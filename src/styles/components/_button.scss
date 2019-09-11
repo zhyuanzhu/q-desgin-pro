@@ -1,0 +1,178 @@
+@charset "utf-8";
+@import "../common/var";
+@import "../mixins/mixin";
+
+$buttonPrefix: "#{$prefixCls}button";
+$btn-border-hover: #f6f8fc;
+
+.#{$buttonPrefix} {
+    color: $white;
+    background-color: $blue;
+    padding: 0 15px;
+    border: 1px solid;
+    border-color: $blue;
+    border-radius: $border-radius-middle;
+    outline: none;
+    box-sizing: border-box;
+    transition: all $animate-time;
+    cursor: $cursor-pointer;
+    box-shadow: 0 2px 5px rgba($blue, .5);
+    font-size: $font-size-base;
+    @include setH(32px, 30px);
+
+    &:hover {
+        background-color: $blue-dark;
+    }
+    &:active {
+        @extend .#{$buttonPrefix}:hover;
+        @include boxShadow(#000, inset);
+    }
+    &:disabled {
+        @include btnDisabled($blue-disabled, transparent, $white)
+    }
+
+    &-text {
+        font-size: $font-size-base;
+        vertical-align: middle; 
+        white-space: nowrap;
+    }
+
+    //样式：蓝底白字（默认值），白底黑框，绿框白字，橙框白字，红框白字，没有边框黑字
+    
+    //黑字无框，hover蓝字无框
+    &.#{$buttonPrefix}-text {
+        border-color: $white;
+        box-shadow: none;
+        background-color: $white;
+        color: $main;
+        &:hover {
+            color: $blue;
+        }
+        &:active {
+            @extend .#{$buttonPrefix}-text:hover;
+        }
+        &:disabled {
+            color: $lightC;
+        }
+    }
+
+    //黑字黑框，hover蓝字蓝框
+    &.#{$buttonPrefix}-primary {
+        border-color: $lightC;
+        box-shadow: none;
+        background-color: $white;
+        color: $main;
+        &:hover {
+            color: $blue;
+            border-color: $blue;
+        }
+        &:active {
+            @extend .#{$buttonPrefix}-primary:hover;
+        }
+        &:disabled {
+            color: $lightC;
+            border-color: $lightC;
+        }
+    }
+
+    //蓝框蓝字，hover底色变蓝
+    &.#{$buttonPrefix}-empty {
+        color: $blue; 
+        background-color: $white; 
+        border-color: $blue; 
+        box-shadow: none;
+        &:hover { 
+            background-color: $blue-dark;
+            color: $white;
+            box-shadow: 0 2px 5px rgba($blue, .5);
+        }
+        &:active { 
+            @extend .#{$buttonPrefix}-empty;
+            box-shadow: none; 
+        }
+        &:disabled {  
+            @include btnDisabled($white, $btn-border-hover)
+        }
+    }
+
+    //绿色背景白字
+    &.#{$buttonPrefix}-success {
+        background-color: $green;
+        border-color: $green;
+        box-shadow: 0 2px 5px rgba($green, .5);
+        &:hover {
+            background-color: $green-dark;
+        }
+        &:active {
+            @extend .#{$buttonPrefix}-success:hover;
+            box-shadow: none;
+        }
+        &:disabled {
+            @include btnDisabled($white, rgba($green, .4))
+        }
+    }
+
+    //红背景白字
+    &.#{$buttonPrefix}-error {
+        background-color: $red;
+        color: $white;
+        border-color: $red;
+        box-shadow: 0 2px 5px rgba($red, .5);
+        &:hover {
+            background-color: $red-dark;
+        }
+        &:active {
+            @extend .#{$buttonPrefix}-error:hover;
+            box-shadow: none;
+        }
+        &:disabled {
+            @include btnDisabled($white, rgba($red, .2));
+        }
+    }
+
+    //橙背景白字
+    &.#{$buttonPrefix}-warning {
+        background-color: $orange;
+        color: $white;
+        border-color: $orange;
+        box-shadow: 0 2px 5px rgba($orange, .5);
+        &:hover {
+            background-color: $orange-dark;
+        }
+        &:active {
+            @extend .#{$buttonPrefix}-warning:hover;
+            box-shadow: none;
+        }
+        &:disabled {
+            @include btnDisabled($white, rgba($orange, .3))
+        }
+    }
+    &.#{$buttonPrefix}-link {
+        background-color: $white;
+        border: none;
+        box-shadow: none;
+        color: $blue;
+        &:hover {
+            color: $blue-dark;
+        }
+        &:active {
+            @extend .#{$buttonPrefix}-link:hover;
+        }
+        &.#{$buttonPrefix}-link-disabled {
+            color: $blue-disabled;
+            cursor: $cursor-disabled;
+            &:hover {
+                color: $blue-disabled;
+            }
+            &:active {
+                @extend .#{$buttonPrefix}-link-disabled:hover;
+            }
+        }
+    }
+    
+
+
+
+
+
+}

@@ -1,0 +1,57 @@
+@charset "utf-8";
+
+//项目前缀
+$prefixCls: "qui-";
+//字体
+$fontFamily: "PingFang SC", "Hiragino Sans GB", "Microsoft Yahei", "微软雅黑", Arial, sans-serif;
+
+$font-size-base: 14px;
+
+$font-size-small: 12px;
+
+$font-size-medium: 16px;
+
+$font-size-large: 18px;
+//圆角
+$border-radius-middle: 4px;
+
+$border-radius-small: 2px;
+
+$border-radius-large: 6px;
+
+//鼠标
+$cursor-disabled: not-allowed;
+
+$cursor-pointer: pointer;
+
+//动画时间
+$animate-time: .2s;
+
+//颜色
+$white: #fff;
+
+//字体颜色
+$main: #727682;
+
+//弱色
+$lightC: #bec1ca;
+
+//蓝色
+$blue: #0074ff;
+$blue-dark: #006def;
+$blue-active: #0064da;
+$blue-disabled: #9fcbff;
+
+// 绿色
+// $green: #0bdba8;
+
+$green:#19be6b;
+$green-dark: #14b363;
+// 橙色
+$orange: #ffb540;
+$orange-dark: #f90;
+// 红色
+$red: #f52f3e;
+$red-dark: #de2b38;
+$red-disabled: #feadb3;
+
