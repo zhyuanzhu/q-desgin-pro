@@ -36,8 +36,6 @@ $btn-border-hover: #f6f8fc;
         vertical-align: middle; 
         white-space: nowrap;
     }
-
-    //样式：蓝底白字（默认值），白底黑框，绿框白字，橙框白字，红框白字，没有边框黑字
     
     //黑字无框，hover蓝字无框
     &.#{$buttonPrefix}-text {
@@ -147,6 +145,8 @@ $btn-border-hover: #f6f8fc;
             @include btnDisabled($white, rgba($orange, .3))
         }
     }
+
+    //a
     &.#{$buttonPrefix}-link {
         background-color: $white;
         border: none;
@@ -169,10 +169,30 @@ $btn-border-hover: #f6f8fc;
             }
         }
     }
+
+    //设置尺寸
+    &.#{$buttonPrefix}-large {
+        @include setH(40px, 38px);
+        padding: 0 25px;
+        &-text {
+            font-size: $font-size-large;
+        }
+    }
+
+    &.#{$buttonPrefix}-small {
+        @include setH(26px, 24px);
+        padding: 0 10px;
+        &-text {
+            font-size: $font-size-small;
+        }
+    }
+    &.#{$buttonPrefix}-long {
+        @include setH(100%);
+        width: 100%;
+        text-align: center;
+        &-text {
+            font-size: $font-size-base;
+        }
+    }
     
-
-
-
-
-
 }
