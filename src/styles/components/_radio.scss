@@ -67,11 +67,11 @@ $radioPrefix: "#{$prefixCls}radio";
         }
     }
     &-disabled {
+        cursor: $cursor-disabled;
         .#{$radioPrefix}-icon {
             // border: 1px solid $lightC;
             // background-color: $border-color;
             @include border($lightC, $border-color);
-            cursor: $cursor-disabled;
             &::after {
                 display: none;
             }
