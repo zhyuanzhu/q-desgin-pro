@@ -1,0 +1,61 @@
+@charset "utf-8";
+@import "../common/var";
+@import "../mixins/mixin";
+
+$modalPrefix: "#{$prefixCls}modal";
+.#{$modalPrefix} {
+    @include centerBox();
+    height: 100%;
+    &-mask {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        background-color: rgba($black, .2);
+        z-index: 999;
+    }
+    &-main {
+        position: relative;
+        z-index: 1000;
+        background-color: $white;
+        width: 500px;
+        box-shadow: 0 2px 8px rgba($black, .05);
+        border-radius: $border-radius-large;
+        box-sizing: border-box;
+        overflow: hidden;
+        .#{$modalPrefix}-header {
+            padding: 35px 50px 15px 20px;
+            box-shadow: 0 2px 8px 0 rgba($black, .05);
+            position: relative;
+            &-title {
+                font-size: $font-size-large;
+                color: $main-dark;
+                @include no-wrap();
+            }
+            &-close {
+                position: absolute;
+                @include wh(15px);
+                background: url(../../assets/images/close.png) no-repeat;
+                background-size: 100% auto;
+                cursor: $cursor-pointer;
+                top: 30px;
+                right: 20px;
+            }
+        }
+        .#{$modalPrefix}-container {
+            padding: 35px 20px;
+        }
+        .#{$modalPrefix}-footer{
+            padding: 25px 40px 20px;
+            border-top: 1px solid $border-color;
+            display: flex;
+            flex-direction: row-reverse;
+            &-btn {
+                button {
+                    margin: 0 10px;
+                }
+            }
+        }
+    }
+}

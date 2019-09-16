@@ -69,3 +69,12 @@
         background-color: $bg;
     }
 }
+
+//模块剧中
+@mixin centerBox {
+    display: -webkit-box;
+    box-pack: center;
+    -webkit-box-pack: center;
+    box-align: center;
+    -webkit-box-align: center;
+}
