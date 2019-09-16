@@ -4,4 +4,7 @@
 $radioGroupPrefix: "#{$prefixCls}radio-group";
 .#{$radioGroupPrefix} {
     display: flex;
+    &-vertical {
+        flex-direction: column;
+    }
 }

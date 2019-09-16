@@ -23,9 +23,10 @@ $radioPrefix: "#{$prefixCls}radio";
         transition: all $animate-time;
         &:after { 
             content: ''; 
-            position: absolute; 
-            left: 50%; 
-            top: 50%; 
+            // position: absolute; 
+            // left: 50%; 
+            // top: 50%; 
+            @include absolute();
             width: 0; 
             height: 0; 
             margin-left: -3px; 
@@ -46,13 +47,15 @@ $radioPrefix: "#{$prefixCls}radio";
     }
     &:hover {
         .#{$radioPrefix}-icon {
-            border: 1px solid $blue;
+            // border: 1px solid $blue;
+            @include border($blue);
         }
     }
     &-active {
         .#{$radioPrefix}-icon {
-            border: 1px solid $blue;
-            background-color: $blue;
+            // border: 1px solid $blue;
+            // background-color: $blue;
+            @include border($blue, $blue);
             &::after {
                 border: 3px solid $white;
                 border-radius: 50%;
@@ -65,8 +68,9 @@ $radioPrefix: "#{$prefixCls}radio";
     }
     &-disabled {
         .#{$radioPrefix}-icon {
-            border: 1px solid $lightC;
-            background-color: $border-color;
+            // border: 1px solid $lightC;
+            // background-color: $border-color;
+            @include border($lightC, $border-color);
             cursor: $cursor-disabled;
             &::after {
                 display: none;
@@ -74,8 +78,9 @@ $radioPrefix: "#{$prefixCls}radio";
         }
         &:hover {
             .#{$radioPrefix}-icon {
-                border: 1px solid $lightC;
-                background-color: $border-color;
+                // border: 1px solid $lightC;
+                // background-color: $border-color;
+                @include border($lightC, $border-color);
             }
         }
         .#{$radioPrefix}-value {
@@ -85,8 +90,9 @@ $radioPrefix: "#{$prefixCls}radio";
     }
     &-disabled.#{$radioPrefix}-active {
         .#{$radioPrefix}-icon {
-            border: 1px solid $lightC;
-            background-color: $lightC;
+            // border: 1px solid $lightC;
+            // background-color: $lightC;
+            @include border($lightC, $lightC);
             &::after {
                 display: block;
                 border: 3px solid $white;

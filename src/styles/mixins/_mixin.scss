@@ -53,3 +53,19 @@
     border-color: $bdc;
     color: $color;
 }
+
+
+//绝对定位
+@mixin absolute($left: 50%, $top: 50%) {
+    position: absolute;
+    left: $left;
+    top: $top;
+}
+
+//主题色的border
+@mixin border($color: $blue, $bg: null) {
+    border: 1px solid $color;
+    @if $bg {
+        background-color: $bg;
+    }
+}
