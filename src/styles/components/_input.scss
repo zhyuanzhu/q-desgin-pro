@@ -4,11 +4,11 @@
 $iptPrefix: "#{$prefixCls}input";
 
 .#{$iptPrefix}-main {
-    position: relative;
-    display: inline-block;
+    // position: relative;
+    // display: inline-block;
     vertical-align: middle;
     font-size: 0;
-    line-height: 1.5;
+    line-height: 38px;
     .#{$iptPrefix} {
         box-sizing: border-box;
         @include wh(240px, 38px);
@@ -35,6 +35,7 @@ $iptPrefix: "#{$prefixCls}input";
     }
 
     &.#{$iptPrefix}-large {
+        line-height: 46px;
         .#{$iptPrefix} {
             padding: 15px 10px;
             font-size: $font-size-large;
@@ -43,9 +44,25 @@ $iptPrefix: "#{$prefixCls}input";
         .#{$iptPrefix}-unit {
             font-size: $font-size-large;
         }
+        .#{$iptPrefix}-err {
+            &.right {
+                padding-top: 10px;
+                margin-left: 10px;
+            }
+        }
+    }
+
+    &.#{$iptPrefix}-middle {
+        .#{$iptPrefix}-err {
+            &.right {
+                padding-top: 5px;
+                margin-left: 10px;
+            }
+        }
     }
 
     &.#{$iptPrefix}-small {
+        line-height: 26px;
         .#{$iptPrefix} {
             padding: 5px 10px;
             font-size: $font-size-small;
@@ -54,9 +71,16 @@ $iptPrefix: "#{$prefixCls}input";
         .#{$iptPrefix}-unit {
             font-size: $font-size-small;
         }
+        .#{$iptPrefix}-err {
+            &.right {
+                padding-top: 0px;
+                margin-left: 10px;
+            }
+        }
     }
     .#{$iptPrefix}-icon {
-        position: absolute;
+        // position: absolute;
+        display: inline-block;
         @include wh(25px);
         background-repeat: no-repeat;
         background-position: center;
@@ -64,6 +88,15 @@ $iptPrefix: "#{$prefixCls}input";
 
     }
     &.#{$iptPrefix}-error {
+        // .#{$iptPrefix}-err {
+        //     &.right {
+        //         padding-top: 5px;
+        //         margin-left: 10px;
+        //     }
+        // }
+        &.#{$iptPrefix}-right {
+            display: flex;
+        }
         .#{$iptPrefix} {
             border-color: $red;
             color: $red;
@@ -78,15 +111,17 @@ $iptPrefix: "#{$prefixCls}input";
         .#{$iptPrefix}-err {
             @include setH(25px);
             padding-left: 20px;
-            position: absolute;
+            // position: absolute;
             &-icon {
                 background-image: url(../../assets/images/error-icon.png);
                 margin-left: -25px;
+                vertical-align: top;
             }
             &-text {
                 color: $red;
                 font-size: $font-size-small;
             }
+            
         }
     }
 }
