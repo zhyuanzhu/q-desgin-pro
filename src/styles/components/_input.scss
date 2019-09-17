@@ -1,0 +1,92 @@
+@charset "utf-8";
+@import "../common/var";
+@import "../mixins/mixin";
+$iptPrefix: "#{$prefixCls}input";
+
+.#{$iptPrefix}-main {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 0;
+    line-height: 1.5;
+    .#{$iptPrefix} {
+        box-sizing: border-box;
+        @include wh(240px, 38px);
+        padding: 10px;
+        @include border($lightC);
+        outline: none;
+        color: $main;
+        font-size: $font-size-base;
+        border-radius: $border-radius-middle;
+        &:focus {
+            border-color: $blue;
+            outline: 0;
+            box-shadow: 0 0 5px rgba($blue, .5);
+        }
+    }
+    ::-webkit-input-placeholder {
+        color: $lightC;
+    }
+    .#{$iptPrefix}-unit {
+        font-size: $font-size-base;
+        font-style: normal;
+        color: $main;
+        margin-left: 10px;
+    }
+
+    &.#{$iptPrefix}-large {
+        .#{$iptPrefix} {
+            padding: 15px 10px;
+            font-size: $font-size-large;
+            height: 46px;
+        }
+        .#{$iptPrefix}-unit {
+            font-size: $font-size-large;
+        }
+    }
+
+    &.#{$iptPrefix}-small {
+        .#{$iptPrefix} {
+            padding: 5px 10px;
+            font-size: $font-size-small;
+            height: 26px;
+        }
+        .#{$iptPrefix}-unit {
+            font-size: $font-size-small;
+        }
+    }
+    .#{$iptPrefix}-icon {
+        position: absolute;
+        @include wh(25px);
+        background-repeat: no-repeat;
+        background-position: center;
+        pointer-events: none;
+
+    }
+    &.#{$iptPrefix}-error {
+        .#{$iptPrefix} {
+            border-color: $red;
+            color: $red;
+            &:focus {
+                border-color: $red-dark;
+                box-shadow: 0 0 5px 0 $red;
+            }
+        }
+        ::-webkit-input-placeholder {
+            color: $red;
+        }
+        .#{$iptPrefix}-err {
+            @include setH(25px);
+            padding-left: 20px;
+            position: absolute;
+            &-icon {
+                background-image: url(../../assets/images/error-icon.png);
+                margin-left: -25px;
+            }
+            &-text {
+                color: $red;
+                font-size: $font-size-small;
+            }
+        }
+    }
+}
