@@ -4,11 +4,12 @@
 
 $dropdownPrefix: "#{$prefixCls}dropdown";
 .#{$dropdownPrefix} {
-    min-width: 100%;
+    // min-width: 100%;
     background-color: $white;
     box-shadow: 0 2px 14px 0 rgba(50, 60, 71, .15);
     box-sizing: border-box;
     overflow: hidden;
+    position: absolute;
     &-item {
         padding: 0 15px;
         line-height: 32px;

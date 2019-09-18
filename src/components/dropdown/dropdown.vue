@@ -1,6 +1,6 @@
 <template>
     <transition :name="transition">
-        <div v-show="show" v-scroll="data" :class="[`${prefixCls}`, `${prefixCls}-${size}`, autoWidth && `${prefixCls}-inherit`]" :style="boxStyle">
+        <div v-show="show" v-scroll="data" :class="[`${prefixCls}`, `${prefixCls}-${size}`, !autoWidth && `${prefixCls}-inherit`]" :style="boxStyle">
             <div :class="`${prefixCls}-list`">
                 <div v-for="(item, index) in data" :key="item.id || index" 
                     :class="[`${prefixCls}-item`, item.active && `${prefixCls}-active`, item.disabled && `${prefixCls}-disabled`]"

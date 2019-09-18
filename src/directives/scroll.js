@@ -3,7 +3,7 @@
  */
 
 const RELATIVE = 'relative';
-const ABSOLUTE = 'absoulte';
+const ABSOLUTE = 'absolute';
 const prefixCls = 'qui-scroll';
 const TRANSLATE = 'translate(0, 0)';
 let MOUSEWHEEL = () => {
