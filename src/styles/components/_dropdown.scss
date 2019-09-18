@@ -1,0 +1,65 @@
+@charset "utf-8";
+@import "../common/var";
+@import "../mixins/mixin";
+
+$dropdownPrefix: "#{$prefixCls}dropdown";
+.#{$dropdownPrefix} {
+    min-width: 100%;
+    background-color: $white;
+    box-shadow: 0 2px 14px 0 rgba(50, 60, 71, .15);
+    box-sizing: border-box;
+    overflow: hidden;
+    &-item {
+        padding: 0 15px;
+        line-height: 32px;
+        margin-top: 12px;
+        color: $main;
+        font-size: $font-size-small;
+        @include no-wrap();
+        background-color: $white;
+        transition: all $animate-time;
+        cursor: $cursor-pointer;
+        &:first-child {
+            margin-top: 0;
+        }
+        &:hover, &:active {
+            background-color: $elebg;
+        }
+        &.#{$dropdownPrefix}-active {
+            color: $blue;
+            background-color: $elebg;
+        }
+        &.#{$dropdownPrefix}-disabled {
+            cursor: $cursor-disabled;
+            color: $lightC;
+            background-color: $white;
+            &:hover, &:active {
+                background-color: $white;
+            }
+            &.#{$dropdownPrefix}-active {
+                color: $blue-disabled;
+            }
+        }
+        
+    }
+    &-large {
+        .#{$dropdownPrefix}-item {
+            padding: 0 25px;
+            line-height: 40px;
+            margin-top: 12px;
+        }
+    }
+    &-small {
+        .#{$dropdownPrefix}-item {
+            padding: 0 10px;
+            line-height: 26;
+            margin-top: 4px;
+        }
+    }
+    &-inherit {
+        width: 100%;
+    }
+    &-list {
+        padding: 10px 0;
+    }
+}

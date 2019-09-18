@@ -1,0 +1,25 @@
+@charset "utf-8";
+@import "./var";
+@import "../mixins/mixin";
+
+$scrollPrefix: "#{$prefixCls}scroll";
+
+
+.#{$scrollPrefix}-box { 
+    position: absolute; 
+    display: block; 
+    z-index: 10; 
+    right: 2px; 
+    width: 4px; 
+    top: 0; 
+    bottom: 0; 
+    background-color: transparent;
+    .#{$scrollPrefix} { 
+        position: absolute; 
+        display: block; 
+        left: 0; 
+        width: 100%; 
+        border-radius: $border-radius-middle; 
+        background-color: $scroll;
+    }
+}

@@ -1,0 +1,10 @@
+@charset "utf-8";
+.fade-in-move-up-enter-active, .fade-in-move-up-leave-active {
+    transition: all $animate-time ease-out;
+    transform: none;
+    opacity: 1;
+  }
+  .fade-in-move-up-enter, .fade-in-move-up-leave-to {
+    transform: translate(0,-5px);
+    opacity: 0;
+  }
