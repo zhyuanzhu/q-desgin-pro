@@ -10,6 +10,7 @@ $dropdownPrefix: "#{$prefixCls}dropdown";
     box-sizing: border-box;
     overflow: hidden;
     position: absolute;
+    z-index: 998;
     &-item {
         padding: 0 15px;
         line-height: 32px;
@@ -53,7 +54,7 @@ $dropdownPrefix: "#{$prefixCls}dropdown";
     &-small {
         .#{$dropdownPrefix}-item {
             padding: 0 10px;
-            line-height: 26;
+            line-height: 26px;
             margin-top: 4px;
         }
     }
