@@ -23,9 +23,6 @@ $radioPrefix: "#{$prefixCls}radio";
         transition: all $animate-time;
         &:after { 
             content: ''; 
-            // position: absolute; 
-            // left: 50%; 
-            // top: 50%; 
             @include absolute();
             width: 0; 
             height: 0; 
@@ -47,14 +44,11 @@ $radioPrefix: "#{$prefixCls}radio";
     }
     &:hover {
         .#{$radioPrefix}-icon {
-            // border: 1px solid $blue;
             @include border($blue);
         }
     }
     &-active {
         .#{$radioPrefix}-icon {
-            // border: 1px solid $blue;
-            // background-color: $blue;
             @include border($blue, $blue);
             &::after {
                 border: 3px solid $white;
@@ -69,8 +63,6 @@ $radioPrefix: "#{$prefixCls}radio";
     &-disabled {
         cursor: $cursor-disabled;
         .#{$radioPrefix}-icon {
-            // border: 1px solid $lightC;
-            // background-color: $border-color;
             @include border($lightC, $border-color);
             &::after {
                 display: none;
@@ -78,8 +70,6 @@ $radioPrefix: "#{$prefixCls}radio";
         }
         &:hover {
             .#{$radioPrefix}-icon {
-                // border: 1px solid $lightC;
-                // background-color: $border-color;
                 @include border($lightC, $border-color);
             }
         }
@@ -90,8 +80,6 @@ $radioPrefix: "#{$prefixCls}radio";
     }
     &-disabled.#{$radioPrefix}-active {
         .#{$radioPrefix}-icon {
-            // border: 1px solid $lightC;
-            // background-color: $lightC;
             @include border($lightC, $lightC);
             &::after {
                 display: block;
