@@ -1,0 +1,78 @@
+@charset "urf-8";
+@import "../common/var";
+@import "../mixins/mixin";
+
+$selectPrefix: "#{$prefixCls}select";
+
+.#{$selectPrefix} {
+    position: relative;
+    @include wh(200px, 38px);
+    line-height: 38px;
+    box-sizing: border-box;
+    border: 1px solid $border-color;
+    border-radius: $border-radius-middle;
+    color: $main;
+    font-size: $font-size-base;
+    cursor: $cursor-pointer;
+
+    &:hover{
+        border-color: $blue;
+    }
+    &:active {
+        border-color: $blue;
+    }
+    &-active {
+        border-color: $blue;
+    }
+    &-arrow {
+        @include absolute;
+        width: 6px;
+        height: 6px;
+        border-color: $main-dark;
+        border-left: 1px solid;
+        border-bottom: 1px solid;
+        transition: all .5s;
+        left: 180px;
+        &.#{$selectPrefix}-down {
+            transform: rotate(-45deg);
+            margin-top: -4px;
+        }
+        &.#{$selectPrefix}-up {
+            transform: rotate(-225deg);
+            margin-top: -1px;
+        }
+    }
+
+    &-main {
+        padding-left: 10px;
+        padding-right: 20px;
+        .#{$selectPrefix}-value {
+            display: block;
+            @include no-wrap();
+        }
+    }
+    &-disabled {
+        color: $main-light;
+        cursor: $cursor-disabled;
+        &:hover {
+            border-color: $border-color;
+        }
+        &:active {
+            border-color: $border-color;
+        }
+    }
+    &.#{$selectPrefix}-large {
+        @include wh(240px, 46px);
+        line-height: 46px;
+        .#{$selectPrefix}-arrow {
+            left: 220px;
+        }
+    }
+    &.#{$selectPrefix}-small {
+        @include wh(160px, 26px);
+        line-height: 26px;
+        .#{$selectPrefix}-arrow {
+            left: 140px;
+        }
+    }
+}
