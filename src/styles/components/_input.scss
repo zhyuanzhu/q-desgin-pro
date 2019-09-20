@@ -4,8 +4,6 @@
 $iptPrefix: "#{$prefixCls}input";
 
 .#{$iptPrefix}-main {
-    // position: relative;
-    // display: inline-block;
     vertical-align: middle;
     font-size: 0;
     line-height: 38px;
@@ -79,7 +77,6 @@ $iptPrefix: "#{$prefixCls}input";
         }
     }
     .#{$iptPrefix}-icon {
-        // position: absolute;
         display: inline-block;
         @include wh(25px);
         background-repeat: no-repeat;
@@ -88,12 +85,6 @@ $iptPrefix: "#{$prefixCls}input";
 
     }
     &.#{$iptPrefix}-error {
-        // .#{$iptPrefix}-err {
-        //     &.right {
-        //         padding-top: 5px;
-        //         margin-left: 10px;
-        //     }
-        // }
         &.#{$iptPrefix}-right {
             display: flex;
         }
@@ -111,7 +102,6 @@ $iptPrefix: "#{$prefixCls}input";
         .#{$iptPrefix}-err {
             @include setH(25px);
             padding-left: 20px;
-            // position: absolute;
             &-icon {
                 background-image: url(../../assets/images/error-icon.png);
                 margin-left: -25px;
@@ -122,6 +112,12 @@ $iptPrefix: "#{$prefixCls}input";
                 font-size: $font-size-small;
             }
             
+        }
+    }
+    &.#{$iptPrefix}-disabled {
+        .#{$iptPrefix} {
+            cursor: $cursor-disabled;
+            background: $elebg;
         }
     }
 }
