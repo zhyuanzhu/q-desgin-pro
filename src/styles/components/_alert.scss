@@ -1,0 +1,30 @@
+@charset "utf-8";
+@import "../common/var";
+@import "../mixins/mixin";
+
+$alertPrefix: "#{$prefixCls}alert";
+
+.#{$alertPrefix} {
+    @include setH(40px);
+    min-width: 100px;
+    @include border(rgba($blue, .4), rgba($blue-disabled, .4));
+    color: $main;
+    font-size: $font-size-base;
+    padding: 0 10px;
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translate(-50%);
+    
+    &.#{$alertPrefix}-warning {
+        @include border(rgba($orange, .2), rgba($orange, .1))
+    }
+
+    &.#{$alertPrefix}-success {
+        @include border(rgba($green, .2), rgba($green, .1))
+    }
+
+    &.#{$alertPrefix}-error {
+        @include border(rgba($red, .4), rgba($red-disabled, .2))
+    }
+}
