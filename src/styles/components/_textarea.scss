@@ -1,0 +1,86 @@
+@charset "utf-8";
+@import "../common/var";
+@import "../mixins/mixin";
+
+$prefixTextarea: "#{$prefixCls}textarea";
+
+.#{$prefixTextarea}-main {
+    vertical-align: middle;
+
+
+    .#{$prefixTextarea} {
+        box-sizing: border-box;
+        @include wh(320px, 80px);
+        outline: none;
+        padding: 10px;
+        @include border($lightC);
+        color: $main;
+        font-size: $font-size-base;
+        border-radius: $border-radius-middle;
+        &:focus {
+            border-color: $blue;
+            outline: 0;
+            box-shadow: 0 0 5px rgba($blue, .5);
+        }
+        &-readonly {
+            cursor: $cursor-disabled;
+            resize: none;
+            &:focus {
+                border-color: $lightC;
+                box-shadow: none;
+            }
+        }
+        &-disabled {
+            cursor: $cursor-disabled;
+            background-color: $white;
+            color: $main-light;
+            resize: none;
+            &:focus {
+                border-color: $lightC;
+                box-shadow: none;
+            }
+        }
+    }
+
+    &.#{$prefixTextarea}-large {
+        .#{$prefixTextarea} {
+            @include wh(360px, 100px);
+        }   
+    }
+
+    &.#{$prefixTextarea}-small {
+        .#{$prefixTextarea} {
+            @include wh(260px, 60px);
+        }
+    }
+
+    &.#{$prefixTextarea}-error {
+        &.#{$prefixTextarea}-right {
+            display: flex;      
+            align-items: flex-end; 
+            .right {
+                margin-left: 10px;
+            }
+            
+        }
+        .#{$prefixTextarea} {
+            color: $red;
+            border-color: $red;
+            &:focus {
+                box-shadow: 0 0 5px rgba($red, .5);
+            }
+        }
+        .#{$prefixTextarea}-err {
+            @include setH(25px);
+            padding-left: 20px;
+            background: url(../../assets/images/error-icon.png) no-repeat center left;
+            &-text {
+                color: $red;
+                font-size: $font-size-small;
+            }
+        }        
+    }
+
+    
+
+}
