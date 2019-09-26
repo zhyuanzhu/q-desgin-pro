@@ -1,0 +1,134 @@
+@charset "utf-8";
+@import "../common/var";
+@import "../mixins/mixin";
+
+$stepPrefix: "#{$prefixCls}steps";
+
+.#{$stepPrefix} {
+    font-size: $font-size-base;
+    color: $main;
+
+    &.#{$stepPrefix}-row {
+        display: flex;
+        .#{$stepPrefix}-item {
+            flex: 1;
+            overflow: hidden;
+            .#{$stepPrefix}-content{
+                width: calc(100% - 36px);
+                padding: 0 5px;
+                box-sizing: border-box;
+            }
+            .title {
+                padding-right: 5px;
+                display: inline-block;
+                background: $white;
+                position: relative;
+                z-index: 1;
+            }
+            .line {
+                background: $lightC;
+                height: 1px;
+                width: calc(100% - 46px);
+                left: 41px;
+                position: relative;
+                top: 17px;
+            }
+            .summary {
+                @include no-wrap();
+            }
+        }
+    }
+    &.#{$stepPrefix}-column {
+        .#{$stepPrefix}-item {
+            height: 140px;
+            .#{$stepPrefix}-content {
+                height: 100%;
+                box-sizing: border-box;
+                padding-bottom: 20px;
+                overflow: hidden;
+                .summary {
+                    height: 80px;
+                    overflow: hidden;
+                }
+            }
+            .#{$stepPrefix}-icon {
+                margin-right: 8px;
+            }
+        }
+        .line {
+            height: calc(100% - 46px);
+            width: 1px;
+            background: $lightC;
+            position: relative;
+            left: 17px;
+            top: 41px;
+        }
+    }
+    &-item {
+        position: relative;
+        .#{$stepPrefix}-icon {
+            float: left;  
+            @include wh(34px);
+            @include border($lightC);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 34px;  
+        }
+        .#{$stepPrefix}-content {
+            float: left;
+            width: calc(100% - 45px);
+        }
+        &.#{$stepPrefix}-active {
+            .#{$stepPrefix}-icon {
+                border-color: $blue;
+            }
+            .step-icon {
+                color: $blue;
+            }
+            .title {
+                color: $main-dark;
+            }
+        }
+        &.#{$stepPrefix}-finished {
+            .#{$stepPrefix}-icon {
+                border-color: $blue;
+                .active {
+                    display: block;
+                    height: 100%;
+                    background: url("http://p0.qhimg.com/t01386d050c81abc024.png") no-repeat center;
+                }
+            }
+            .line {
+                background: $blue;
+            }
+        }
+        &.#{$stepPrefix}-error {
+            .#{$stepPrefix}-icon {
+                border-color: $red;
+                .error-icon {
+                    display: block;
+                    color: $red;
+                    transform: scale(2.2) rotate(45deg);
+                }
+            }
+            .line {
+                background: $red !important;
+            }
+            .title {
+                color: $red;
+            }
+            .summary {
+                color: $red;
+            }
+        }
+        &.#{$stepPrefix}-err {
+            .line {
+                background: $blue !important;
+            }
+        }
+        .title {
+            font-weight: 600;
+            @include setH(34px);
+        }
+    }
+}
