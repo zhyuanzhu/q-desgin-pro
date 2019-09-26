@@ -1,0 +1,96 @@
+@charset "utf-8";
+@import "../common/var";
+@import "../mixins/mixin";
+
+$prefixPage: "#{$prefixCls}page";
+$page: "page";
+
+.#{$prefixPage} {
+    display: flex;
+    &Size {
+        font-size: $font-size-base;
+        color: $main;
+        @include setH(32px);
+        margin-left: 5px;
+    }
+    .#{$page} {
+        &-list {
+            display: flex;
+            &.#{$page}-list-circle {
+                .#{$page}-item {
+                    @include wh(30px);
+                    line-height: 30px;
+                    border-radius: 50%;
+                    font-size: $font-size-small;
+                }
+            }
+        }
+        &-item {
+            @include wh(32px);
+            text-align: center;
+            line-height: 32px;
+            @include border($lightC);
+            margin: 0 5px;
+            cursor: $cursor-pointer;
+            font-size: $font-size-base;
+            color: $main;
+            border-radius: $border-radius-middle;
+            user-select: none;
+            transition: all $animate-time;
+            &:hover {
+                color: $blue;
+                border-color: $blue;
+                box-shadow: 0 0 4px 0 rgba($blue, .3);
+            }
+            &:active {
+                box-shadow: none;
+            }
+            &.#{$page}-active {
+                @extend .#{$page}-item:hover;
+            }
+        }
+        &-next-fast, &-prev-fast {
+            color: $lightC;
+            @include wh(32px);
+            text-align: center;
+            line-height: 32px;
+        }
+        &-next, &-prev {
+            @extend .#{$page}-item;
+            color: $main;
+            &-disabled {
+                cursor: $cursor-disabled;
+                color: $lightC;
+            }
+            &:hover {
+                color: $blue;
+                box-shadow: 0 0 4px 0 rgba($blue, .3);
+            }
+        }
+        &-prev {
+            &-disabled {
+                &:hover {
+                    box-shadow: none;
+                    color: $lightC;
+                    border-color: $lightC;
+                }
+            }
+            .prev {
+                display: inline-block;
+                @include wh(6px);
+                transform: rotate(45deg);
+                border-left: 2px solid;
+                border-bottom: 2px solid;
+                margin-left: 2px;
+            }
+        }
+        &-next {
+            @extend .#{$page}-prev;
+            .next {
+                @extend .prev;
+                margin-right: 2px;
+                transform: rotate(-135deg);
+            }
+        }
+    }
+}
