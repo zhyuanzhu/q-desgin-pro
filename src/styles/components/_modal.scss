@@ -36,7 +36,8 @@ $modalPrefix: "#{$prefixCls}modal";
             &-close {
                 position: absolute;
                 @include wh(15px);
-                background: url(../../assets/images/close.png) no-repeat;
+                // background: url(../../assets/images/close.png) no-repeat;
+                background: url("http://p0.qhimg.com/t010896d43c3131a739.png") no-repeat;
                 background-size: 100% auto;
                 cursor: $cursor-pointer;
                 top: 30px;

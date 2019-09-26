@@ -103,7 +103,8 @@ $iptPrefix: "#{$prefixCls}input";
             @include setH(25px);
             padding-left: 20px;
             &-icon {
-                background-image: url(../../assets/images/error-icon.png);
+                // background-image: url(../../assets/images/error-icon.png);
+                background-image: url("http://p0.qhimg.com/t0165cc15aed7f13691.png");
                 margin-left: -25px;
                 vertical-align: top;
             }
