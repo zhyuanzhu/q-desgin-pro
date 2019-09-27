@@ -86,6 +86,13 @@ $page: "page";
         }
         &-next {
             @extend .#{$page}-prev;
+            &-disabled {
+                &:hover {
+                    box-shadow: none;
+                    color: $lightC;
+                    border-color: $lightC;
+                }
+            }
             .next {
                 @extend .prev;
                 margin-right: 2px;
