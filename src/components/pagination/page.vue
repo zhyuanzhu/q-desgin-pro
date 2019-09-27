@@ -52,10 +52,13 @@ export default {
     },
     methods: {
         prev () {
-
+            let prev = this.now - 1;
+            prev && this.changePage(prev);
         },
         next () {
-
+            let next = this.now + 1;
+            next <= this.totalPage() && this.changePage(next);
+            
         },
         prevFast () {
 
@@ -64,6 +67,7 @@ export default {
 
         },
         changePage (page) {
+            console.log(page)
             if (this.now === page) return;
             this.now = page;
             this.$emit('changePage', page)
