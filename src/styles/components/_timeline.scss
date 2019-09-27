@@ -1,0 +1,45 @@
+@charset "utf-8";
+@import "../common/var";
+@import "../mixins/mixin";
+
+$timelinePrefix: "#{$prefixCls}timeline";
+$t: "time";
+
+.#{$timelinePrefix} {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    font-size: $font-size-base;
+    color: $main;
+    &-item {
+        flex: 1;
+    }
+    .#{$t}-icon {
+        float: left;
+        box-sizing: border-box;
+        @include wh(16px);
+        @include border($blue);
+        border-radius: 50%;
+        margin-right: 8px;
+
+    }
+    .#{$t}-content {
+        float: left;
+        .#{$t} {
+            height: 24px;
+            line-height: 18px;
+        }
+        .#{$t}-bold {
+            font-weight: 600;
+        }
+    }
+    .#{$t}-line {
+        width: 1px;
+        height: calc(100% - 20px);
+        position: relative;
+        z-index: 5;
+        top: 18px;
+        left: 8px;
+        background: $lightC;
+    }
+}
