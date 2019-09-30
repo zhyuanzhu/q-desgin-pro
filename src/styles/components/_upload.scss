@@ -1,0 +1,75 @@
+@charset "utf-8";
+@import "../common/var";
+@import "../mixins/mixin";
+
+$up: "upload";
+$uploadPrefix: "#{$prefixCls}#{$up}";
+
+
+.#{$uploadPrefix} {
+    font-size: 0;
+
+    .#{$up} {
+        transition: all $animate-time;    
+        cursor: $cursor-pointer;
+        &-default {
+            @include wh(80px);
+            border: 1px dashed $lightC;
+            background: $border-color;
+            position: relative;
+            z-index: 1;
+            &::after {
+                content: "";
+                @include absolute();
+                width: 30px;
+                height: 2px;
+                transform: translate(-50%, -50%);
+                background: $main;
+            }
+            &::before {
+                @extend .#{$up}-default::after;
+                width: 2px;
+                height: 30px;
+            }
+            &:hover {
+                border-color: $blue;
+            }
+            .file {
+                
+            }
+        }
+
+        &-other {
+            display: inline-block;
+            padding: 5px 10px;
+            @include border($lightC);
+            border-radius: $border-radius-middle;
+            color: $main;
+            position: relative;
+            &:hover {
+                color: $blue;
+                border-color: $blue;
+            }
+            .file {
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+            .#{$up}-btn {
+                font-size: $font-size-base;
+                
+            }
+        }
+    }
+
+
+    .file {
+        user-select: none;
+        @include wh(100%);
+        font-size: 0;
+        opacity: 0;
+        cursor: pointer;
+    }
+
+
+}
