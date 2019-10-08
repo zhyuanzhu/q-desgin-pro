@@ -10,6 +10,7 @@
         <div :class="`${prefixCls}-filelist`" v-if="fileMaxLength <= fileList.length">
             <slot name="fileList"></slot>
         </div>
+        <div :class="`${prefixCls}-progress`"></div>
     </div>
 </template>
 <script>
@@ -72,18 +73,20 @@ export default {
             console.log(evt) 
             let iptDom = this.$refs.file;
             let file = evt.target.files[0];
-            let fileName = file.name,
-                fileSize = file.size,
-                fileType = file.type.split('/')[1];
+            // let fileName = file.name,
+            //     fileSize = file.size,
+            //     fileType = file.type.split('/')[1];
+            let {name: fileName, size: fileSize, type: fileType} = file;
+            console.log(fileName, fileSize, fileType)
             let render = new FileReader();
             render.onload = () => {
-                console.log(render.result)
-                console.log(render)
-                this.$emit('onChange', render)
+                // console.log(render.result)
+                // console.log(render)
+                this.$emit('onChange', render.result)
             }
             // render.readAsDataURL(file);
             // render.readAsBinaryString(file);
-            render.readAsArrayBuffer(file)
+            // render.readAsArrayBuffer(file)
         }
     },
 }
