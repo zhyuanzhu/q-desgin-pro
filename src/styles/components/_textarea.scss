@@ -7,7 +7,6 @@ $prefixTextarea: "#{$prefixCls}textarea";
 .#{$prefixTextarea}-main {
     vertical-align: middle;
 
-
     .#{$prefixTextarea} {
         box-sizing: border-box;
         @include wh(320px, 80px);
@@ -73,7 +72,8 @@ $prefixTextarea: "#{$prefixCls}textarea";
         .#{$prefixTextarea}-err {
             @include setH(25px);
             padding-left: 20px;
-            background: url(../../assets/images/error-icon.png) no-repeat center left;
+            // background: url(../../assets/images/error-icon.png) no-repeat center left;
+            background: url("http://p0.qhimg.com/t0165cc15aed7f13691.png") no-repeat center left;
             &-text {
                 color: $red;
                 font-size: $font-size-small;
