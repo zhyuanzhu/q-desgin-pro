@@ -52,6 +52,7 @@ export default {
     methods: {
         changePage (page) {
             this.now = page;
+            this.$emit('on-change', page)
         }
     },
 }
