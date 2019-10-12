@@ -1,0 +1,22 @@
+@charset "utf-8";
+@import "../common/var";
+@import "../mixins/mixin";
+
+$loadingPrefix: "#{$prefixCls}loading";
+
+.#{$loadingPrefix} {
+    height: 100%;
+    &-mask {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background: rgba($black, 0);
+    }
+    &-img {
+        min-height: 50px;
+        height: 100%;
+        transform: rotate(180deg);
+    }
+}
