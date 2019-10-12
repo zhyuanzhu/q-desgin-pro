@@ -70,15 +70,10 @@ export default {
     },
     methods: {
         upload (evt) {
-            console.log(evt) 
-            let iptDom = this.$refs.file;
-            let file = evt.target.files[0];
-            // let fileName = file.name,
-            //     fileSize = file.size,
-            //     fileType = file.type.split('/')[1];
-            let {name: fileName, size: fileSize, type: fileType} = file;
-            console.log(fileName, fileSize, fileType)
+            // let iptDom = this.$refs.file;
+            const file = evt.target.files[0];
             let render = new FileReader();
+            let {name: fileName, size: fileSize, type: fileType} = file;
             render.onload = () => {
                 // console.log(render.result)
                 // console.log(render)
