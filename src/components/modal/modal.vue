@@ -1,11 +1,11 @@
 <template>
-    <div :class="[`${prefixCls}`]">
+    <div :class="[`${prefixCls}`]" v-show="isShow">
         <div :class="`${prefixCls}-main`">
             <section :class="`${prefixCls}-header`" v-if="header">
                 <h3 :class="`${prefixCls}-header-title`" v-text="title"></h3>
-                <span :class="`${prefixCls}-header-close`" v-if="close"  @click.native="cancel"></span>
+                <span :class="`${prefixCls}-header-close`" v-if="close" @click="cancel"></span>
             </section>
-            <section :class="`${prefixCls}-container`">container</section>
+            <section :class="`${prefixCls}-container`"><slot></slot></section>
             <section :class="`${prefixCls}-footer`" v-if="footer">
                 <div :class="`${prefixCls}-footer-btn`">
                     <button-group>
@@ -15,7 +15,7 @@
                 </div>
             </section>
         </div>
-        <div :class="`${prefixCls}-mask`"></div>
+        <div :class="`${prefixCls}-mask`" v-if="mask" @click="closeMask"></div>
     </div>
 </template>
 
@@ -68,12 +68,21 @@ export default {
             type: Boolean,
             default: true
         },
+        mask: {
+            type: Boolean,
+            default: true
+        },
+        value: {
+            type: Boolean,
+            default: false
+        },
         title: String
 
     },
     data() {
         return {
-            prefixCls
+            prefixCls,
+            isShow: this.value
         }
     },
     methods: {
@@ -81,7 +90,19 @@ export default {
             this.$emit('on-confirm', evt)
         },
         cancel (evt) {
+            this.hide();
             this.$emit('on-cancel', evt)
+        },
+        hide () {
+            this.isShow = false;
+        },
+        closeMask () {
+            this.hide();
+        }
+    },
+    watch: {
+        value (show) {
+            this.isShow = show;
         }
     },
 }
