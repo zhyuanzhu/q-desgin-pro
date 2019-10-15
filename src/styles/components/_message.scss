@@ -1,0 +1,9 @@
+@charset "utf-8";
+@import "../common/var";
+@import "../mixins/mixin";
+
+$msgPrefix: "#{$prefixCls}message";
+$success: "http://p0.qhimg.com/t017effeb70a307579f.png";
+$warning: "http://p0.qhimg.com/t01a094bb64666cf4d4.png";
+$error: "http://p0.qhimg.com/t0104826990b6fb9bfa.png";
+
