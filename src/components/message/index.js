@@ -15,9 +15,9 @@ function getMessageInstance () {
 }
 
 function init (o = {}) {
-    if (!o.onOk && !o.onCancel) {
-        return console.error('message component shoul have ok or cancel callback')
-    }
+    // if (!o.onOk && !o.onCancel) {
+    //     return console.error('message component shoul have ok or cancel callback')
+    // }
     let instance = getMessageInstance();
     Object.assign(_options, o);
     instance.init(_options)
