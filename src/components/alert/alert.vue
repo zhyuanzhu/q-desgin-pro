@@ -12,6 +12,8 @@
 const prefixCls = 'qui-alert';
 import { hasParam } from '../../utils/util';
 
+//处理成像toast那样
+
 
 export default {
     name: 'Alert',
