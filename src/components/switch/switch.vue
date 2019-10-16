@@ -45,8 +45,10 @@ export default {
     },
     methods: {
         toggle () {
-            this.checked = !this.checked;
-            this.$emit('on-change', this.checked)
+            const _this = this;
+            if (_this.disabled) return;
+            _this.checked = !_this.checked;
+            _this.$emit('on-change', _this.checked)
         }
     },
 }
