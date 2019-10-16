@@ -1,0 +1,36 @@
+@charset "utf-8";
+@import "../common/var";
+@import "../mixins/mixin";
+
+$switchPrefix: "#{$prefixCls}switch";
+$s: "switch";
+$c: #ccc;
+
+.#{$switchPrefix} {
+    color: $blue;
+    cursor: $cursor-pointer;
+    user-select: none;
+    transition: all 1s;
+    position: relative;
+    &-middle {
+        @include wh(44px, 22px);
+        @include border($lightC, $c);
+        border-radius: 11px;
+    }
+    &-inner {
+        @include wh(22px);
+        background: $white;
+        border-radius: 11px;
+        box-sizing: border-box;
+        position: absolute;
+    }
+    &-active {
+        background: $blue;
+        border-color: $blue;
+        transition: all 1s;
+        .#{$switchPrefix}-inner {
+            right: 0;
+            transition: all 1s;
+        }
+    }
+}
