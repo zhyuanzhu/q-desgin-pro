@@ -20,13 +20,17 @@ import Pagination from '../pagination';
 import TableHeader from './tableheader'
 import TableMain from './tablemain'
 
+import CheckBox from '../checkbox'
+//多选框，默认选中选项
+
 export default {
     name: 'Table',
     components: {
         Empty,
         Pagination,
         TableHeader,
-        TableMain
+        TableMain,
+        CheckBox
     },
     mixins: [],
     props: {
