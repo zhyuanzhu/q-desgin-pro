@@ -1,0 +1,80 @@
+@charset "utf-8";
+@import "../common/var";
+@import "../mixins/mixin";
+
+$table: "#{$prefixCls}table";
+$hover: #ebf7ff;
+$header: #f8f8f9;
+
+.#{$table} {
+    table {
+        width: 100%;
+        border: none;
+        border-spacing: 0;
+    }
+    .table-flex {
+        display: flex;
+        text-align: center;
+        &-td {
+            flex: 1;
+            border-right: 1px solid $border-color;
+            &:last-child {
+                border-right: none;
+            }
+            .table-text {
+                text-align: left;
+                color: $main;
+                font-size: $font-size-base;
+            }
+        }
+    }
+    tbody {
+        .table-flex {
+            &:hover {
+
+            }
+        }
+    }
+    .table-header {
+        background: $header;
+        @include setH(40px);
+        border-bottom: 1px solid $border-color;
+        border-top: 1px solid $lightC;
+        box-sizing: border-box;
+
+    }
+    .table-row-hover {
+        background: $hover;
+    }
+    .table-main {
+        @include setH(46px);
+        box-sizing: border-box;
+        border-bottom: 1px solid $border-color;
+    }
+    &-border {
+        .#{$table}-main {
+            border-left: 1px solid $lightC;
+            border-right: 1px solid $lightC;
+        }
+        .#{$table}-header {
+            border-left: 1px solid $lightC;
+            border-right: 1px solid $lightC;
+        }
+    }
+    .table-body {
+        &:last-child {
+            .table-main {
+                border-bottom-color: $lightC;
+            }
+        }
+    }
+    &-header {
+        // border-bottom: 1px solid $lightC;
+    }
+    &-footer {
+        display: flex;
+        flex-direction: row-reverse;
+        padding-top: 20px;
+    }
+    
+}
