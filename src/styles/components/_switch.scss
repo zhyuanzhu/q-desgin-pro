@@ -12,25 +12,61 @@ $c: #ccc;
     user-select: none;
     transition: all 1s;
     position: relative;
+    &.#{$switchPrefix}-disabled {
+        opacity: .6;
+        cursor: $cursor-disabled;
+    }
     &-middle {
         @include wh(44px, 22px);
         @include border($lightC, $c);
         border-radius: 11px;
+        .#{$switchPrefix}-inner {
+            @include wh(22px);
+            border-radius: 11px;
+        }
+    }
+    &-large {
+        @include wh(56px, 22px);
+        @include border($lightC, $c);
+        border-radius: 11px;
+        .#{$switchPrefix}-inner {
+            @include wh(22px);
+            border-radius: 11px;
+        }
+    }
+    &-small {
+        @include wh(28px, 16px);
+        @include border($lightC, $c);
+        border-radius: 8px;
+        .#{$switchPrefix}-inner {
+            @include wh(16px);
+            border-radius: 8px;
+        }
     }
     &-inner {
-        @include wh(22px);
         background: $white;
-        border-radius: 11px;
         box-sizing: border-box;
         position: absolute;
+        transform: translateX(0);
+        transition: all .6s;
     }
     &-active {
         background: $blue;
         border-color: $blue;
-        transition: all 1s;
-        .#{$switchPrefix}-inner {
-            right: 0;
-            transition: all 1s;
+        &.#{$switchPrefix}-small {
+            .#{$switchPrefix}-inner {
+                transform: translateX(12px);
+            }
+        }
+        &.#{$switchPrefix}-middle {
+            .#{$switchPrefix}-inner {
+                transform: translateX(22px);
+            }
+        }
+        &.#{$switchPrefix}-large {
+            .#{$switchPrefix}-inner {
+                transform: translateX(34px);
+            }
         }
     }
 }
