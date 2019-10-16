@@ -45,6 +45,7 @@ $header: #f8f8f9;
     }
     .table-row-hover {
         background: $hover;
+        transition: all $animate-time;
     }
     .table-main {
         @include setH(46px);

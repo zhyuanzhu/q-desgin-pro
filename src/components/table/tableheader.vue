@@ -2,7 +2,11 @@
     <table>
         <thead>
             <th class="table-flex">
-                <td class="table-flex-td table-header" v-for="(item, index) in header" :style="setWidth()"><span class="table-text">{{ item }}</span></td>
+                <td class="table-flex-td table-header" 
+                    v-for="(item, index) in header" :style="setWidth()" 
+                    :key="item.tableKey || index">
+                    <span class="table-text">{{ item.tableVal }}</span>
+                </td>
             </th>
         </thead>
     </table>

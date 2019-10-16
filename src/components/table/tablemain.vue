@@ -1,8 +1,14 @@
 <template>
         <table v-if="data.length > 0">
             <tbody>
-                <tr class="table-flex table-body" :class="{'table-row-hover': isHover}" @mouseenter="isHover = !isHover" @mouseleave="isHover=!isHover">
-                    <td v-for="item in data" class="table-flex-td table-main"><span class="table-text">{{ item }}</span></td>
+                <tr class="table-flex table-body" 
+                    v-for="(item, idx) in data" :key="item.id || idx"
+                    :class="{'table-row-hover': hoverIdx == idx}" 
+                    @mouseenter="hoverIdx = idx" @mouseleave="hoverIdx = -1">
+                    <td v-for="(head, index) in header" :key="head.id || index" 
+                        class="table-flex-td table-main">
+                        <span class="table-text">{{ item[head.tableKey] }}</span>
+                    </td>
                 </tr>
                 
             </tbody>
@@ -19,12 +25,17 @@ export default {
         Empty
     },
     props: {
-        data: Array
+        data: Array,
+        header: Array
     },
     data () {
         return {
-            isHover: false
+            isHover: false,
+            hoverIdx: -1
         }
-    }
+    },
+    methods: {
+        
+    },
 }
 </script>

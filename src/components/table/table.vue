@@ -1,10 +1,10 @@
 <template>
     <div :class="[prefixCls, border && `${prefixCls}-border`]">
         <div :class="`${prefixCls}-header`">
-            <table-header :header="[1, 2, 3]" />
+            <table-header :header="header" />
         </div>
         <div :class="`${prefixCls}-main`">
-            <table-main :data="data" />
+            <table-main :data="data" :header="header" />
         </div>
         <div :class="`${prefixCls}-footer`" v-if="footer && total > 1">
             <pagination :total="total" :circle="true" @on-change="onChange" />
@@ -43,7 +43,7 @@ export default {
             default: () => [1, 2, 3]
         },
         header: {
-            type: Array,
+            type: Array,               //后续data中的数据会根据header传入的键去取值
             default: () => []
         },
         defaultSelect: {
