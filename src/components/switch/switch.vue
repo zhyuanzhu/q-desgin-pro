@@ -45,7 +45,8 @@ export default {
     },
     methods: {
         toggle () {
-            this.checked = !this.checked
+            this.checked = !this.checked;
+            this.$emit('on-change', this.checked)
         }
     },
 }
