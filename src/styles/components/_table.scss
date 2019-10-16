@@ -51,6 +51,13 @@ $header: #f8f8f9;
         @include setH(46px);
         box-sizing: border-box;
         border-bottom: 1px solid $border-color;
+        padding: 0 8px;
+        .table-text {
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+            @include no-wrap();
+        }
     }
     &-border {
         .#{$table}-main {
