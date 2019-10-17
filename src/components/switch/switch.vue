@@ -1,7 +1,12 @@
 <template>
-    <div :class="[prefixCls, `${prefixCls}-${size}`, disabled && `${prefixCls}-disabled`, checked && `${prefixCls}-active`]" @click="toggle">
-        <div :class="`${prefixCls}-inner`">
-            <span class="open"></span>
+    <div :class="[prefixCls, 
+        `${prefixCls}-${size}`, disabled && `${prefixCls}-disabled`, 
+        checked && `${prefixCls}-active`]" 
+        @click="toggle">
+        <div :class="`${prefixCls}-inner`"></div>
+        <div :class="`${prefixCls}-txt`">
+            <div class="open"  v-if="$slots.on" v-show="checked"><slot name="on"></slot></div>
+            <div class="close" v-if="$slots.off" v-show="!checked"><slot name="off"></slot></div>
         </div>
     </div>
 </template>
@@ -9,6 +14,8 @@
 import { hasParam } from '../../utils/util';
 
 const prefixCls = 'qui-switch';
+
+//添加选中和非选中的时候的文案描述，颜色的配置
 
 export default {
     name: 'qSwitch',
