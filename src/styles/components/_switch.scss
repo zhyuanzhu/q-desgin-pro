@@ -7,7 +7,6 @@ $s: "switch";
 $c: #ccc;
 
 .#{$switchPrefix} {
-    color: $blue;
     cursor: $cursor-pointer;
     user-select: none;
     transition: all 1s;

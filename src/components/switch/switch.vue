@@ -35,6 +35,14 @@ export default {
                 const valueList = ['small', 'middle', 'large'];
                 return hasParam(value, valueList);
             }
+        },
+        activeColor: {
+            type: String,
+            default: '#0074ff'
+        },
+        unActiveColor: {
+            type: String,
+            default: '#ccc'
         }
     },
     data() {
