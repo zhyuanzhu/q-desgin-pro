@@ -18,11 +18,19 @@ $c: #ccc;
     }
     &-middle {
         @include wh(44px, 22px);
+        height: 22px;
+        min-width: 44px;
         @include border($lightC, $c);
         border-radius: 11px;
         .#{$switchPrefix}-inner {
             @include wh(22px);
             border-radius: 11px;
+        }
+        .#{$switchPrefix}-txt {
+            width: 24px;
+            .close {
+                margin-left: 20px;
+            }
         }
     }
     &-large {
@@ -37,10 +45,23 @@ $c: #ccc;
     &-small {
         @include wh(28px, 16px);
         @include border($lightC, $c);
-        border-radius: 8px;
+        border-radius: 9px;
         .#{$switchPrefix}-inner {
             @include wh(16px);
             border-radius: 8px;
+        }
+        .#{$switchPrefix}-txt { 
+            width: 12px;
+            .open {
+                @include setH(18px, 16px);
+            }
+            .close {
+                @include setH(18px, 16px);
+                margin-left: 16px;
+            }
+        }
+        .#{$switchPrefix}-inner {
+            transition: all $animate-time;
         }
     }
     &-inner {
@@ -69,4 +90,21 @@ $c: #ccc;
             }
         }
     }
+
+    &-txt {
+        font-size: $font-size-small;
+        color: $white;
+        .open {
+            width: 100%;
+            @include setH(22px);
+            text-align: center;
+            overflow: hidden;
+        }
+        .close {
+            @extend .open;
+            margin-left: 24px;
+        }
+    }
+
+
 }
