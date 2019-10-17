@@ -1,7 +1,7 @@
 <template>
     <div :class="[prefixCls, border && `${prefixCls}-border`]">
         <div :class="`${prefixCls}-header`" >
-            <table-header :header="header" :rowSelection="rowSelection" :data="data" />
+            <table-header :header="header" :rowSelection="rowSelection" :data="data" @on-select-all="onSelectAll" />
         </div>
         <div :class="`${prefixCls}-main`" >
             <table-main :data="data" :header="header" :rowSelection="rowSelection" @on-select-change="onSelectChange" />
@@ -32,10 +32,10 @@ export default {
     },
     mixins: [],
     props: {
-        loading: {
-            type: Boolean,
-            default: true
-        },
+        // loading: {
+        //     type: Boolean,
+        //     default: true
+        // },
         rowSelection: {
             type: Boolean,
             default: false
@@ -48,10 +48,10 @@ export default {
             type: Array,               //后续data中的数据会根据header传入的键去取值
             default: () => []
         },
-        defaultSelect: {
-            type: Array,
-            default: () => []
-        },
+        // defaultSelect: {
+        //     type: Array,
+        //     default: () => []
+        // },
         footer: {
             type: Boolean,
             default: true
@@ -76,8 +76,10 @@ export default {
             this.$emit('on-change', page)
         },
         onSelectChange (item) {
-            console.log(item);
-            console.log(this.data)
+            this.$emit('on-select-change', item);
+        },
+        onSelectAll (data) {
+            this.$emit('on-select-all', data);
         }
     },
 }

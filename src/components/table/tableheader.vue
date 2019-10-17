@@ -57,6 +57,7 @@ export default {
             const { data } = this;
             let check = this.setTableCheckAll() == 1;
             data.map(item => item.checked = !check);
+            this.$emit('on-select-all', data);
         }
     },
 }
