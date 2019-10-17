@@ -3,3 +3,52 @@
 @import "../mixins/mixin";
 
 $tabsPrefix: "#{$prefixCls}tabs";
+
+.#{$tabsPrefix} {
+    width: 100%;
+    &-header {
+        width: 100%;
+        display: flex;
+        border-bottom: 1px solid $lightC;
+        position: relative;
+    }
+    &-tab {
+        padding: 8px 16px;
+        margin-right: 10px;
+        color: $main;
+        font-size: $font-size-base;
+        cursor: $cursor-pointer;
+        &:hover {
+            color: $blue;
+            transition: all $animate-time;
+        }
+        &.#{$tabsPrefix}-icon {
+            background-size: 14px;
+            background-repeat: no-repeat;
+            background-position: left center;
+            padding-left: 20px;
+        }
+        &.#{$tabsPrefix}-tab-active {
+            color: $blue-active;
+            &.#{$tabsPrefix}-tab-disabled {
+                &:hover {
+                    color: $blue;
+                }
+            }
+        }
+        &.#{$tabsPrefix}-tab-disabled {
+            opacity: .6;
+            cursor: $cursor-disabled;
+            &:hover {
+                color: $main;
+            }
+        }
+    }
+    &-underline {
+        position: absolute;
+        bottom: 0;
+        height: 2px;
+        transition: all 1s;
+        background: $blue;
+    }
+}
