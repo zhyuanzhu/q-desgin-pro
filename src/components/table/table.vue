@@ -1,10 +1,10 @@
 <template>
     <div :class="[prefixCls, border && `${prefixCls}-border`]">
-        <div :class="`${prefixCls}-header`">
-            <table-header :header="header" />
+        <div :class="`${prefixCls}-header`" >
+            <table-header :header="header" :rowSelection="rowSelection" :data="data" />
         </div>
-        <div :class="`${prefixCls}-main`">
-            <table-main :data="data" :header="header" />
+        <div :class="`${prefixCls}-main`" >
+            <table-main :data="data" :header="header" :rowSelection="rowSelection" @on-select-change="onSelectChange" />
         </div>
         <div :class="`${prefixCls}-footer`" v-if="footer && total > 1">
             <pagination :total="total" :circle="true" @on-change="onChange" />
@@ -20,7 +20,6 @@ import Pagination from '../pagination';
 import TableHeader from './tableheader'
 import TableMain from './tablemain'
 
-import CheckBox from '../checkbox'
 //多选框，默认选中选项
 
 export default {
@@ -29,8 +28,7 @@ export default {
         Empty,
         Pagination,
         TableHeader,
-        TableMain,
-        CheckBox
+        TableMain
     },
     mixins: [],
     props: {
@@ -76,6 +74,10 @@ export default {
     methods: {
         onChange (page) {
             this.$emit('on-change', page)
+        },
+        onSelectChange (item) {
+            console.log(item);
+            console.log(this.data)
         }
     },
 }
