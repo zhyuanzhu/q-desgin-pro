@@ -21,11 +21,11 @@ export default {
         },
         target: {
             type: String,
+            default: '_self',
             validator (value) {
                 const valueList = ['_blank', '_self', '_parent', '_top'];
                 return hasParam(value, valueList);
-            },
-            default: '_self'
+            }
         }
     },
     computed: {
@@ -41,6 +41,22 @@ export default {
                 return route ? route.href : to;
             }
             return to;
+        },
+        listUrl () {
+            const { data } = this;
+            return data.map(item => {
+                const to = item.to,
+                    type = typeof to;
+                if (type !== 'string') return null;
+                if (to.includes('//')) return to;
+                const router = this.$router;
+                if (router) {
+                    const current = this.$route;
+                    const route = router.resolve(to, current, this.append);
+                    return route ? route.href : to;
+                }
+                return to;
+            })
         }
     },
     methods: {
