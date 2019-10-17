@@ -27,12 +27,9 @@ $header: #f8f8f9;
                 font-size: $font-size-base;
             }
         }
-    }
-    tbody {
-        .table-flex {
-            &:hover {
-
-            }
+        .table-checkbox {
+            padding: 0 8px 0 18px;
+            border-right: 1px solid $border-color;
         }
     }
     .table-header {
@@ -75,9 +72,6 @@ $header: #f8f8f9;
                 border-bottom-color: $lightC;
             }
         }
-    }
-    &-header {
-        // border-bottom: 1px solid $lightC;
     }
     &-footer {
         display: flex;
