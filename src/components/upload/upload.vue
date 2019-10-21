@@ -1,11 +1,12 @@
 <template>
-    <div :class="[prefixCls, `${prefixCls}-${type}`]">
+    <div :class="[prefixCls, `${prefixCls}-${type}`, disabled && `${prefixCls}-disabled`]">
         <form class="upload" :class="[`upload-${type}`, type != 'default' && `upload-other` ]" enctype="multipart/form-data">
-            <input type="file" :name="name" class="file" ref="file" title="" @change="upload">
+            <input type="file" :name="name" class="file" ref="file" title="" @change="upload" v-if="!disabled">
             <div v-if="type != 'default'" class="upload-btn">
                 <span :class="`${type}`" v-html="setIcon(type)"></span>
                 {{ title }}
             </div>
+            <!-- <div :class="`${prefixCls}-mask`" v-if="disabled"></div> -->
         </form>
         <div :class="`${prefixCls}-filelist`" v-if="fileMaxLength <= fileList.length">
             <slot name="fileList"></slot>
@@ -70,10 +71,14 @@ export default {
     },
     methods: {
         upload (evt) {
+
+            const { dataType, disabled } = this;
+            if (disabled) evt.preventDefault();
+            
             const file = evt.target.files[0];
             let render = new FileReader();
             let {name: fileName, size: fileSize, type: fileType} = file;
-            const { dataType } = this;
+            
             render.onload = () => {
                 // console.log(render)
                 let emitData = {
