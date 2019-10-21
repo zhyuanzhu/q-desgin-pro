@@ -14,7 +14,7 @@ $tabsPrefix: "#{$prefixCls}tabs";
     }
     &-tab {
         padding: 8px 16px;
-        margin-right: 10px;
+        margin-right: 8px;
         color: $main;
         font-size: $font-size-base;
         cursor: $cursor-pointer;
@@ -43,6 +43,15 @@ $tabsPrefix: "#{$prefixCls}tabs";
                 color: $main;
             }
         }
+        &.#{$tabsPrefix}-card {
+            border: 1px solid $lightC;
+            border-bottom: none;
+            border-radius: 5px 5px 0 0;
+            background: $border-color;
+            &.#{$tabsPrefix}-tab-active {
+                border-color: $blue-active;
+            }
+        }
     }
     &-underline {
         position: absolute;
@@ -50,5 +59,11 @@ $tabsPrefix: "#{$prefixCls}tabs";
         height: 2px;
         transition: all 1s;
         background: $blue;
+    }
+    &-card-underline {
+        @extend .#{$tabsPrefix}-underline;
+        height: 1px;
+        background: $white;
+        transition: none;
     }
 }
