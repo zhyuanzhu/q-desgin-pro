@@ -70,16 +70,24 @@ export default {
     },
     methods: {
         upload (evt) {
-            // let iptDom = this.$refs.file;
             const file = evt.target.files[0];
             let render = new FileReader();
             let {name: fileName, size: fileSize, type: fileType} = file;
+            const { dataType } = this;
             render.onload = () => {
-                // console.log(render.result)
                 // console.log(render)
-                this.$emit('onChange', render.result)
+                let emitData = {
+                    file,
+                    data: render.result
+                }
+                this.$emit('on-change', emitData)
             }
-            // render.readAsDataURL(file);
+            if (dataType == 'base64') {
+                render.readAsDataURL(file);
+            } else {
+                render.readAsBinaryString(file);
+            }
+            
             // render.readAsBinaryString(file);
             // render.readAsArrayBuffer(file)
         },
