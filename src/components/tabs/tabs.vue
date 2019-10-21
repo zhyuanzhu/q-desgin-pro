@@ -9,24 +9,27 @@
                 :key="item.id || index"
                 :class="[`${prefixCls}-tab`, item.disabled && `${prefixCls}-tab-disabled`, 
                 item.active && `${prefixCls}-tab-active`,
-                item.icon && `${prefixCls}-icon`]"
+                item.icon && `${prefixCls}-icon`,
+                `${prefixCls}-${type}`
+                ]"
                 :style="item.icon && `background-image:url(${item.icon});`"
                 @click="handleClick(item, index)"
                 ref="tab"
                 >
                 {{ item[primaryKey] }}</li>
-            <li :class="`${prefixCls}-underline`" ref="line"></li>
+            <li :class="type !== 'card' ? `${prefixCls}-underline` : `${prefixCls}-card-underline`" ref="line"></li>
         </ul>
     </div>
 </template>
 <script>
 
 const prefixCls = 'qui-tabs';
+import { hasParam } from '../../utils/util.js';
 import mixinsLink from '../../mixins/link';
 
 export default {
     name: 'Tabs',
-    mixins: [mixinsLink],
+    // mixins: [mixinsLink],
     props: {
         data: {
             type: Array,
@@ -35,6 +38,14 @@ export default {
         primaryKey: {
             type: String,
             required: true
+        },
+        type: {
+            type: String,
+            default: 'default',
+            validator (value) {
+                const valueList = ['default', 'card'];
+                return hasParam(value, valueList);
+            }
         }
     },
     data () {
@@ -68,7 +79,7 @@ export default {
         },
         setActiveUnderline (prevIndex, activeIndex) {
             const { domWidth: _w } = this;
-            let distance = activeIndex * 10 + activeIndex * _w + 'px'
+            let distance = activeIndex * 8 + activeIndex * _w + 'px'
             this.$refs.line.style.transform = `translateX(${distance})`
         }
     },
