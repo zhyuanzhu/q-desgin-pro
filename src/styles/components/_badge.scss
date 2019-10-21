@@ -4,4 +4,12 @@
 
 $badgePrefix: "#{$prefixCls}badge";
 
-//TODO
+.#{$badgePrefix} {
+    font-size: $font-size-small;
+    color: #fff;
+    background: $red;
+    position: absolute;
+    @include setH(22px);
+    border-radius: 11px;
+    padding: 0 6px;
+}
