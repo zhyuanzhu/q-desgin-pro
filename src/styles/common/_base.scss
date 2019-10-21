@@ -23,3 +23,9 @@ $scrollPrefix: "#{$prefixCls}scroll";
         background-color: $scroll;
     }
 }
+li {
+    list-style: none;
+}
+a {
+    text-decoration: none;
+}
