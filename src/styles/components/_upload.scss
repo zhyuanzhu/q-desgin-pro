@@ -4,7 +4,7 @@
 
 $up: "upload";
 $uploadPrefix: "#{$prefixCls}#{$up}";
-
+$camera: "http://p0.qhimg.com/t01ec4be02f4f0e79d4.png";
 
 .#{$uploadPrefix} {
     font-size: 0;
@@ -57,12 +57,24 @@ $uploadPrefix: "#{$prefixCls}#{$up}";
             }
             .#{$up}-btn {
                 font-size: $font-size-base;
-                
+                // .camera {
+                //     background: url(#{$camera}) no-repeat;
+                //     position: absolute;
+                //     @include wh(22px, 19px);
+                //     background-position:left 2;
+                //     background-size:22px 19px;
+                // }
             }
         }
     }
 
-
+    .svg-icon {
+        width: 1em; 
+        height: 1em;
+        vertical-align: middle;
+        fill: currentColor;
+        overflow: hidden;
+    }
     .file {
         user-select: none;
         @include wh(100%);
