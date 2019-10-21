@@ -12,19 +12,39 @@ $alertPrefix: "#{$prefixCls}alert";
     font-size: $font-size-base;
     padding: 0 10px;
     position: fixed;
-    top: 20px;
+    top: 50px;
     left: 50%;
     transform: translate(-50%);
     
     &.#{$alertPrefix}-warning {
-        @include border(rgba($orange, .2), rgba($orange, .1))
+        @include border(rgba($orange, .2), rgba($orange, .1));
+        color: $orange;
     }
 
     &.#{$alertPrefix}-success {
-        @include border(rgba($green, .2), rgba($green, .1))
+        @include border(rgba($green, .2), rgba($green, .1));
+        color: $green;
     }
 
     &.#{$alertPrefix}-error {
-        @include border(rgba($red, .4), rgba($red-disabled, .2))
+        @include border(rgba($red, .4), rgba($red-disabled, .2));
+        color: $red;
+    }
+    &-icon {
+        font-size: 18px;
+        display: inline-block;
+        // &.icon-warning {
+        //     color: $orange;
+        // }
+        // &.icon-success {
+        //     color: $green;
+        // }
+        // &.icon-error {
+        //     color: $red;
+        // }
+        &.icon-info {
+            color: $blue;
+        }
+
     }
 }
