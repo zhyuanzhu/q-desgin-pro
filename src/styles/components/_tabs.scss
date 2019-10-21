@@ -3,14 +3,23 @@
 @import "../mixins/mixin";
 
 $tabsPrefix: "#{$prefixCls}tabs";
+$opacity: .6;
 
 .#{$tabsPrefix} {
     width: 100%;
     &-header {
         width: 100%;
         display: flex;
-        border-bottom: 1px solid $lightC;
+        // border-bottom: 1px solid $lightC;
         position: relative;
+        &::after {
+            content: "";
+            position: absolute;
+            height: 1px;
+            width: 100%;
+            background: $lightC;
+            bottom: 0;
+        }
     }
     &-tab {
         padding: 8px 16px;
@@ -36,13 +45,6 @@ $tabsPrefix: "#{$prefixCls}tabs";
                 }
             }
         }
-        &.#{$tabsPrefix}-tab-disabled {
-            opacity: .6;
-            cursor: $cursor-disabled;
-            &:hover {
-                color: $main;
-            }
-        }
         &.#{$tabsPrefix}-card {
             border: 1px solid $lightC;
             border-bottom: none;
@@ -50,6 +52,22 @@ $tabsPrefix: "#{$prefixCls}tabs";
             background: $border-color;
             &.#{$tabsPrefix}-tab-active {
                 border-color: $blue-active;
+            }
+            &:hover {
+                border-color: $blue;
+                transition: all $animate-time;
+            }
+            &.#{$tabsPrefix}-tab-disabled {
+                &:hover {
+                    border-color: rgba($main, $opacity);
+                }
+            }
+        }
+        &.#{$tabsPrefix}-tab-disabled {
+            opacity: $opacity;
+            cursor: $cursor-disabled;
+            &:hover {
+                color: $main;
             }
         }
     }
@@ -61,9 +79,10 @@ $tabsPrefix: "#{$prefixCls}tabs";
         background: $blue;
     }
     &-card-underline {
-        @extend .#{$tabsPrefix}-underline;
+        position: absolute;
         height: 1px;
+        bottom: 0;
         background: $white;
-        transition: none;
+        z-index: 5;
     }
 }
