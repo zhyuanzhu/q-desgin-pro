@@ -4,10 +4,39 @@
 
 $up: "upload";
 $uploadPrefix: "#{$prefixCls}#{$up}";
-$camera: "http://p0.qhimg.com/t01ec4be02f4f0e79d4.png";
+// $camera: "http://p0.qhimg.com/t01ec4be02f4f0e79d4.png";
+$opacity: .6;
+.disabed-color {
+    color: rgba($main, $opacity);
+    border-color: rgba($lightC, $opacity);
+}
 
 .#{$uploadPrefix} {
     font-size: 0;
+
+    &.#{$uploadPrefix}-disabled {
+        .#{$up} {
+            cursor: $cursor-disabled;  
+        }
+        .#{$up}-default {
+            &::after {
+                opacity: $opacity;
+            }
+            &::before {
+                opacity: $opacity;
+            }
+            @extend .disabed-color;
+            &:hover {
+                @extend .disabed-color;
+            }
+        }
+        .#{$up}-other{
+            @extend .disabed-color;
+            &:hover {
+                @extend .disabed-color;
+            }
+        }
+    }
 
     .#{$up} {
         transition: all $animate-time;    
