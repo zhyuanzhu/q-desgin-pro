@@ -3,4 +3,79 @@
 @import "../mixins/mixin";
 
 $menuPrefix: "#{$prefixCls}menu";
-//TODO
+$dark: #515a6e;
+$dark-open: #363e4f;
+$dark-active: $blue;
+$arrow: "http://p0.qhimg.com/t011244f24d2bbac6d4.png";
+
+
+.#{$menuPrefix} {
+    &-dark {
+        .#{$menuPrefix}-list {
+            background: $dark;
+            color: rgba($white, .7);
+        }
+    }
+    &-list {
+        border-right: 1px solid $lightC;
+        width: 240px;
+        box-sizing: border-box;
+        overflow: hidden;
+        font-size: $font-size-base;
+    }
+    &-item {
+        &-title {
+            position: relative;
+            padding: 14px 24px;
+            cursor: $cursor-pointer;
+            transition: all $animate-time ease-in-out;
+            &:hover {
+                color: $white;
+            }
+            &.item-title-active {
+                background: $blue;
+                color: $white;
+            }
+        }
+        &-sub {
+            position: absolute;
+            @include wh(14px);
+            // top: 50%;
+            // transform: translateY(-50%);
+            right: 10px;
+            // background: url($arrow) no-repeat center;
+            transition: all $animate-time;
+            &.#{$menuPrefix}-item-sub-down {
+                transform: rotate(0deg);
+                
+            }
+            &.#{$menuPrefix}-item-sub-up {
+                transform: rotate(-180deg) translateY(-7px);
+            }
+        }
+
+        &-children {
+            background: $dark-open;
+            .item {
+                padding: 14px 24px;
+                padding-left: 34px;
+                cursor: $cursor-pointer;
+                transition: all $animate-time ease-in-out;
+                &-active {
+                    background: $dark-active;
+                    color: $white;
+                }
+                &:hover {
+                    color: $white;
+                }
+            }
+        }
+    }
+    .svg-icon {
+        width: 14px; 
+        height: 14px;
+        vertical-align: middle;
+        fill: currentColor;
+        overflow: hidden;
+    }
+}
