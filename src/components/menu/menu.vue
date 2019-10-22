@@ -1,22 +1,84 @@
 <template>
-    <div>
-        TODO:Menu
+    <div :class="[prefixCls, `${prefixCls}-${theme}`]">
+        <ul :class="`${prefixCls}-list`">
+            <li v-for="(menu, index) in data" :class="[`${prefixCls}-item`]" :key="menu.id || index">
+                <div :class="[`${prefixCls}-item-title`, !hasChild(menu) && menu.active && 'item-title-active']" @click="toggleMenu(data, menu, menu.active)">
+                    <i :class="[iconClass, menu.icon && `${prefixCls}-${menu.icon}`]"></i>
+                    {{ menu.label }}
+                    <i v-if="hasChild(menu)" 
+                        :class="[hasChild(menu) && `${prefixCls}-item-sub`, 
+                        menu.active ? `${prefixCls}-item-sub-up`: `${prefixCls}-item-sub-down`]">
+                        <svg class="svg-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M472.064 751.552 72.832 352.32c-22.08-22.08-22.08-57.792 0-79.872 22.016-22.016 57.792-22.08 79.872 0L512 631.744l359.296-359.296c22.016-22.016 57.792-22.08 79.872 0 22.08 22.08 22.016 57.792 0 79.872l-399.232 399.232C529.856 773.568 494.144 773.568 472.064 751.552z" p-id="1833"></path>
+                        </svg>    
+                        
+                    </i>
+                </div>
+                <transition :name="setTransition(menu)">
+                    <div :class="[`${prefixCls}-item-children`, `${menu.id}-children`]" v-if="hasChild(menu)" v-show="menu.active">
+                        <ul :class="`${menu.id}-list`">
+                            <li v-for="(item, idx) in menu.children" :key="item.id || idx" 
+                                @click="clickItem(menu.children, item, item.active)"
+                                :class="[`item`, `${item.id}-item`, item.active && `item-active`]"
+                                >{{ item.label }}</li>
+                        </ul>
+                    </div>
+                </transition>
+            </li>
+        </ul>
     </div>
 </template>
 <script>
+import { hasParam } from '../../utils/util';
 
-const prefixCls = 'qui-menu';
+const [prefixCls, iconClass] = ['qui-menu', 'menu-icon'];
 
 export default {
     name: 'Menu',
     props: {
+        theme: {
+            type: String,
+            default: 'dark',
+            validator (value) {
+                const valueList = ['dark', 'light', 'primary'];
+                return hasParam(value, valueList);
+            }
+        },
+        data: {
+            type: Array,
+            default: () => [],
+            itemTitleActive: false
+        },
 
     },
     data () {
         return {
-            prefixCls
+            prefixCls,
+            iconClass
         }
-    }
+    },
+    methods: {
+        hasChild (v) {
+            return v.children && v.children.length > 0;
+        },
+        setTransition (v) {
+            return v.active ? 'menu-move-up' : 'menu-move-down'
+        },
+        toggleMenu (arr, v, open = false) {
+            const { hasChild } = this;
+            // if (hasChild()) {
+                v.active = !v.active;
+            // } else {
+            //     return true;
+            // }
+        },
+        clickItem (arr, v, unActive = false) {
+            if (v.active) return;
+            arr.map(item => item.active = false);
+            v.active = !unActive;
+            this.$emit('on-select-item', v)
+        }
+    },
 }
 </script>
 <style lang="scss" type="text/scss">
