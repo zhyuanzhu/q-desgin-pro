@@ -4,6 +4,9 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 
+// import "../src/styles/common/_base.scss";
+import "../src/styles/index.scss";
+
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
