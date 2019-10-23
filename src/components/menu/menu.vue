@@ -1,6 +1,6 @@
 <template>
     <div :class="[prefixCls, `${prefixCls}-${theme}`]">
-        <ul :class="`${prefixCls}-list`">
+        <ul :class="`${prefixCls}-list`" :style="{'width': width}">
             <li v-for="(menu, index) in data" :class="[`${prefixCls}-item`]" :key="menu.id || index">
                 <div :class="[`${prefixCls}-item-title`, !hasChild(menu) && menu.active && 'item-title-active']" @click="toggleMenu(data, menu, menu.active)">
                     <i :class="[iconClass, menu.icon && `${prefixCls}-${menu.icon}`]"></i>
@@ -49,6 +49,10 @@ export default {
             default: () => [],
             itemTitleActive: false
         },
+        width: {
+            type: String,
+            default: '240px'
+        }
 
     },
     data () {
