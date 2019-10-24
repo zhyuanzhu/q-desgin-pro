@@ -9,7 +9,6 @@
     "url": "https://github.com/alphazhangyz/q-desgin-pro"
   },
   "license": "MIT",
-  "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
@@ -17,7 +16,7 @@
     "package:dev": "webpack --config build/package.dev.config.js",
     "package:prod": "webpack --config build/package.prod.config.js",
     "package:style": "gulp --gulpfile build/build-style.js",
-    "package": "npm run package:prod && npm publish && npm run build"
+    "package": "npm publish"
   },
   "peerDependencies": {
     "vue": "^2.5.2"
