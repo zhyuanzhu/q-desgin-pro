@@ -1,0 +1,13 @@
+.*
+*.md
+*.yml
+build/
+config/
+node_modules/
+test/
+gulpfile.js
+src/main.js
+src/App.vue
+src/components/HelloWorld.vue
+index.html
+package-lock.json
