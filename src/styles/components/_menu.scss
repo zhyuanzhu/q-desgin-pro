@@ -6,6 +6,9 @@ $menuPrefix: "#{$prefixCls}menu";
 $dark: #515a6e;
 $dark-open: #363e4f;
 $dark-active: $blue;
+$light: #f5f5f5;
+$light-open: '';
+$light-active: #f0faff;
 $arrow: "http://p0.qhimg.com/t011244f24d2bbac6d4.png";
 
 
@@ -28,12 +31,8 @@ $arrow: "http://p0.qhimg.com/t011244f24d2bbac6d4.png";
             padding: 14px 24px;
             cursor: $cursor-pointer;
             transition: all $animate-time ease-in-out;
-            &:hover {
-                color: $white;
-            }
-            &.item-title-active {
-                background: $blue;
-                color: $white;
+            a {
+                color: inherit;
             }
         }
         &-sub {
@@ -52,24 +51,94 @@ $arrow: "http://p0.qhimg.com/t011244f24d2bbac6d4.png";
                 transform: rotate(-180deg) translateY(-7px);
             }
         }
-
         &-children {
-            background: $dark-open;
             .item {
                 padding: 14px 24px;
                 padding-left: 34px;
                 cursor: $cursor-pointer;
                 transition: all $animate-time ease-in-out;
-                &-active {
-                    background: $dark-active;
-                    color: $white;
-                }
-                &:hover {
-                    color: $white;
+                a {
+                    color: inherit;
                 }
             }
         }
     }
+    &-dark {
+        .#{$menuPrefix}-item {
+            &-title {
+                &:hover {
+                    color: $white;
+                }
+                &.item-title-active {
+                    background: $blue;
+                    color: $white;
+                }
+            }
+            &-children {
+                background: $dark-open;
+                .item {
+                    &-active {
+                        background: $dark-active;
+                        color: $white;
+                    }
+                    &:hover {
+                        color: $white;
+                    }
+                }
+            }
+        }
+    }
+    &-light {
+        .#{$menuPrefix}-list {
+            // background: $light;
+            color: $main;
+        }
+        .#{$menuPrefix}-item {
+            &-title {
+                &:hover {
+                    color: $blue;
+                }
+                &.item-title-active {
+                    background: $light-active;
+                    color: $blue;
+                    position: relative;
+                    &::after {
+                        content: "";
+                        position: absolute;
+                        width: 2px;
+                        height: 100%;
+                        background: $blue;
+                        right: 0;
+                        top: 0;
+                    }
+                }
+            }
+            &-children {
+                background: $white;
+                .item {
+                    &-active {
+                        background: $light-active;
+                        color: $blue;
+                        position: relative;
+                        &::after {
+                            content: "";
+                            position: absolute;
+                            width: 2px;
+                            height: 100%;
+                            background: $blue;
+                            right: 0;
+                            top: 0;
+                        }
+                    }
+                    &:hover {
+                        color: $blue;
+                    }
+                }
+            }
+        }
+    }
+
+
     .svg-icon {
         width: 14px; 
         height: 14px;
