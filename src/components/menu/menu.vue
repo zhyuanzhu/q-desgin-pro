@@ -4,7 +4,7 @@
             <li v-for="(menu, index) in data" :class="[`${prefixCls}-item`]" :key="menu.id || index">
                 <div :class="[`${prefixCls}-item-title`, !hasChild(menu) && menu.active && 'item-title-active']" @click="toggleMenu(data, menu, menu.active)">
                     <i :class="[iconClass, menu.icon && `${prefixCls}-${menu.icon}`]"></i>
-                    {{ menu.label }}
+                    <a :href="menu.to ? menu.to : 'javascript:;' ">{{ menu.label }}</a>
                     <i v-if="hasChild(menu)" 
                         :class="[hasChild(menu) && `${prefixCls}-item-sub`, 
                         menu.active ? `${prefixCls}-item-sub-up`: `${prefixCls}-item-sub-down`]">
@@ -18,9 +18,11 @@
                     <div :class="[`${prefixCls}-item-children`, `${menu.id}-children`]" v-if="hasChild(menu)" v-show="menu.active">
                         <ul :class="`${menu.id}-list`">
                             <li v-for="(item, idx) in menu.children" :key="item.id || idx" 
-                                @click="clickItem(menu.children, item, item.active)"
+                                @click="clickItem(menu.children, item, item.active, data)"
                                 :class="[`item`, `${item.id}-item`, item.active && `item-active`]"
-                                >{{ item.label }}</li>
+                                >
+                                <a :href="item.to">{{ item.label }}</a>
+                            </li>
                         </ul>
                     </div>
                 </transition>
@@ -32,6 +34,7 @@
 import { hasParam } from '../../utils/util';
 
 const [prefixCls, iconClass] = ['qui-menu', 'menu-icon'];
+//跳转的version-1，需要写跳转的绝对路径 /xx的形式，后续会添加判断，类似于button
 
 export default {
     name: 'Menu',
@@ -47,13 +50,13 @@ export default {
         data: {
             type: Array,
             default: () => [],
-            itemTitleActive: false
+            // itemTitleActive: false,
+            // activeId: 0
         },
         width: {
             type: String,
             default: '240px'
         }
-
     },
     data () {
         return {
@@ -69,19 +72,50 @@ export default {
             return v.active ? 'menu-move-up' : 'menu-move-down'
         },
         toggleMenu (arr, v, open = false) {
-            const { hasChild } = this;
-            // if (hasChild()) {
-                v.active = !v.active;
-            // } else {
-            //     return true;
-            // }
+            // const { hasChild } = this;
+
+            if (v.children && v.children.length) {
+                
+            } else {
+                arr.map(item => {         //后续需要优化
+                // item.active = false;
+                    if (item.children && item.children.length) {
+                        item.children.map(child => {
+                            child.active = false;
+                        })
+                    }
+                })
+            }
+            // this.removeActive(arr)
+            v.active = !v.active;
         },
-        clickItem (arr, v, unActive = false) {
+        clickItem (arr, v, unActive = false, parent) {
             if (v.active) return;
             arr.map(item => item.active = false);
-            v.active = !unActive;
             this.$emit('on-select-item', v)
-        }
+            parent.map(item => {
+                if (item.children && item.children.length) {
+                    item.children.map(child => {
+                        child.active = false;
+                    })
+                } else {
+                    item.active = false;
+                }
+            })
+            // this.removeActive(parent)
+            v.active = !unActive;
+        },
+        // removeActive (arr) {
+        //     arr.map(item => { 
+        //         if (item.children && item.children.length) {
+        //             item.children.map(child => {
+        //                 child.active = false;
+        //             })
+        //         } else {
+        //             item.active = false;
+        //         }
+        //     })
+        // }
     },
 }
 </script>
