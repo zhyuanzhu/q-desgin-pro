@@ -41,7 +41,7 @@ export default {
     props: {
         theme: {
             type: String,
-            default: 'dark',
+            default: 'light',
             validator (value) {
                 const valueList = ['dark', 'light', 'primary'];
                 return hasParam(value, valueList);
