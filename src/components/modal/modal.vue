@@ -96,7 +96,7 @@ export default {
             this.$emit('on-confirm', evt)
         },
         cancel (evt) {
-            this.hide();
+            // this.hide();
             this.$emit('on-cancel', evt)
         },
         hide () {
