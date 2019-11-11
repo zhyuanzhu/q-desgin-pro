@@ -77,32 +77,33 @@ export default {
             if (v.children && v.children.length) {
                 
             } else {
-                arr.map(item => {         //后续需要优化
-                // item.active = false;
-                    if (item.children && item.children.length) {
-                        item.children.map(child => {
-                            child.active = false;
-                        })
-                    }
-                })
+            //     arr.map(item => {         //后续需要优化
+            //         if (item.children && item.children.length) {
+            //             item.children.map(child => {
+            //                 child.active = false;
+            //             })
+            //         } else {
+            //             item.active = false;
+            //         }
+            //     })
+                this.removeActive(arr)
             }
-            // this.removeActive(arr)
             v.active = !v.active;
         },
         clickItem (arr, v, unActive = false, parent) {
             if (v.active) return;
             arr.map(item => item.active = false);
             this.$emit('on-select-item', v)
-            parent.map(item => {
-                if (item.children && item.children.length) {
-                    item.children.map(child => {
-                        child.active = false;
-                    })
-                } else {
-                    item.active = false;
-                }
-            })
-            // this.removeActive(parent)
+            // parent.map(item => {
+            //     if (item.children && item.children.length) {
+            //         item.children.map(child => {
+            //             child.active = false;
+            //         })
+            //     } else {
+            //         item.active = false;
+            //     }
+            // })
+            this.removeActive(parent)
             v.active = !unActive;
         },
         tagName (item) {
@@ -115,18 +116,18 @@ export default {
             } else {
                 return {to: item.to}
             }
+        },
+        removeActive (arr) {
+            arr.map(item => { 
+                if (item.children && item.children.length) {
+                    item.children.map(child => {
+                        child.active = false;
+                    })
+                } else {
+                    item.active = false;
+                }
+            })
         }
-        // removeActive (arr) {
-        //     arr.map(item => { 
-        //         if (item.children && item.children.length) {
-        //             item.children.map(child => {
-        //                 child.active = false;
-        //             })
-        //         } else {
-        //             item.active = false;
-        //         }
-        //     })
-        // }
     },
 }
 </script>
