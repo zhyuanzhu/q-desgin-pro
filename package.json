@@ -1,6 +1,6 @@
 {
   "name": "q-desgin-pro",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A PC UI library based on Vue 2.x",
   "author": "zhangyuanzhu",
   "main": "dist/qdesgin.js",
@@ -18,8 +18,9 @@
     "package:style": "gulp --gulpfile build/build-style.js",
     "package": "npm publish"
   },
-  "peerDependencies": {
-    "vue": "^2.5.2"
+  "dependencies": {
+    "vue": "^2.5.2",
+    "vue-router": "^3.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
