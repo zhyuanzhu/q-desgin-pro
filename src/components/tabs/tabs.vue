@@ -76,6 +76,7 @@ export default {
                 }
             })
             item.active = !item.active;
+            this.$emit('on-change', item)
         },
         setActiveUnderline (prevIndex, activeIndex) {
             const { domWidth: _w } = this;
