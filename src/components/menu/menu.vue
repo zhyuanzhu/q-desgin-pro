@@ -4,7 +4,9 @@
             <li v-for="(menu, index) in data" :class="[`${prefixCls}-item`]" :key="menu.id || index">
                 <div :class="[`${prefixCls}-item-title`, !hasChild(menu) && menu.active && 'item-title-active']" @click="toggleMenu(data, menu, menu.active)">
                     <i :class="[iconClass, menu.icon && `${prefixCls}-${menu.icon}`]"></i>
-                    <a :href="menu.to ? menu.to : 'javascript:;' ">{{ menu.label }}</a>
+                    <!-- <a href="javascript:;" v-if="!hasChild(menu)">{{ menu.label }}</a> -->
+                    <component :is="tagName(menu)" v-bind="tagProps(menu)" >{{ menu.label }}</component>
+                    <!-- <router-link :to="menu.to">{{ menu.label }}</router-link> -->
                     <i v-if="hasChild(menu)" 
                         :class="[hasChild(menu) && `${prefixCls}-item-sub`, 
                         menu.active ? `${prefixCls}-item-sub-up`: `${prefixCls}-item-sub-down`]">
@@ -21,7 +23,7 @@
                                 @click="clickItem(menu.children, item, item.active, data)"
                                 :class="[`item`, `${item.id}-item`, item.active && `item-active`]"
                                 >
-                                <a :href="item.to">{{ item.label }}</a>
+                                <router-link :to="item.to">{{ item.label }}</router-link>
                             </li>
                         </ul>
                     </div>
@@ -105,6 +107,17 @@ export default {
             // this.removeActive(parent)
             v.active = !unActive;
         },
+        tagName (item) {
+            return this.hasChild(item) ? 'a' : 'router-link';
+        },
+        tagProps (item) {
+            const hasChild = this.hasChild(item);
+            if (hasChild) {
+                return {href: 'javascript:;'};
+            } else {
+                return {to: item.to}
+            }
+        }
         // removeActive (arr) {
         //     arr.map(item => { 
         //         if (item.children && item.children.length) {
