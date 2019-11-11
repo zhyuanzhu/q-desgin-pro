@@ -4,7 +4,8 @@
             <li v-for="(menu, index) in data" :class="[`${prefixCls}-item`]" :key="menu.id || index">
                 <div :class="[`${prefixCls}-item-title`, !hasChild(menu) && menu.active && 'item-title-active']" @click="toggleMenu(data, menu, menu.active)">
                     <i :class="[iconClass, menu.icon && `${prefixCls}-${menu.icon}`]"></i>
-                    <component :is="tagName(menu)" v-bind="tagProps(menu)" >{{ menu.label }}</component>
+                    <a href="javascript:;">{{ menu.label }}</a>
+                    <!-- <component :is="tagName(menu)" v-bind="tagProps(menu)" >{{ menu.label }}</component> -->
                     <i v-if="hasChild(menu)" 
                         :class="[hasChild(menu) && `${prefixCls}-item-sub`, 
                         menu.active ? `${prefixCls}-item-sub-up`: `${prefixCls}-item-sub-down`]">
@@ -21,7 +22,8 @@
                                 @click="clickItem(menu.children, item, item.active, data)"
                                 :class="[`item`, `${item.id}-item`, item.active && `item-active`]"
                                 >
-                                <router-link :to="item.to">{{ item.label }}</router-link>
+                                <!-- <router-link :to="item.to">{{ item.label }}</router-link> -->
+                                <a href="javascript:;">{{ item.label }}</a>
                             </li>
                         </ul>
                     </div>
@@ -72,23 +74,13 @@ export default {
             return v.active ? 'menu-move-up' : 'menu-move-down'
         },
         toggleMenu (arr, v, open = false) {
-            // const { hasChild } = this;
+            const { hasChild } = this;
 
-            if (v.children && v.children.length) {
-                
-            } else {
-            //     arr.map(item => {         //后续需要优化
-            //         if (item.children && item.children.length) {
-            //             item.children.map(child => {
-            //                 child.active = false;
-            //             })
-            //         } else {
-            //             item.active = false;
-            //         }
-            //     })
+            if (!hasChild(v)) {
                 this.removeActive(arr)
             }
             v.active = !v.active;
+            this.$emit('on-select', v);
         },
         clickItem (arr, v, unActive = false, parent) {
             if (v.active) return;
