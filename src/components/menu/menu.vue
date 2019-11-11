@@ -4,9 +4,7 @@
             <li v-for="(menu, index) in data" :class="[`${prefixCls}-item`]" :key="menu.id || index">
                 <div :class="[`${prefixCls}-item-title`, !hasChild(menu) && menu.active && 'item-title-active']" @click="toggleMenu(data, menu, menu.active)">
                     <i :class="[iconClass, menu.icon && `${prefixCls}-${menu.icon}`]"></i>
-                    <!-- <a href="javascript:;" v-if="!hasChild(menu)">{{ menu.label }}</a> -->
                     <component :is="tagName(menu)" v-bind="tagProps(menu)" >{{ menu.label }}</component>
-                    <!-- <router-link :to="menu.to">{{ menu.label }}</router-link> -->
                     <i v-if="hasChild(menu)" 
                         :class="[hasChild(menu) && `${prefixCls}-item-sub`, 
                         menu.active ? `${prefixCls}-item-sub-up`: `${prefixCls}-item-sub-down`]">
