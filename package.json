@@ -1,6 +1,6 @@
 {
   "name": "q-desgin-pro",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "A PC UI library based on Vue 2.x",
   "author": "zhangyuanzhu",
   "main": "dist/qdesgin.js",
