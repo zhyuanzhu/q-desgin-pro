@@ -75,8 +75,9 @@ $opacity: .6;
         position: absolute;
         bottom: -1px;
         height: 2px;
-        transition: all 1s;
+        transition: all .45s linear;
         background: $blue;
+        z-index: 1;
     }
     &-card-underline {
         position: absolute;
