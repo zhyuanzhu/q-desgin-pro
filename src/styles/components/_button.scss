@@ -61,8 +61,8 @@ $btn-border-hover: #f6f8fc;
         background-color: $white;
         color: $main;
         &:hover {
-            color: $blue;
-            border-color: $blue;
+            color: $green;
+            border-color: $green;
         }
         &:active {
             @extend .#{$buttonPrefix}-primary:hover;
