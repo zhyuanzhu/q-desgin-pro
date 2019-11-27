@@ -10,6 +10,24 @@ $radioPrefix: "#{$prefixCls}radio";
     display: block;
     cursor: $cursor-pointer;
     box-sizing: border-box;
+    &.#{$radioPrefix}-primary {
+        .#{$radioPrefix}-icon {
+            &:after {
+                border-color: $green;
+                background-color: $green;
+            }
+        }
+        &:hover {
+            .#{$radioPrefix}-icon {
+                border-color: $green;
+            }
+        }
+        &-active {
+            .#{$radioPrefix}-icon {
+                @include border($green, $green);
+            }
+        }
+    }
     &-icon {
         position: relative;
         display: inline-block;
@@ -48,6 +66,14 @@ $radioPrefix: "#{$prefixCls}radio";
         }
     }
     &-active {
+        &.#{$radioPrefix}-primary {
+            .#{$radioPrefix}-icon {
+                @include border($green, $green);
+                &::after {
+                    border-color: $white;
+                }
+            }
+        }
         .#{$radioPrefix}-icon {
             @include border($blue, $blue);
             &::after {

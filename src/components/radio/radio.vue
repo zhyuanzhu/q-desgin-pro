@@ -1,10 +1,11 @@
 <template>
-    <label :class="[`${prefixCls}`, active && `${prefixCls}-active`, disabled && `${prefixCls}-disabled`]">
+    <label :class="[`${prefixCls}`, active && `${prefixCls}-active`, disabled && `${prefixCls}-disabled`, `${[prefixCls]}-${type}`]">
         <span :class="[`${prefixCls}-icon`]"></span>
         <span :class="`${prefixCls}-value`" v-if="value" v-text="value"></span>
     </label>
 </template>
 <script>
+import { hasParam } from '../../utils/util';
 
 //是否选中的逻辑在引入组件处处理，所以disabled等选项和多个单选框的时候，需要判断逻辑
 
@@ -26,6 +27,14 @@ export default {
         group: {
             type: Boolean,
             default: false
+        },
+        type: {
+            type: String,
+            default: 'default',
+            validator (value) {
+                const valueList = ['default', 'primary'];
+                return hasParam(value, valueList)
+            }
         }
     },
     data() {
