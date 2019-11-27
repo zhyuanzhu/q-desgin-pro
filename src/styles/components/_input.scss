@@ -7,7 +7,14 @@ $iptPrefix: "#{$prefixCls}input";
     vertical-align: middle;
     font-size: 0;
     line-height: 38px;
+   
     .#{$iptPrefix} {
+        &.#{$iptPrefix}-primary {
+            &:focus {
+                border-color: $green;
+                box-shadow: 0 0 5px rgba($green, .5);
+            }
+        }
         box-sizing: border-box;
         @include wh(240px, 38px);
         padding: 10px;

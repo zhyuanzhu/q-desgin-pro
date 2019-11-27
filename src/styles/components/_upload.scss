@@ -29,11 +29,23 @@ $opacity: .6;
             &:hover {
                 @extend .disabed-color;
             }
+            &.theme-primary {
+                @extend .disabed-color;
+                &:hover {
+                    @extend .disabed-color;
+                }
+            }
         }
         .#{$up}-other{
             @extend .disabed-color;
             &:hover {
                 @extend .disabed-color;
+            }
+            &.theme-primary {
+                @extend .disabed-color;
+                &:hover {
+                    @extend .disabed-color;
+                }
             }
         }
     }
@@ -63,6 +75,11 @@ $opacity: .6;
             &:hover {
                 border-color: $blue;
             }
+            &.theme-primary {
+                &:hover {
+                    border-color: $green;
+                }
+            }
             .file {
                 
             }
@@ -75,6 +92,12 @@ $opacity: .6;
             border-radius: $border-radius-middle;
             color: $main;
             position: relative;
+            &.theme-primary {
+                &:hover {
+                    color: $green;
+                    border-color: $green;
+                }
+            }
             &:hover {
                 color: $blue;
                 border-color: $blue;

@@ -24,7 +24,35 @@ $page: "page";
                     font-size: $font-size-small;
                 }
             }
+            &.#{$page}-primary {
+                .#{$page}-item {
+                    &:hover {
+                        color: $green;
+                        border-color: $green;
+                        box-shadow: 0 0 4px 0 rgba($green, .3);
+                    }
+                    &.#{$page}-active {
+                        color: $green;
+                        border-color: $green;
+                        box-shadow: 0 0 4px 0 rgba($green, .3);
+                    }
+                }
+                .#{$page}-next, .#{$page}-prev {
+                    &:hover {
+                        color: $green;
+                        box-shadow: 0 0 4px 0 rgba($green, .3);
+                    }
+                    &-disabled {
+                        &:hover {
+                            box-shadow: none;
+                            color: $lightC;
+                            border-color: $lightC;
+                        }
+                    }
+                }
+            }
         }
+        
         &-item {
             @include wh(32px);
             text-align: center;
