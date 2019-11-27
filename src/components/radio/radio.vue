@@ -1,5 +1,5 @@
 <template>
-    <label :class="[`${prefixCls}`, active && `${prefixCls}-active`, disabled && `${prefixCls}-disabled`, `${[prefixCls]}-${type}`]">
+    <label :class="[`${prefixCls}`, active && `${prefixCls}-active`, disabled && `${prefixCls}-disabled`, `${[prefixCls]}-${theme}`]">
         <span :class="[`${prefixCls}-icon`]"></span>
         <span :class="`${prefixCls}-value`" v-if="value" v-text="value"></span>
     </label>
@@ -28,7 +28,7 @@ export default {
             type: Boolean,
             default: false
         },
-        type: {
+        theme: {
             type: String,
             default: 'default',
             validator (value) {

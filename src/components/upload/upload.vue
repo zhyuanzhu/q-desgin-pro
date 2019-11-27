@@ -1,6 +1,6 @@
 <template>
     <div :class="[prefixCls, `${prefixCls}-${type}`, disabled && `${prefixCls}-disabled`]">
-        <form class="upload" :class="[`upload-${type}`, type != 'default' && `upload-other` ]" enctype="multipart/form-data">
+        <form class="upload" :class="[`upload-${type}`, type != 'default' && `upload-other`, `theme-${theme}` ]" enctype="multipart/form-data">
             <input type="file" :name="name" class="file" ref="file" title="" @change="upload" v-if="!disabled">
             <div v-if="type != 'default'" class="upload-btn">
                 <span :class="`${type}`" v-html="setIcon(type)"></span>
@@ -62,6 +62,14 @@ export default {
         title: {
             type: String,
             default: '上传'
+        },
+        theme: {
+            type: String,
+            default: 'default',
+            validator (value) {
+                const valueList = ['default', 'primary'];
+                return hasParam(value, valueList)
+            }
         }
     },
     data() {

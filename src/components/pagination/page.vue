@@ -1,6 +1,6 @@
 <template>
     <div :class="[`${prefixCls}`]" v-if="total > pageSize">
-        <div :class="[`${prefixCls}-list`, circle && `${prefixCls}-list-circle`]">
+        <div :class="[`${prefixCls}-list`, circle && `${prefixCls}-list-circle`, `${prefixCls}-${theme}`]">
             <div class="page-prev" :class="{'page-prev-disabled': now == 1}" @click="prev">
                 <span class="prev"></span>
             </div>
@@ -34,7 +34,8 @@ export default {
             default: 1
         },
         pageSize: Number,
-        circle: Boolean
+        circle: Boolean,
+        theme: String
     },
     data() {
         return {

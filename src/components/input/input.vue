@@ -7,7 +7,7 @@
         error && `${prefixCls}-error`]"
         >
         <input 
-        :class="[`${prefixCls}`]"
+        :class="[`${prefixCls}`, `${prefixCls}-${theme}`]"
         :type="type"
         :disabled="disabled"
         :readonly="readonly"
@@ -93,6 +93,14 @@ export default {
             type: Boolean,
             default: true
         },
+        theme: {
+            type: String,
+            default: 'default',
+            validator (value) {
+                const valueList = ['default', 'primary'];
+                return hasParam(value, valueList)
+            }
+        }
     },
     data () {
         return {
@@ -101,8 +109,11 @@ export default {
         }
     },
     watch: {
-        vallue (value) {
+        value (value) {
             this.setCurrentValue(value);
+        },
+        currentValue (value) {
+            this.$emit('input', value)
         }
     },
     methods: {
