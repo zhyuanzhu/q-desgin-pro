@@ -94,7 +94,20 @@ $arrow: "http://p0.qhimg.com/t011244f24d2bbac6d4.png";
             color: $main;
         }
         .#{$menuPrefix}-item {
+
             &-title {
+                &.green-list {
+                    &:hover {
+                        color: $green;
+                    }
+                    &.item-title-active {
+                        color: $green;
+                        background: $green-mask;
+                        &::after {
+                            background: $green;
+                        }
+                    }
+                }
                 &:hover {
                     color: $blue;
                 }
@@ -116,6 +129,18 @@ $arrow: "http://p0.qhimg.com/t011244f24d2bbac6d4.png";
             &-children {
                 background: $white;
                 .item {
+                    &.green-item {
+                        &:hover {
+                            color: $green;
+                        }
+                        &.item-active {
+                            color: $green;
+                            background: $green-mask;
+                            &::after {
+                                background: $green;
+                            }
+                        }
+                    }
                     &-active {
                         background: $light-active;
                         color: $blue;

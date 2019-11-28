@@ -1,8 +1,8 @@
 <template>
     <div :class="[prefixCls, `${prefixCls}-${theme}`]">
-        <ul :class="`${prefixCls}-list`" :style="{'width': width}">
+        <ul :class="[`${prefixCls}-list`]" :style="{'width': width}">
             <li v-for="(menu, index) in data" :class="[`${prefixCls}-item`]" :key="menu.id || index">
-                <div :class="[`${prefixCls}-item-title`, !hasChild(menu) && menu.active && 'item-title-active']" @click="toggleMenu(data, menu, menu.active)">
+                <div :class="[`${prefixCls}-item-title`, !hasChild(menu) && menu.active && 'item-title-active', color && `green-list`]" @click="toggleMenu(data, menu, menu.active)">
                     <i :class="[iconClass, menu.icon && `${prefixCls}-${menu.icon}`]"></i>
                     <a href="javascript:;">{{ menu.label }}</a>
                     <!-- <component :is="tagName(menu)" v-bind="tagProps(menu)" >{{ menu.label }}</component> -->
@@ -20,7 +20,7 @@
                         <ul :class="`${menu.id}-list`">
                             <li v-for="(item, idx) in menu.children" :key="item.id || idx" 
                                 @click="clickItem(menu.children, item, item.active, data)"
-                                :class="[`item`, `${item.id}-item`, item.active && `item-active`]"
+                                :class="[`item`, `${item.id}-item`, item.active && `item-active`, color && `green-item`]"
                                 >
                                 <!-- <router-link :to="item.to">{{ item.label }}</router-link> -->
                                 <a href="javascript:;">{{ item.label }}</a>
@@ -58,6 +58,10 @@ export default {
         width: {
             type: String,
             default: '240px'
+        },
+        color: {
+            type: Boolean,
+            default: false
         }
     },
     data () {
