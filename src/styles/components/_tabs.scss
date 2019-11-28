@@ -27,6 +27,19 @@ $opacity: .6;
         color: $main;
         font-size: $font-size-base;
         cursor: $cursor-pointer;
+        &.theme-primary {
+            &:hover { 
+                color: $green;
+            }
+            &.#{$tabsPrefix}-tab-active {
+                color: $green;
+                &.#{$tabsPrefix}-tab-disabled {
+                    &:hover {
+                        color: $green;
+                    }
+                }
+            }
+        }
         &:hover {
             color: $blue;
             transition: all $animate-time;
@@ -73,11 +86,14 @@ $opacity: .6;
     }
     &-underline {
         position: absolute;
-        bottom: -1px;
+        bottom: 0;
         height: 2px;
         transition: all .45s linear;
         background: $blue;
         z-index: 1;
+        &.theme-primary {
+            background: $green;
+        }
     }
     &-card-underline {
         position: absolute;

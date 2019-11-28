@@ -10,14 +10,15 @@
                 :class="[`${prefixCls}-tab`, item.disabled && `${prefixCls}-tab-disabled`, 
                 item.active && `${prefixCls}-tab-active`,
                 item.icon && `${prefixCls}-icon`,
-                `${prefixCls}-${type}`
+                `${prefixCls}-${type}`,
+                `theme-${theme}`
                 ]"
                 :style="item.icon && `background-image:url(${item.icon});`"
                 @click="handleClick(item, index)"
                 ref="tab"
                 >
                 {{ item[primaryKey] }}</li>
-            <li :class="type !== 'card' ? `${prefixCls}-underline` : `${prefixCls}-card-underline`" ref="line"></li>
+            <li :class="[type !== 'card' ? `${prefixCls}-underline` : `${prefixCls}-card-underline`, `theme-${theme}`]" ref="line"></li>
         </ul>
     </div>
 </template>
@@ -45,6 +46,14 @@ export default {
             validator (value) {
                 const valueList = ['default', 'card'];
                 return hasParam(value, valueList);
+            }
+        },
+        theme: {
+            type: String,
+            default: 'default',
+            validator (value) {
+                const valueList = ['default', 'primary'];
+                return hasParam(value, valueList)
             }
         }
     },
