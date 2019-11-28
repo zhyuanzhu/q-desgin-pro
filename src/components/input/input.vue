@@ -37,10 +37,12 @@
 <script>
 
 import { hasParam } from '../../utils/util';
+import emitter from '../../mixins/emitter';
 const prefixCls = 'qui-input';
 
 export default {
     name: 'Input',
+    mixins: [emitter],
     props: {
         type: {
             type: String,
@@ -64,7 +66,10 @@ export default {
             default: true
         },
         unit: String,
-        value: [String, Number],
+        value: {
+            type: [String, Number],
+            default: ''
+        },
         placeholder: String,
         autocomplete: {
             type: Boolean,
@@ -135,8 +140,8 @@ export default {
         handleInput (evt) {
             let _val = evt.target.value;
             this.setCurrentValue(_val);
-            this.$emit('change', evt);
-            this.$emit('input', evt);
+            this.$emit('change', _val);
+            this.$emit('input', _val);
         },
         handleChange (evt) {
             this.$emit('change', evt);
