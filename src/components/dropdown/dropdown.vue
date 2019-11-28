@@ -54,7 +54,7 @@ export default {
             default: false
         },
         theme: {
-            type: Boolean,
+            type: String,
             default: 'default',
             validator (value) {
                 const valueList = ['default', 'primary']
