@@ -3,7 +3,7 @@
         <div v-show="show" v-scroll="data" :class="[`${prefixCls}`, `${prefixCls}-${size}`, !autoWidth && `${prefixCls}-inherit`]" :style="boxStyle">
             <div :class="`${prefixCls}-list`">
                 <div v-for="(item, index) in data" :key="item.id || index" 
-                    :class="[`${prefixCls}-item`, item.active && `${prefixCls}-active`, item.disabled && `${prefixCls}-disabled`]"
+                    :class="[`${prefixCls}-item`, item.active && `${prefixCls}-active`, item.disabled && `${prefixCls}-disabled`, `theme-${theme}`]"
                     @click="!item.disabled && handleClick(item)" :title="showTitle && item.title">
                     <slot>{{item.value}}</slot>
                 </div>
@@ -52,6 +52,14 @@ export default {
         show: {
             type: Boolean,
             default: false
+        },
+        theme: {
+            type: Boolean,
+            default: 'default',
+            validator (value) {
+                const valueList = ['default', 'primary']
+                return hasParam(value, valueList)
+            }
         }
     },
     data () {

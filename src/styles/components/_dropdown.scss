@@ -14,7 +14,7 @@ $dropdownPrefix: "#{$prefixCls}dropdown";
     &-item {
         padding: 0 15px;
         line-height: 32px;
-        margin-top: 12px;
+        margin-top: 2px;
         color: $main;
         font-size: $font-size-small;
         @include no-wrap();
@@ -27,7 +27,16 @@ $dropdownPrefix: "#{$prefixCls}dropdown";
         &:hover, &:active {
             background-color: $elebg;
         }
+        &.theme-primary { 
+            &:hover, &:active {
+                background-color: $green-mask;
+            }
+        }
         &.#{$dropdownPrefix}-active {
+            &.theme-primary {
+                color: $green;
+                background-color: $green-mask;
+            }
             color: $blue;
             background-color: $elebg;
         }
@@ -41,6 +50,16 @@ $dropdownPrefix: "#{$prefixCls}dropdown";
             &.#{$dropdownPrefix}-active {
                 color: $blue-disabled;
             }
+            &.theme-primary {
+                color: $lightC;
+                background-color: $white;
+                &:hover, &:active {
+                    background-color: $white;
+                }
+                &.#{$dropdownPrefix}-active {
+                    color: $green-light;
+                }
+            }
         }
         
     }
@@ -48,14 +67,14 @@ $dropdownPrefix: "#{$prefixCls}dropdown";
         .#{$dropdownPrefix}-item {
             padding: 0 25px;
             line-height: 40px;
-            margin-top: 12px;
+            // margin-top: 12px;
         }
     }
     &-small {
         .#{$dropdownPrefix}-item {
             padding: 0 10px;
             line-height: 26px;
-            margin-top: 4px;
+            // margin-top: 4px;
         }
     }
     &-inherit {

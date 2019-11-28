@@ -1,10 +1,10 @@
 <template>
-    <div :class="[`${prefixCls}`, `${prefixCls}-${size}`, disabled && `${prefixCls}-disabled`, !arrowDown && `${prefixCls}-active`]">
+    <div :class="[`${prefixCls}`, `${prefixCls}-${size}`, disabled && `${prefixCls}-disabled`, !arrowDown && `${prefixCls}-active`, `theme-${theme}`]">
         <div :class="[`${prefixCls}-main`]" @click="!disabled && (arrowDown = !arrowDown)">
             <span :class="`${prefixCls}-value`">{{ selectValue }}</span>
             <span :class="[arrowDown ? `${prefixCls}-down` : `${prefixCls}-up`, `${prefixCls}-arrow`]"></span>
         </div>
-        <drop-down :data="dropData" :size="size" :show="!disabled && !arrowDown" :autoWidth="autoWidth" @on-choose="onChoose" />
+        <drop-down :theme="theme" :data="dropData" :size="size" :show="!disabled && !arrowDown" :autoWidth="autoWidth" @on-choose="onChoose" />
     </div>
 </template>
 <script>
@@ -47,6 +47,14 @@ export default {
         disabled: {
             type: Boolean,
             default: false
+        },
+        theme: {
+            type: String,
+            default: 'default',
+            validator (value) {
+                const valueList = ['default', 'primary'];
+                return hasParam(value, valueList)
+            }
         }
     },
     data() {

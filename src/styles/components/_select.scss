@@ -14,7 +14,17 @@ $selectPrefix: "#{$prefixCls}select";
     color: $main;
     font-size: $font-size-base;
     cursor: $cursor-pointer;
-
+    &.theme-primary {
+        &:hover{
+            border-color: $green;
+        }
+        &:active {
+            border-color: $green;
+        }
+        &.#{$selectPrefix}-active {
+            border-color: $green;
+        }
+    }
     &:hover{
         border-color: $blue;
     }
