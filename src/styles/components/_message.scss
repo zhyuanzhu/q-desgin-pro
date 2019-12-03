@@ -10,13 +10,21 @@ $i: "icon";
 
 .#{$msgPrefix} {
     text-align: center;
+    position: absolute;
+    z-index: 999;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    padding-top: 200px;
+    left: 50%;
+    transform: translateX(-50%);
     &-mask {
         @include mask(rgba($black, .1), 1);
     }
     &-main {
         position: relative;
         padding: 32px 32px 24px;
-        z-index: 1000;
+        z-index: 1001;
         background-color: $white;
         display: inline-block;
         box-shadow: 0 2px 8px rgba($black, .05);
