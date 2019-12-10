@@ -9,6 +9,46 @@ export function hasParam (value, valueList=[]) {
     return false;
 }
 
+/**
+ * 查找父组件
+ */
+export function findComponentParents (context, componentName, componentNames) {
+    if (typeof componentName === 'string') {
+        componentNames = [componentName];
+    } else {
+        componentNames = componentName;
+    }
+
+    let parent = context.$parent;
+    let name = parent.$options.name;
+    while (parent && (!name || componentNames.indexOf(name) < 0)) {
+        parent = parent.$parent;
+        if (parent) name = parent.$options.name;
+    }
+    return parent;
+}
+
+
+/**
+ * 查找子组件
+ */
+export function findComponentChildren (context, componentName, ignoreComponentNames = []) {
+    if ( typeOf(ignoreComponentNames) != 'array' ) {
+        ignoreComponentNames = [ignoreComponentNames]
+    }
+    return context.$children.reduce((components, child) => {
+        if (child.$options.name === componentName) components.push(child);
+        if (ignoreComponentNames.indexOf(child.$options.name) < 0) {
+            const _f = findComponentChildren(child, componentName);
+            return components.concat(_f)
+        } else {
+            return components
+        }
+    }, [])
+}
+
+
+
 function typeOf (obj) {
     const toString  = Object.prototype.toString;
     const map = {

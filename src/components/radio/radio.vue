@@ -1,30 +1,41 @@
 <template>
-    <label :class="[`${prefixCls}`, active && `${prefixCls}-active`, disabled && `${prefixCls}-disabled`, `${[prefixCls]}-${theme}`]">
-        <span :class="[`${prefixCls}-icon`]"></span>
-        <span :class="`${prefixCls}-value`" v-if="value" v-text="value"></span>
+    <label :class="[`${prefixCls}`, 
+        currentValue && `${prefixCls}-active`, 
+        disabled && `${prefixCls}-disabled`, 
+        `${[prefixCls]}-${theme}`]"
+        >
+        <span :class="`${prefixCls}-icon`">
+            <input type="radio" 
+                ref="ipt"
+                :name="radioName" 
+                :class="`${prefixCls}-ipt`"
+                :disabled="disabled"
+                :checked="currentValue"
+                @change="change"
+                :value="value"
+                @click="handleClick"
+                >
+        </span>
+        <span :class="`${prefixCls}-value`" v-if="label" v-text="label"></span>
     </label>
 </template>
 <script>
-import { hasParam } from '../../utils/util';
-
-//是否选中的逻辑在引入组件处处理，所以disabled等选项和多个单选框的时候，需要判断逻辑
-
+import { hasParam, findComponentParents } from '../../utils/util';
 
 const prefixCls = "qui-radio";
 
 export default {
     name: 'Radio',
     props: {
-        value: [String, Number, Boolean],
+        value: {
+            type: [String, Number, Boolean],
+            default: false
+        },
         active: {
             type: Boolean,
             default: false
         },
         disabled: {
-            type: Boolean,
-            default: false
-        },
-        group: {
             type: Boolean,
             default: false
         },
@@ -35,35 +46,55 @@ export default {
                 const valueList = ['default', 'primary'];
                 return hasParam(value, valueList)
             }
-        }
+        },
+        name: {
+            type: String
+        },
+        label: [String, Number, Boolean]
     },
     data() {
         return {
             prefixCls,
             isActive: false,
-            radioGroupValue: null
+            group: false,
+            radioName: this.name,
+            parent: findComponentParents(this, 'RadioGroup'),
+            currentValue: '',
+            single: false
         }
     },
     methods: {
         handleClick () {
-            //后续添加处理
-            let { value, isActive, disabled, group, radioGroupValue } = this;
-            if (disabled) return;
-            if (group) {
-                this.radioGroupValue = value;
-            } else {
-                this.isActive = !isActive;
-                if (isActive) {
-                    this.$emit('on-change', '')
-                } else {
-                    this.$emit('on-change', value)
-                }
-            }
+            const { group, disabled, currentValue } = this;
+            if (disabled || group) return;
+            this.currentValue = !currentValue
+            this.$emit('input', this.currentValue)
+            this.$emit('on-change', this.currentValue);
+        },
+        change (evt) {
+            const { disabled, value, group, parent } = this;
+            if (disabled || !group) return;
+            const isChecked = evt.target.checked;
+            this.currentValue = isChecked;
+            this.$emit('input', isChecked)
+            parent.change({
+                value: value 
+            })
+        },
+        updateValue () {
+            this.currentValue = this.value
         }
     },
     mounted() {
-        // const { active } = this;
-        // this.isActive = active;
+        if (this.parent) {
+            this.group = true;
+            this.radioName = this.parent.name
+        }
+        if (this.group) {
+            this.parent.updateValue()
+        } else {
+            this.updateValue()
+        }
     },
 }
 </script>
