@@ -39,6 +39,16 @@ $radioPrefix: "#{$prefixCls}radio";
         border: 1px solid $lightC;
         box-sizing: border-box;
         transition: all $animate-time;
+        .#{$radioPrefix}-ipt {
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            z-index: 1;
+            opacity: 0;
+            cursor: $cursor-pointer;
+        }
         &:after { 
             content: ''; 
             @include absolute();
@@ -92,6 +102,9 @@ $radioPrefix: "#{$prefixCls}radio";
             @include border($lightC, $border-color);
             &::after {
                 display: none;
+            }
+            .#{$radioPrefix}-ipt { 
+                cursor: $cursor-disabled;
             }
         }
         &:hover {
