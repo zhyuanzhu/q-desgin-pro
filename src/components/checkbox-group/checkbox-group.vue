@@ -1,5 +1,5 @@
 <template>
-    <div :class="prefixCls">
+    <div :class="[prefixCls, vertical && `${prefixCls}-vertical`]">
         <slot></slot>
     </div>
 </template>
@@ -57,3 +57,6 @@ export default {
     },
 }
 </script>
+<style lang="scss" type="text/scss">
+    @import "../../styles/components/_checkbox-group.scss";
+</style>
