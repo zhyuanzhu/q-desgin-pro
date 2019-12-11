@@ -3,9 +3,9 @@
             `${prefixCls}`, 
             disabled && `${prefixCls}-disabled`, 
             currentValue && `${prefixCls}-active`, 
-            partial && `${prefixCls}-partial`
+            partial && `${prefixCls}-partial`,
             ]">
-        <span :class="[`${prefixCls}-icon`]">
+        <span :class="[`${prefixCls}-icon`, `${prefixCls}-${theme}`]">
             <input type="checkbox" v-if="group" 
                 :name="name"
                 :disabled="disabled"
@@ -61,6 +61,14 @@ export default {
         },
         name: {
             type: String
+        },
+        theme: {
+            type: String,
+            default: 'default',
+            validator (value) {
+                const valueList = ['default', 'primary'];
+                return hasParam(value, valueList)
+            }
         }
     },
     data () {

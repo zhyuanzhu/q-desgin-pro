@@ -44,6 +44,12 @@ $checkBoxPrefix: "#{$prefixCls}checkbox";
             border: 0 solid $blue; 
             transition: all $animate-time; 
         }
+
+        &.#{$checkBoxPrefix}-primary {
+            &::after {
+                border: 0 solid $green; 
+            }
+        }
     }
     &-ipt {
         position: absolute;
@@ -64,6 +70,9 @@ $checkBoxPrefix: "#{$prefixCls}checkbox";
     &:hover {
         .#{$checkBoxPrefix}-icon {
             @include border($blue);
+            &.#{$checkBoxPrefix}-primary {
+                @include border($green);
+            }
         }
     }
     &-active {
@@ -71,6 +80,9 @@ $checkBoxPrefix: "#{$prefixCls}checkbox";
             @include border($blue, $blue);
             &::after {
                 display: block;
+            }
+            &.#{$checkBoxPrefix}-primary {
+                @include border($green, $green);
             }
         }  
         .#{$checkBoxPrefix}-value {
@@ -86,6 +98,9 @@ $checkBoxPrefix: "#{$prefixCls}checkbox";
             &::after {
                 display: none;
             }
+            &.#{$checkBoxPrefix}-primary {
+                @include border($green, $green);
+            }
         }
     }
     &-disabled {
@@ -98,10 +113,16 @@ $checkBoxPrefix: "#{$prefixCls}checkbox";
             &::before {
                 display: none;
             }
+            &.#{$checkBoxPrefix}-primary {
+                @include border($lightC, $border-color);
+            }
         }
         &:hover {
             .#{$checkBoxPrefix}-icon { 
                 @include border($lightC, $border-color);
+                &.#{$checkBoxPrefix}-primary {
+                    @include border($lightC, $border-color);
+                }
             }
         }
         .#{$checkBoxPrefix}-value {
@@ -112,6 +133,9 @@ $checkBoxPrefix: "#{$prefixCls}checkbox";
         cursor: $cursor-disabled;
         .#{$checkBoxPrefix}-icon {
             @include border($lightC, $border-color);
+            &.#{$checkBoxPrefix}-primary {
+                @include border($lightC, $border-color);
+            }
         }
     }
 }
