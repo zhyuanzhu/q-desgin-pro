@@ -8,6 +8,7 @@ $dropdownPrefix: "#{$prefixCls}dropdown";
     background-color: $white;
     box-shadow: 0 2px 14px 0 rgba(50, 60, 71, .15);
     box-sizing: border-box;
+    border-radius: 0 0 5px 5px;
     overflow: hidden;
     position: absolute;
     z-index: 998;

@@ -73,7 +73,8 @@ export default {
             this.$emit('on-choose', item);
         },
         setMaxHeight (lineH = 32, mt = 8) {
-            return this.maxLength * lineH + mt * (this.maxLength - 1) + 20;
+            const { maxLength } = this;
+            return maxLength * lineH + mt * (maxLength - 1) - 10;
         },
         setScrollData () {
 
