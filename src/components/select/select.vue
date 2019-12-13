@@ -1,5 +1,10 @@
 <template>
-    <div :class="[`${prefixCls}`, `${prefixCls}-${size}`, disabled && `${prefixCls}-disabled`, !arrowDown && `${prefixCls}-active`, `theme-${theme}`]">
+    <div :class="[`${prefixCls}`, `${prefixCls}-${size}`, 
+    disabled && `${prefixCls}-disabled`, 
+    !arrowDown && `${prefixCls}-active`, 
+    `theme-${theme}`]"
+    v-clickoutside="handleClickOutSide"
+    >
         <div :class="[`${prefixCls}-main`]" @click="!disabled && (arrowDown = !arrowDown)">
             <span :class="`${prefixCls}-value`">{{ selectValue }}</span>
             <span :class="[arrowDown ? `${prefixCls}-down` : `${prefixCls}-up`, `${prefixCls}-arrow`]"></span>
@@ -12,6 +17,7 @@
 const prefixCls = 'qui-select';
 import DropDown from '../dropdown'
 import { hasParam } from '../../utils/util'
+import clickoutside from '../../directives/clickoutside';
 
 
 export default {
@@ -78,10 +84,15 @@ export default {
                 if (i.active) this.selectValue = i.value;
             });
         },
+        handleClickOutSide (e) {
+            if (this.arrowDown) return;
+            this.arrowDown = !this.arrowDown;
+        }
     },
     mounted() {
         this.getDefaultValue();
     },
+    directives: { clickoutside }
 }
 </script>
 <style lang="scss" type="text/scss">
