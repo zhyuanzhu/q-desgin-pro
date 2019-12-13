@@ -55,7 +55,6 @@ export default {
 
                         el.addEventListener(mousewheel, event => {
 							let top = Number(el.children[0].tagTop) || 0;
-							console.log(top)
 							let _boxH = el.clientHeight, _childH = el.children[0].clientHeight;
 							let _barH = _childH ? Math.round(_boxH * _boxH / _childH) : 0;
 
@@ -152,7 +151,7 @@ export default {
                     }
 
                 } else {
-                    console.error('Threr should be only one container child element.');
+                    console.error('There should be only one container child element.');
                 }
             } else {
                 console.error('Container Element style position should be relative or absolute.');
