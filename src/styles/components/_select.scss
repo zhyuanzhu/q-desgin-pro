@@ -24,6 +24,16 @@ $selectPrefix: "#{$prefixCls}select";
         &.#{$selectPrefix}-active {
             border-color: $green;
         }
+        .#{$selectPrefix}-option {
+            &.#{$selectPrefix}-option-active {
+                color: $green;
+                background-color: $green-mask;
+            }
+            &:hover {
+                background-color: $green-mask;
+                color: $green;
+            }   
+        }
     }
     &:hover{
         border-color: $blue;
@@ -56,9 +66,40 @@ $selectPrefix: "#{$prefixCls}select";
     &-main {
         padding-left: 10px;
         padding-right: 20px;
+        height: 100%;
         .#{$selectPrefix}-value {
             display: block;
             @include no-wrap();
+        }
+    }
+    &-dropdown {
+        position: relative;
+        box-sizing: border-box;
+        padding-top: 6px;
+        margin-top: 1px;
+        z-index: 998;
+        background: $white;
+        border-radius: 0 0 5px 5px;
+        box-shadow: 0 2px 14px 0 rgba(50, 60, 71, .15);
+        overflow: hidden;
+        .#{$selectPrefix}-option {
+            padding: 0 15px;
+            line-height: 32px;
+            margin-top: 2px;
+            color: $main;
+            font-size: $font-size-small;
+            @include no-wrap();
+            transition: all $animate-time;
+            cursor: $cursor-pointer;
+            &:first-child {
+                margin-top: 0;
+            }
+            &:hover, &:active {
+                background-color: $elebg;
+            }
+            &.#{$selectPrefix}-option-active {
+                background-color: $elebg;
+            }
         }
     }
     &-disabled {

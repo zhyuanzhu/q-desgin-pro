@@ -1,46 +1,47 @@
 <template>
-    <div :class="[`${prefixCls}`, `${prefixCls}-${size}`, 
-    disabled && `${prefixCls}-disabled`, 
-    !arrowDown && `${prefixCls}-active`, 
-    `theme-${theme}`]"
-    v-clickoutside="handleClickOutSide"
-    >
+    <div :class="setClassName" v-clickoutside="handleClickOutSide">
         <div :class="[`${prefixCls}-main`]" @click="!disabled && (arrowDown = !arrowDown)">
             <span :class="`${prefixCls}-value`">{{ selectValue }}</span>
+            <input type="hidden" >
             <span :class="[arrowDown ? `${prefixCls}-down` : `${prefixCls}-up`, `${prefixCls}-arrow`]"></span>
         </div>
-        <drop-down :theme="theme" :data="dropData" :size="size" :show="!disabled && !arrowDown" :autoWidth="autoWidth" @on-choose="onChoose" />
+        <transition :name="transition">
+            <div :class="`${prefixCls}-dropdown`" v-scroll :style="boxStyle" v-show="!arrowDown">
+                <Dropdown :value="selectValue"><slot></slot></Dropdown>
+            </div>
+        </transition>
     </div>
 </template>
 <script>
 
 const prefixCls = 'qui-select';
-import DropDown from '../dropdown'
-import { hasParam } from '../../utils/util'
-import clickoutside from '../../directives/clickoutside';
 
+import Dropdown from './dropdown'
+import { hasParam } from '../../utils/util'
+import scroll from '../../directives/scroll';
+import clickoutside from '../../directives/clickoutside';
 
 export default {
     name: 'Select',
     components: {
-        DropDown
+        Dropdown
     },
     props: {
-        data: {
-            type: Array,
-            default: () => []
-        },
-        show: {
-            type: Boolean,
-            default: false
-        },
-        autoWidth: {
-            type: Boolean,
-            default: false
-        },
         defaultValue: {
             type: [String, Number],
             default: '请选择'
+        },
+        value: {
+            type: [String, Number, Array],         //array的模式多选
+            default: ''
+        },
+        maxLength: {
+            type: Number,
+            default: 5
+        },
+        transition: {
+            type: String,
+            default: 'fade-in-move-up'
         },
         size: {
             type: String,
@@ -72,27 +73,63 @@ export default {
         }
     },
     methods: {
-        onChoose (item) {
-            this.dropData.map(i => i.active = false);
-            item.active = !item.active;
-            this.selectValue = item.value;
-            this.arrowDown = !this.arrowDown;
-            this.$emit('on-select', item)
-        },
         getDefaultValue () {
-            this.dropData.map(i => {
-                if (i.active) this.selectValue = i.value;
-            });
+            this.selectValue = this.value
         },
         handleClickOutSide (e) {
             if (this.arrowDown) return;
             this.arrowDown = !this.arrowDown;
+        },
+        setMaxHeight (lineH = 32, mt = 2) {
+            const { maxLength } = this;
+            return maxLength * lineH + mt * (maxLength - 1) + 10;
+        },
+        emitValue (v) {
+            this.selectValue = v
+            this.arrowDown = !this.arrowDown;
+            this.$emit('input', v)
+            this.$emit('on-select', v)
+        }
+    },
+    watch: {
+        value (value) {
+            this.getDefaultValue()
         }
     },
     mounted() {
         this.getDefaultValue();
     },
-    directives: { clickoutside }
+    computed: {
+        setClassName () {
+            const { prefixCls, size, disabled, arrowDown, theme } = this;
+            const disabledClass = `${prefixCls}-disabled`, activeClass = `${prefixCls}-active`;
+            return [`${prefixCls}`, `${prefixCls}-${size}`, `theme-${theme}`, 
+                { 
+                    [disabledClass]: disabled,
+                    [activeClass]: !arrowDown
+                }
+            ]
+        },
+        boxStyle () {
+            const { size, setMaxHeight } = this;
+            // let maxH;
+            // switch (size) {
+            //     case 'small':
+            //         maxH = setMaxHeight(26, 4);
+            //         break;
+            //     case 'large':
+            //         maxH = setMaxHeight(40, 12);            
+            //     default:
+            let maxH = setMaxHeight();
+                    // break;
+            // }
+            return {
+                'max-height': maxH + 'px'
+            }
+
+        }
+    },
+    directives: { clickoutside, scroll }
 }
 </script>
 <style lang="scss" type="text/scss">
