@@ -23,10 +23,9 @@ export default {
             if (pos === RELATIVE || pos === ABSOLUTE) {
 
                 if (el.children && el.children.length === 1) {
-
                     let isFF = navigator.userAgent.indexOf('Firefox') > -1;
                     let transition = 'all .2s linear';
-                    el.children[0].dataset.top = 0;
+                    el.children[0].tagTop = 0;
                     let div = document.createElement('div'),
                         span = document.createElement('span');
                     div.className = `${prefixCls}-box`;
@@ -44,8 +43,8 @@ export default {
                             mousewheel = 'DOMMouseScroll';
                         }
                         let barH = childH ? Math.round(boxH * boxH / childH) : 0;
-                        el.children[0].dataset.top = 0;
-                        el.children[0].dataset.childH = childH;
+                        el.children[0].tagTop = 0;
+                        el.children[0].childH = childH;
                         if (childH <= boxH) {
                             setTransform(el.children[0], TRANSLATE);
                             setTransform(span, TRANSLATE);
@@ -55,18 +54,19 @@ export default {
                         }
 
                         el.addEventListener(mousewheel, event => {
-                            let top = Number(el.children[0].dataset.top) || 0;
+							let top = Number(el.children[0].tagTop) || 0;
+							console.log(top)
 							let _boxH = el.clientHeight, _childH = el.children[0].clientHeight;
 							let _barH = _childH ? Math.round(_boxH * _boxH / _childH) : 0;
 
 							event.delta = (event.wheelDelta) ? parseInt(event.wheelDelta) / 120 : -(parseInt(event.detail) || 0) / 3;
 							if (event.delta > 0) { // 往上滚
 								let sTop = (top - dis <= 0) ? 0 : (top - dis);
-								el.children[0].dataset.top = sTop;
+								el.children[0].tagTop = sTop;
 								setTransform(el.children[0], 'translate(0,-' + sTop + 'px)');
 								let y = Math.round(sTop * _barH / _boxH);
 								setTransform(span, 'translate(0,' + y + 'px)');
-								span.dataset.y = y;
+								span.y = y;
 								top = sTop;
 								if (top !== 0) {
 									event.preventDefault();
@@ -75,11 +75,11 @@ export default {
 							} else if (event.delta < 0) { // 往下滚
 								let sTop = (top + dis >= _childH - _boxH) ? (_childH - _boxH) : (top + dis);
 								sTop += 1;
-								el.children[0].dataset.top = sTop;
+								el.children[0].tagTop = sTop;
 								setTransform(el.children[0], 'translate(0,-' + sTop + 'px)');
 								let y = Math.round(sTop * _barH / _boxH);
 								setTransform(span, 'translate(0,' + y + 'px)');
-								span.dataset.y = y;
+								span.y = y;
 								top = sTop;
 								if (top <= _childH - _boxH) {
 									event.preventDefault();
@@ -99,13 +99,13 @@ export default {
 
                         function mouseDown(e) {
 							let scrollBox = el.children[0];
-							let top = Number(scrollBox.dataset.top) || 0;
+							let top = Number(scrollBox.tagTop) || 0;
 							let _boxH = el.clientHeight, _childH = scrollBox.clientHeight;
 							let _barH = _childH ? Math.round(_boxH * _boxH / _childH) : 0;
 
 							let ev = e || event;
 							let downY = ev.clientY;
-							let origY = parseFloat(span.dataset.y) || 0;
+							let origY = parseFloat(span.y) || 0;
 							setTransition(scrollBox, none);
 							setTransition(span, none);
 							setUserSelect(scrollBox, none);
@@ -121,10 +121,10 @@ export default {
 								if (resY > d) resY = d;
 								if (resY < 0) resY = 0;
 								setTransform(span, 'translate(0,' + resY + 'px)');
-								span.dataset.y = resY;
+								span.y = resY;
 								let st = Math.round(resY * _childH / _boxH);
 								setTransform(scrollBox, 'translate(0, ' + -st + 'px)');
-								scrollBox.dataset.top = st;
+								scrollBox.tagTop = st;
 							}
 
 							function mouseUp(e) {
@@ -158,9 +158,6 @@ export default {
                 console.error('Container Element style position should be relative or absolute.');
             }
 
-
-
-
         }, 20);
     },
     inserted(el, binding, vnode) {
@@ -180,16 +177,16 @@ export default {
 			if (childH <= boxH) {  // 隐藏滚动条
 				span.style.height = '0px';
 
-				el.children[0].dataset.top = 0;
+				el.children[0].tagTop = 0;
 				setTransform(el.children[0], TRANSLATE);
 				setTransform(span, TRANSLATE);
 			} else {
 				// 滚动条高度变动
 				span.style.height = barH + 'px';
 
-				let oldChildH = Number(el.children[0].dataset.childH) || 0; // 老容器高度
-				let oldTop = Number(el.children[0].dataset.top) || 0; // 老容器位置
-				el.children[0].dataset.childH = childH;
+				let oldChildH = Number(el.children[0].childH) || 0; // 老容器高度
+				let oldTop = Number(el.children[0].tagTop) || 0; // 老容器位置
+				el.children[0].childH = childH;
 
 				let changeH = childH - oldChildH; // 高度变动
 				if (changeH > 0) { // 高度增加操作
@@ -198,7 +195,7 @@ export default {
 					setTransform(span, 'translate(0,' + y + 'px)');
 				} else {  // 高度减少操作
 					if (oldTop >= childH - boxH) { // 置为底部
-						el.children[0].dataset.top = childH - boxH;
+						el.children[0].tagTop = childH - boxH;
 						setTransform(el.children[0], 'translate(0,-' + (childH - boxH) + 'px)');
 						y = (boxH - barH);
 						setTransform(span, 'translate(0,' + y + 'px)');
@@ -207,7 +204,7 @@ export default {
 						setTransform(span, 'translate(0,' + y + 'px)');
 					}
 				}
-				span.dataset.y = y;
+				span.y = y;
 			}
 			clearTimeout(timer);
 		}, 20);
