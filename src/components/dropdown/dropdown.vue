@@ -1,6 +1,9 @@
 <template>
     <transition :name="transition">
-        <div v-show="show" v-scroll="data" :class="[`${prefixCls}`, `${prefixCls}-${size}`, !autoWidth && `${prefixCls}-inherit`]" :style="boxStyle">
+        <div v-show="show" v-scroll="data" 
+        :class="[`${prefixCls}`, `${prefixCls}-${size}`, !autoWidth && `${prefixCls}-inherit`]" 
+        :style="boxStyle"
+        >
             <div :class="`${prefixCls}-list`">
                 <div v-for="(item, index) in data" :key="item.id || index" 
                     :class="[`${prefixCls}-item`, item.active && `${prefixCls}-active`, item.disabled && `${prefixCls}-disabled`, `theme-${theme}`]"
@@ -16,6 +19,7 @@
 
 import {hasParam} from '../../utils/util';
 import scroll from '../../directives/scroll';
+// import clickoutside from '../../directives/clickoutside';           //后续优化
 const prefixCls = 'qui-dropdown';
 
 export default {
@@ -77,6 +81,9 @@ export default {
             return maxLength * lineH + mt * (maxLength - 1) - 10;
         },
         setScrollData () {
+
+        },
+        handleClickOutSide () {
 
         }
     },
