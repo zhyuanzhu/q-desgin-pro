@@ -4,7 +4,7 @@
             <div :class="`${prefixCls}-main`" v-if="value">
                 <section :class="`${prefixCls}-header`" v-if="header">
                     <h3 :class="`${prefixCls}-header-title`" v-text="title"></h3>
-                    <span :class="`${prefixCls}-header-close`" v-if="close" @click="cancel"></span>
+                    <Icon :type="'close'" :size="24" :color="'#999'" :class="`${prefixCls}-header-close`" v-if="close" @click.native="cancel" />
                 </section>
                 <section :class="`${prefixCls}-container`"><slot></slot></section>
                 <section :class="`${prefixCls}-footer`" v-if="footer">
@@ -25,13 +25,15 @@
 
 import ButtonGroup from '../button-group'
 import Button from '../button'
+import Icon from '../icon'
 
 const prefixCls = 'qui-modal';
 export default {
     name: 'Modal',
     components: {
         ButtonGroup,
-        Button
+        Button,
+        Icon
     },
     props: {
         header: {
@@ -96,7 +98,6 @@ export default {
             this.$emit('on-confirm', evt)
         },
         cancel (evt) {
-            // this.hide();
             this.$emit('on-cancel', evt)
         },
         hide () {
