@@ -3,10 +3,6 @@
 @import "../mixins/mixin";
 
 $msgPrefix: "#{$prefixCls}message";
-$success: "http://p0.qhimg.com/t017effeb70a307579f.png";
-$warning: "http://p0.qhimg.com/t01a094bb64666cf4d4.png";
-$error: "http://p0.qhimg.com/t0104826990b6fb9bfa.png";
-$i: "icon";
 
 .#{$msgPrefix} {
     text-align: center;
@@ -33,20 +29,6 @@ $i: "icon";
         overflow: hidden;
         .#{$msgPrefix}-text {
             display: flex;
-        }
-        .#{$msgPrefix}-icon {
-            display: block;
-            @include wh(32px);
-            margin-right: 8px;
-            &.success-icon {
-                background: url(#{$success}) no-repeat;
-            }
-            &.warning-icon {
-                background: url(#{$warning}) no-repeat;
-            }
-            &.error-icon {
-                background: url(#{$error}) no-repeat;
-            }
         }
 
         .#{$msgPrefix}-content {

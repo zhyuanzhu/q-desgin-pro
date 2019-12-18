@@ -2,7 +2,7 @@
     <div :class="prefixCls">
         <div :class="`${prefixCls}-main`">
             <div :class="`${prefixCls}-text`">
-                <span :class="[`${prefixCls}-icon`, `${type}-icon`]"></span>
+                <Icon :type="type" :color="type | filterColor" :size="36" style="margin-right: 5px;" />
                 <div :class="`${prefixCls}-content`" v-text="text"></div>
             </div>
             <div :class="`${prefixCls}-btn`">
@@ -21,6 +21,7 @@ const prefixCls = 'qui-message';
 
 import Button from '../button';
 import ButtonGroup from '../button-group'
+import Icon from '../icon'
 import { hasParam } from '../../utils/util';
 
 //是否需要关闭icon，如果没有注册确认事件和关闭事件，默认确认和关闭直接destroy组件
@@ -30,7 +31,8 @@ export default {
     name: 'Message',
     components: {
         Button,
-        ButtonGroup
+        ButtonGroup,
+        Icon
     },
     props: {
         // type: {
@@ -70,6 +72,17 @@ export default {
             this.onCancel && this.onCancel();
             this.destroy();
             // console.log(this.destroy())
+        }
+    },
+    filters: {
+        filterColor (val) {
+            if (!val) return;
+            const enums = {
+                error: '#f52f3e',
+                warning: '#f90',
+                success: '#23ac38'
+            }
+            return enums[val]
         }
     }
 }
