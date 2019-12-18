@@ -30,18 +30,12 @@ $checkBoxPrefix: "#{$prefixCls}checkbox";
             background-color: $white; 
             transition: all $animate-time;
         }
-        &::after { 
+        .checked {
             content: ''; 
-            display: none; 
-            @include absolute();
-            width: 10px; 
-            height: 8px; 
-            margin-left: -5px; 
-            margin-top: -4px; 
-            // background: url(../../assets/images/checkbox_active.png) no-repeat center center; 
-            background: url("http://p0.qhimg.com/t0142a43c7e282c80ce.png") no-repeat center center; 
-            background-size: 10px 8px; 
-            border: 0 solid $blue; 
+            position: absolute;
+            top: 1px;
+            left: -1px;
+            color: #fff; 
             transition: all $animate-time; 
         }
 
@@ -78,9 +72,6 @@ $checkBoxPrefix: "#{$prefixCls}checkbox";
     &-active {
         .#{$checkBoxPrefix}-icon {
             @include border($blue, $blue);
-            &::after {
-                display: block;
-            }
             &.#{$checkBoxPrefix}-primary {
                 @include border($green, $green);
             }
@@ -95,9 +86,6 @@ $checkBoxPrefix: "#{$prefixCls}checkbox";
             &::before {
                 display: block;
             }
-            &::after {
-                display: none;
-            }
             &.#{$checkBoxPrefix}-primary {
                 @include border($green, $green);
             }
@@ -107,9 +95,6 @@ $checkBoxPrefix: "#{$prefixCls}checkbox";
         cursor: $cursor-disabled;
         .#{$checkBoxPrefix}-icon {
             @include border($lightC, $border-color);
-            &::after {
-                display: none;
-            }
             &::before {
                 display: none;
             }

@@ -6,6 +6,7 @@
             partial && `${prefixCls}-partial`,
             ]">
         <span :class="[`${prefixCls}-icon`, `${prefixCls}-${theme}`]">
+            <Icon :type="icon" :size="14" class="checked" v-show="currentValue" />
             <input type="checkbox" v-if="group" 
                 :name="name"
                 :disabled="disabled"
@@ -27,13 +28,16 @@
 </template>
 
 <script>
-// 是否全部选中或者部分选中，是否disabled需要在业务逻辑代码中做判断
 
 import { hasParam, findComponentParents } from '../../utils/util';
+import Icon from '../icon'
 
 const prefixCls = "qui-checkbox";
 export default {
     name: 'Checkbox',
+    components: {
+        Icon
+    },
     props: {
         value: {
             type: [String, Number, Boolean],
@@ -77,7 +81,8 @@ export default {
             group: false,
             parent: findComponentParents(this, 'CheckboxGroup'),
             model: [],
-            currentValue: this.value
+            currentValue: this.value,
+            icon: 'check'
         }
     },
     mounted() {
