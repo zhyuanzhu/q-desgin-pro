@@ -17,9 +17,9 @@ $prefixTextarea: "#{$prefixCls}textarea";
         font-size: $font-size-base;
         border-radius: $border-radius-middle;
         &:focus {
-            border-color: $blue;
+            border-color: $primary;
             outline: 0;
-            box-shadow: 0 0 5px rgba($blue, .5);
+            box-shadow: 0 0 5px rgba($primary, .5);
         }
         &-readonly {
             cursor: $cursor-disabled;

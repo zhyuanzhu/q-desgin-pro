@@ -1,10 +1,20 @@
 <template>
-    <div :class="[`${prefixCls}-main`, error && `${prefixCls}-error`, `${prefixCls}-${size}`,`${prefixCls}-${errPosition}`,]">
-        <textarea :name="name" :readonly="readonly"
-            :disabled="disabled" :placeholder="placeholder"
-            :maxlength="maxlength" :minlength="minlength" v-text="value"
+    <div :class="wrapclass">
+        <textarea 
+            :name="name" 
+            :readonly="readonly"
+            :disabled="disabled" 
+            :placeholder="placeholder"
+            :maxlength="maxlength" 
+            :minlength="minlength" 
+            v-text="value"
             :style="!resize && 'resize: none;'"
-            :class="[`${prefixCls}`, disabled && `${prefixCls}-disabled`, readonly && `${prefixCls}-readonly`]"
+            :class="textareaClss"
+            :value="value"
+            @change="change"
+            @input="handleInput"
+            @focus="handleFocus"
+            @blue="handleBlur"
             ></textarea>
         <div :class="[`${prefixCls}-err`, `${errPosition}`]" v-show="error && errText">
             <i :class="[`${prefixCls}-err-icon`, `${prefixCls}-icon`]"></i>
@@ -70,7 +80,44 @@ export default {
         return {
             prefixCls
         }
-    }
+    },
+    computed: {
+        wrapclass () {
+            const { prefixCls, error, size, errPosition } = this;
+            return [
+                `${prefixCls}-main`,
+                `${prefixCls}-${size}`,
+                `${prefixCls}-${errPosition}`,
+                { [`${prefixCls}-error`]: error }
+            ]
+        },
+        textareaClss () {
+            const { prefixCls, disabled, readonly } = this;
+            return [
+                `${prefixCls}`, 
+                { [`${prefixCls}-disabled`]: disabled },
+                { [`${prefixCls}-readonly`]: readonly }
+            ]
+        }
+    },
+    methods: {
+        change (evt) {
+            const value = evt.target.value;
+            this.$emit('input', value)
+            this.$emit('on-change', value)
+        },
+        handleInput (evt) {
+            const value = evt.target.value;
+            this.$emit('input', value)
+            this.$emit('on-change', value)
+        },
+        handleBlur (evt) {
+            this.$emit('on-blur', evt)
+        },
+        handleFocus (evt) {
+            this.$emit('on-focus', evt)
+        }
+    },
 }
 </script>
 <style lang="scss" type="text/scss">
