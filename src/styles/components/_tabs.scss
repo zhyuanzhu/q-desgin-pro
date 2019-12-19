@@ -10,7 +10,6 @@ $opacity: .6;
     &-header {
         width: 100%;
         display: flex;
-        // border-bottom: 1px solid $lightC;
         position: relative;
         &::after {
             content: "";
@@ -22,26 +21,14 @@ $opacity: .6;
         }
     }
     &-tab {
-        padding: 8px 16px;
+        padding: 8px 0px;
         margin-right: 8px;
+        text-align: center;
         color: $main;
         font-size: $font-size-base;
         cursor: $cursor-pointer;
-        &.theme-primary {
-            &:hover { 
-                color: $green;
-            }
-            &.#{$tabsPrefix}-tab-active {
-                color: $green;
-                &.#{$tabsPrefix}-tab-disabled {
-                    &:hover {
-                        color: $green;
-                    }
-                }
-            }
-        }
         &:hover {
-            color: $blue;
+            color: $primary;
             transition: all $animate-time;
         }
         &.#{$tabsPrefix}-icon {
@@ -51,10 +38,10 @@ $opacity: .6;
             padding-left: 20px;
         }
         &.#{$tabsPrefix}-tab-active {
-            color: $blue-active;
+            color: $primary-active;
             &.#{$tabsPrefix}-tab-disabled {
                 &:hover {
-                    color: $blue;
+                    color: $primary;
                 }
             }
         }
@@ -63,11 +50,12 @@ $opacity: .6;
             border-bottom: none;
             border-radius: 5px 5px 0 0;
             background: $border-color;
+            box-sizing: border-box;
             &.#{$tabsPrefix}-tab-active {
-                border-color: $blue-active;
+                border-color: $primary-active;
             }
             &:hover {
-                border-color: $blue;
+                border-color: $primary;
                 transition: all $animate-time;
             }
             &.#{$tabsPrefix}-tab-disabled {
@@ -89,17 +77,13 @@ $opacity: .6;
         bottom: 0;
         height: 2px;
         transition: all .3s linear;
-        background: $blue;
-        z-index: 1;
-        &.theme-primary {
-            background: $green;
-        }
+        background: $primary;
+        z-index: 5;
     }
     &-card-underline {
-        position: absolute;
-        height: 1px;
-        bottom: 0;
+        @extend .#{$tabsPrefix}-underline;
         background: $white;
-        z-index: 5;
+        bottom: -1px;
+        border-radius: 1px;
     }
 }

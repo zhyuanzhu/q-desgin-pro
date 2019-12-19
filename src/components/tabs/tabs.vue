@@ -10,15 +10,14 @@
                 :class="[`${prefixCls}-tab`, item.disabled && `${prefixCls}-tab-disabled`, 
                 item.active && `${prefixCls}-tab-active`,
                 item.icon && `${prefixCls}-icon`,
-                `${prefixCls}-${type}`,
-                `theme-${theme}`
+                `${prefixCls}-${type}`
                 ]"
                 :style="item.icon && `background-image:url(${item.icon});`"
                 @click="handleClick(item, index)"
                 ref="tab"
                 >
                 {{ item[primaryKey] }}</li>
-            <li :class="[type !== 'card' ? `${prefixCls}-underline` : `${prefixCls}-card-underline`, `theme-${theme}`]" ref="line"></li>
+            <li :class="[type !== 'card' ? `${prefixCls}-underline` : `${prefixCls}-card-underline`]" ref="line"></li>
         </ul>
     </div>
 </template>
@@ -46,14 +45,6 @@ export default {
             validator (value) {
                 const valueList = ['default', 'card'];
                 return hasParam(value, valueList);
-            }
-        },
-        theme: {
-            type: String,
-            default: 'default',
-            validator (value) {
-                const valueList = ['default', 'primary'];
-                return hasParam(value, valueList)
             }
         }
     },
@@ -94,8 +85,17 @@ export default {
         }
     },
     mounted() {
-        let dom = this.$refs.tab[0];
-        let _w = dom.offsetWidth;
+        const tabs = this.$refs.tab;
+        const tabsWidth = [];
+        let _w
+        tabs.map(tab => {
+            _w = window.getComputedStyle(tab).width.slice(0, -2)
+            tabsWidth.push(_w);
+        })
+        _w = Math.ceil(Math.max(...tabsWidth)) + 32;
+        tabs.map(tab => {
+            tab.style.width = _w + 'px'
+        })
         this.$refs.line.style.width = _w + 'px';
         this.domWidth = _w;
     },
