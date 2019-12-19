@@ -71,8 +71,8 @@ $c: #ccc;
         transition: all .6s;
     }
     &-active {
-        background: $blue;
-        border-color: $blue;
+        background: $primary;
+        border-color: $primary;
         &.#{$switchPrefix}-small {
             .#{$switchPrefix}-inner {
                 transform: translateX(12px);
