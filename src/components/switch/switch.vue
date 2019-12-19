@@ -1,11 +1,10 @@
 <template>
-    <div :class="[prefixCls, 
-        `${prefixCls}-${size}`, disabled && `${prefixCls}-disabled`, 
-        checked && `${prefixCls}-active`]" 
+    <div :class="styles" 
         @click="toggle">
+        <input type="hidden">
         <div :class="`${prefixCls}-inner`"></div>
         <div :class="`${prefixCls}-txt`">
-            <div class="open"  v-if="$slots.on" v-show="checked"><slot name="on"></slot></div>
+            <div class="open" v-if="$slots.on" v-show="checked"><slot name="on"></slot></div>
             <div class="close" v-if="$slots.off" v-show="!checked"><slot name="off"></slot></div>
         </div>
     </div>
@@ -14,8 +13,6 @@
 import { hasParam } from '../../utils/util';
 
 const prefixCls = 'qui-switch';
-
-//添加选中和非选中的时候的文案描述，颜色的配置
 
 export default {
     name: 'qSwitch',
@@ -35,14 +32,6 @@ export default {
                 const valueList = ['small', 'middle', 'large'];
                 return hasParam(value, valueList);
             }
-        },
-        activeColor: {
-            type: String,
-            default: '#0074ff'
-        },
-        unActiveColor: {
-            type: String,
-            default: '#ccc'
         }
     },
     data() {
@@ -63,9 +52,21 @@ export default {
             const _this = this;
             if (_this.disabled) return;
             _this.checked = !_this.checked;
+            _this.$emit('input', _this.checked)
             _this.$emit('on-change', _this.checked)
         }
     },
+    computed: {
+        styles () {
+            const { prefixCls, disabled, size, checked } = this;
+            return [ 
+                prefixCls, 
+                `${prefixCls}-${size}`, 
+                { [`${prefixCls}-disabled`]: disabled },
+                { [`${prefixCls}-active`]: checked }
+            ]
+        }
+    }
 }
 </script>
 <style lang="scss" type="text/scss">
