@@ -2,65 +2,46 @@
 @import "../common/var";
 @import "../mixins/mixin";
 
-$radioPrefix: "#{$prefixCls}radio";
+$radio: "#{$prefixCls}radio";
 
-.#{$radioPrefix} {
-    position: relative;
+.#{$radio} {
     font-size: 0;
-    display: block;
     cursor: $cursor-pointer;
     box-sizing: border-box;
-    &.#{$radioPrefix}-primary {
-        .#{$radioPrefix}-icon {
-            &:after {
-                border-color: $green;
-                background-color: $green;
-            }
-        }
-        &:hover {
-            .#{$radioPrefix}-icon {
-                border-color: $green;
-            }
-        }
-        &-active {
-            .#{$radioPrefix}-icon {
-                @include border($green, $green);
-            }
-        }
-    }
     &-icon {
         position: relative;
         display: inline-block;
         @include wh(14px);
         border-radius: 50%;
         margin-right: 10px;
-        font-size: $font-size-base;
         vertical-align: middle;
         border: 1px solid $lightC;
         box-sizing: border-box;
         transition: all $animate-time;
-        .#{$radioPrefix}-ipt {
-            position: absolute;
-            top: 0;
-            left: 0;
-            bottom: 0;
-            right: 0;
-            z-index: 1;
-            opacity: 0;
+        .#{$radio}-ipt {
+            @include opacityCovert();
             cursor: $cursor-pointer;
         }
         &:after { 
             content: ''; 
             @include absolute();
-            width: 0; 
-            height: 0; 
             margin-left: -3px; 
             margin-top: -3px; 
-            border: 3px solid $blue; 
+            border: 3px solid $primary; 
             border-radius: 50%; 
-            background-color: $blue; 
+            background-color: $primary; 
             transition: all $animate-time; 
             transform: scale(0); 
+        }
+        &.#{$radio}-active {
+            @include border($primary, $primary);
+            &::after {
+                border-color: $white;
+                transform: scale(1);
+            }
+            & + .#{$radio}-value {
+                color: $main-dark;
+            }
         }
     }
     &-value {
@@ -71,61 +52,41 @@ $radioPrefix: "#{$prefixCls}radio";
         margin-right: 10px;
     }
     &:hover {
-        .#{$radioPrefix}-icon {
-            @include border($blue);
+        .#{$radio}-icon {
+            @include border($primary);
         }
     }
-    &-active {
-        &.#{$radioPrefix}-primary {
-            .#{$radioPrefix}-icon {
-                @include border($green, $green);
-                &::after {
-                    border-color: $white;
-                }
-            }
-        }
-        .#{$radioPrefix}-icon {
-            @include border($blue, $blue);
-            &::after {
-                border: 3px solid $white;
-                border-radius: 50%;
-                transform: scale(1);
-            }
-        }
-        .#{$radioPrefix}-value {
-            color: $main-dark;
-        }
-    }
+
     &-disabled {
         cursor: $cursor-disabled;
-        .#{$radioPrefix}-icon {
+        .#{$radio}-icon {
             @include border($lightC, $border-color);
             &::after {
                 display: none;
             }
-            .#{$radioPrefix}-ipt { 
+            .#{$radio}-ipt { 
                 cursor: $cursor-disabled;
+            }
+            &.#{$radio}-active {
+                @include border($lightC, $lightC);
+                &::after {
+                    display: block;
+                    border-color: $white;
+                }
             }
         }
         &:hover {
-            .#{$radioPrefix}-icon {
+            .#{$radio}-icon {
                 @include border($lightC, $border-color);
+                &.#{$radio}-active {
+                    @include border($lightC, $lightC);
+                }
             }
         }
-        .#{$radioPrefix}-value {
+        .#{$radio}-value {
             color: $main-light;
         }
 
     }
-    &-disabled.#{$radioPrefix}-active {
-        .#{$radioPrefix}-icon {
-            @include border($lightC, $lightC);
-            &::after {
-                display: block;
-                border: 3px solid $white;
-                border-radius: 50%;
-                transform: scale(1);
-            }
-        }
-    }
+
 }

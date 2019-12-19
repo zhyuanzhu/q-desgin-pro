@@ -1,10 +1,6 @@
 <template>
-    <label :class="[`${prefixCls}`, 
-        currentValue && `${prefixCls}-active`, 
-        disabled && `${prefixCls}-disabled`, 
-        `${[prefixCls]}-${theme}`]"
-        >
-        <span :class="`${prefixCls}-icon`">
+    <label :class="[`${prefixCls}`, disabled && `${prefixCls}-disabled`]">
+        <span :class="[`${prefixCls}-icon`, currentValue && `${prefixCls}-active`]">
             <input type="radio" 
                 ref="ipt"
                 :name="radioName" 
@@ -38,14 +34,6 @@ export default {
         disabled: {
             type: Boolean,
             default: false
-        },
-        theme: {
-            type: String,
-            default: 'default',
-            validator (value) {
-                const valueList = ['default', 'primary'];
-                return hasParam(value, valueList)
-            }
         },
         name: {
             type: String
