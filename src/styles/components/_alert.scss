@@ -2,13 +2,13 @@
 @import "../common/var";
 @import "../mixins/mixin";
 
-$alertPrefix: "#{$prefixCls}alert";
+$alert: "#{$prefixCls}alert";
 
-.#{$alertPrefix} {
+.#{$alert} {
     @include setH(40px);
     min-width: 100px;
-    @include border(rgba($blue, .4), rgba($blue-disabled, .4));
-    color: $main;
+    @include border(rgba($primary, .4), rgba($primary, .1));
+    color: $primary;
     font-size: $font-size-base;
     padding: 0 10px;
     position: fixed;
@@ -16,35 +16,18 @@ $alertPrefix: "#{$prefixCls}alert";
     left: 50%;
     transform: translate(-50%);
     
-    &.#{$alertPrefix}-warning {
-        @include border(rgba($orange, .2), rgba($orange, .1));
-        color: $orange;
+    &.#{$alert}-warning {
+        @include border(rgba($warning, .2), rgba($warning, .1));
+        color: $warning;
     }
 
-    &.#{$alertPrefix}-success {
-        @include border(rgba($green, .2), rgba($green, .1));
-        color: $green;
+    &.#{$alert}-success {
+        @include border(rgba($success, .2), rgba($success, .1));
+        color: $success;
     }
 
-    &.#{$alertPrefix}-error {
-        @include border(rgba($red, .4), rgba($red-disabled, .2));
-        color: $red;
-    }
-    &-icon {
-        font-size: 18px;
-        display: inline-block;
-        // &.icon-warning {
-        //     color: $orange;
-        // }
-        // &.icon-success {
-        //     color: $green;
-        // }
-        // &.icon-error {
-        //     color: $red;
-        // }
-        &.icon-info {
-            color: $blue;
-        }
-
+    &.#{$alert}-error {
+        @include border(rgba($error, .4), rgba($error, .1));
+        color: $error;
     }
 }
