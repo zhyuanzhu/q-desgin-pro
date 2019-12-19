@@ -1,13 +1,13 @@
 <template>
     <div :class="setClassName" v-clickoutside="handleClickOutSide">
         <div :class="[`${prefixCls}-main`]" @click="!disabled && (arrowDown = !arrowDown)">
-            <span :class="`${prefixCls}-value`">{{ selectValue }}</span>
-            <input type="hidden" >
-            <span :class="[arrowDown ? `${prefixCls}-down` : `${prefixCls}-up`, `${prefixCls}-arrow`]"></span>
+            <span :class="`${prefixCls}-value`" v-if="!filter">{{ selectValue }}</span>
+            <input :type="filter ?'text': 'hidden'" v-model="selectValue" :class="`${prefixCls}-input`" >
+            <Icon :size="14" :type="'arrow-down'" :class="[arrowDown ? `${prefixCls}-down` : `${prefixCls}-up`, `${prefixCls}-arrow`]" />
         </div>
         <transition :name="transition">
             <div :class="`${prefixCls}-dropdown`" v-scroll :style="boxStyle" v-show="!arrowDown">
-                <Dropdown :value="selectValue"><slot></slot></Dropdown>
+                <Dropdown :value="selectValue" :filter="filter"><slot></slot></Dropdown>
             </div>
         </transition>
     </div>
@@ -20,11 +20,13 @@ import Dropdown from './dropdown'
 import { hasParam } from '../../utils/util'
 import scroll from '../../directives/scroll';
 import clickoutside from '../../directives/clickoutside';
+import Icon from '../icon'
 
 export default {
     name: 'Select',
     components: {
-        Dropdown
+        Dropdown,
+        Icon
     },
     props: {
         defaultValue: {
@@ -55,13 +57,9 @@ export default {
             type: Boolean,
             default: false
         },
-        theme: {
-            type: String,
-            default: 'default',
-            validator (value) {
-                const valueList = ['default', 'primary'];
-                return hasParam(value, valueList)
-            }
+        filter: {
+            type: Boolean,
+            default: false
         }
     },
     data() {
@@ -82,7 +80,7 @@ export default {
         },
         setMaxHeight (lineH = 32, mt = 2) {
             const { maxLength } = this;
-            return maxLength * lineH + mt * (maxLength - 1) + 10;
+            return maxLength * lineH + mt * (maxLength - 1) + 5;
         },
         emitValue (v) {
             this.selectValue = v
@@ -101,9 +99,9 @@ export default {
     },
     computed: {
         setClassName () {
-            const { prefixCls, size, disabled, arrowDown, theme } = this;
+            const { prefixCls, size, disabled, arrowDown } = this;
             const disabledClass = `${prefixCls}-disabled`, activeClass = `${prefixCls}-active`;
-            return [`${prefixCls}`, `${prefixCls}-${size}`, `theme-${theme}`, 
+            return [`${prefixCls}`, `${prefixCls}-${size}`,
                 { 
                     [disabledClass]: disabled,
                     [activeClass]: !arrowDown

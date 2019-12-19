@@ -1,5 +1,5 @@
 <template>
-    <div :class="setClass" @click="handleClick"> {{ label }} </div>
+    <div :class="setClass" @click="handleClick" v-show="show"> {{ label }} </div>
 </template>
 <script>
 
@@ -22,7 +22,8 @@ export default {
         return {
             prefix,
             currentValue: '',
-            parent: findComponentParents(this, 'Dropdown')
+            parent: findComponentParents(this, 'Dropdown'),
+            show: true
         }
     },
     methods: {
@@ -43,6 +44,12 @@ export default {
     },
     watch: {
         currentValue (v) {
+            if (this.value.indexOf(v) > -1) {
+                this.show = true
+                if (this.parent.empty) {
+                    this.parent.empty = false;
+                }
+            }
             if (this.currentValue === v) return;
             this.currentValue = v;
         }

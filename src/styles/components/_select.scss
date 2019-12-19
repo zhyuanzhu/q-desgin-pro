@@ -2,9 +2,9 @@
 @import "../common/var";
 @import "../mixins/mixin";
 
-$selectPrefix: "#{$prefixCls}select";
+$select: "#{$prefixCls}select";
 
-.#{$selectPrefix} {
+.#{$select} {
     position: relative;
     @include wh(200px, 38px);
     line-height: 38px;
@@ -14,52 +14,27 @@ $selectPrefix: "#{$prefixCls}select";
     color: $main;
     font-size: $font-size-base;
     cursor: $cursor-pointer;
-    &.theme-primary {
-        &:hover{
-            border-color: $green;
-        }
-        &:active {
-            border-color: $green;
-        }
-        &.#{$selectPrefix}-active {
-            border-color: $green;
-        }
-        .#{$selectPrefix}-option {
-            &.#{$selectPrefix}-option-active {
-                color: $green;
-                background-color: $green-mask;
-            }
-            &:hover {
-                background-color: $green-mask;
-                color: $green;
-            }   
-        }
-    }
+
     &:hover{
-        border-color: $blue;
+        border-color: $primary;
     }
     &:active {
-        border-color: $blue;
+        border-color: $primary;
     }
     &-active {
-        border-color: $blue;
+        border-color: $primary;
     }
     &-arrow {
         @include absolute;
-        width: 6px;
-        height: 6px;
-        border-color: $main-dark;
-        border-left: 1px solid;
-        border-bottom: 1px solid;
         transition: all .5s;
         left: 180px;
-        &.#{$selectPrefix}-down {
-            transform: rotate(-45deg);
+        &.#{$select}-down {
+            transform: rotate(0deg);
             margin-top: -4px;
         }
-        &.#{$selectPrefix}-up {
-            transform: rotate(-225deg);
-            margin-top: -1px;
+        &.#{$select}-up {
+            transform: rotate(-180deg);
+            margin-top: -8px;
         }
     }
 
@@ -67,10 +42,15 @@ $selectPrefix: "#{$prefixCls}select";
         padding-left: 10px;
         padding-right: 20px;
         height: 100%;
-        .#{$selectPrefix}-value {
+        .#{$select}-value {
             display: block;
             @include no-wrap();
         }
+    }
+    &-input {
+        border: none;
+        outline: none;
+        width: 90%;
     }
     &-dropdown {
         position: relative;
@@ -82,10 +62,10 @@ $selectPrefix: "#{$prefixCls}select";
         border-radius: 0 0 5px 5px;
         box-shadow: 0 2px 14px 0 rgba(50, 60, 71, .15);
         overflow: hidden;
-        .#{$selectPrefix}-option {
+        .#{$select}-option {
             padding: 0 15px;
             line-height: 32px;
-            margin-top: 2px;
+            // margin-top: 2px;
             color: $main;
             font-size: $font-size-small;
             @include no-wrap();
@@ -95,10 +75,10 @@ $selectPrefix: "#{$prefixCls}select";
                 margin-top: 0;
             }
             &:hover, &:active {
-                background-color: $elebg;
+                background-color: rgba($primary, .1);
             }
-            &.#{$selectPrefix}-option-active {
-                background-color: $elebg;
+            &.#{$select}-option-active {
+                background-color: rgba($primary, .1);
             }
         }
     }
@@ -112,17 +92,17 @@ $selectPrefix: "#{$prefixCls}select";
             border-color: $border-color;
         }
     }
-    &.#{$selectPrefix}-large {
+    &.#{$select}-large {
         @include wh(240px, 46px);
         line-height: 46px;
-        .#{$selectPrefix}-arrow {
+        .#{$select}-arrow {
             left: 220px;
         }
     }
-    &.#{$selectPrefix}-small {
+    &.#{$select}-small {
         @include wh(160px, 26px);
         line-height: 26px;
-        .#{$selectPrefix}-arrow {
+        .#{$select}-arrow {
             left: 140px;
         }
     }
