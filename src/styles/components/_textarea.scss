@@ -2,12 +2,12 @@
 @import "../common/var";
 @import "../mixins/mixin";
 
-$prefixTextarea: "#{$prefixCls}textarea";
+$textarea: "#{$prefixCls}textarea";
 
-.#{$prefixTextarea}-main {
+.#{$textarea}-main {
     vertical-align: middle;
 
-    .#{$prefixTextarea} {
+    .#{$textarea} {
         box-sizing: border-box;
         @include wh(320px, 80px);
         outline: none;
@@ -41,20 +41,20 @@ $prefixTextarea: "#{$prefixCls}textarea";
         }
     }
 
-    &.#{$prefixTextarea}-large {
-        .#{$prefixTextarea} {
+    &.#{$textarea}-large {
+        .#{$textarea} {
             @include wh(360px, 100px);
         }   
     }
 
-    &.#{$prefixTextarea}-small {
-        .#{$prefixTextarea} {
+    &.#{$textarea}-small {
+        .#{$textarea} {
             @include wh(260px, 60px);
         }
     }
 
-    &.#{$prefixTextarea}-error {
-        &.#{$prefixTextarea}-right {
+    &.#{$textarea}-error {
+        &.#{$textarea}-right {
             display: flex;      
             align-items: flex-end; 
             .right {
@@ -62,20 +62,17 @@ $prefixTextarea: "#{$prefixCls}textarea";
             }
             
         }
-        .#{$prefixTextarea} {
-            color: $red;
-            border-color: $red;
+        .#{$textarea} {
+            color: $error;
+            border-color: $error;
             &:focus {
-                box-shadow: 0 0 5px rgba($red, .5);
+                box-shadow: 0 0 5px rgba($error, .5);
             }
         }
-        .#{$prefixTextarea}-err {
+        .#{$textarea}-err {
             @include setH(25px);
-            padding-left: 20px;
-            // background: url(../../assets/images/error-icon.png) no-repeat center left;
-            background: url("http://p0.qhimg.com/t0165cc15aed7f13691.png") no-repeat center left;
             &-text {
-                color: $red;
+                color: $error;
                 font-size: $font-size-small;
             }
         }        

@@ -17,7 +17,7 @@
             @blue="handleBlur"
             ></textarea>
         <div :class="[`${prefixCls}-err`, `${errPosition}`]" v-show="error && errText">
-            <i :class="[`${prefixCls}-err-icon`, `${prefixCls}-icon`]"></i>
+            <Icon :size="14" :type="'warning'" :color="errorColor" style="vertical-align:center;" />
             <span :class="`${prefixCls}-err-text`" v-text="errText"></span>
         </div>
     </div>
@@ -27,10 +27,12 @@
 const prefixCls = 'qui-textarea';
 
 import { hasParam } from '../../utils/util';
+import Icon from '../icon'
 
 
 export default {
     name: 'TextArea',
+    components: { Icon },
     props: {
         value: [String, Number],
         disabled: {
@@ -78,7 +80,8 @@ export default {
     },
     data () {
         return {
-            prefixCls
+            prefixCls,
+            errorColor: '#f52f3e'
         }
     },
     computed: {
