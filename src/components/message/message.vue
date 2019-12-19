@@ -2,7 +2,7 @@
     <div :class="prefixCls">
         <div :class="`${prefixCls}-main`">
             <div :class="`${prefixCls}-text`">
-                <Icon :type="type" :color="type | filterColor" :size="36" style="margin-right: 5px;" />
+                <Icon :type="type" :color="type | filterColor" :size="32" style="margin-right: 5px;" />
                 <div :class="`${prefixCls}-content`" v-text="text"></div>
             </div>
             <div :class="`${prefixCls}-btn`">
@@ -11,7 +11,7 @@
             </div>
             <div :class="`${prefixCls}-close`" v-if="onCancel"></div>
         </div>
-        <div :class="`${prefixCls}-mask`"></div>
+        <div :class="`${prefixCls}-mask`" @click="hideMask"></div>
     </div>
 </template>
 <script>
@@ -34,25 +34,7 @@ export default {
         ButtonGroup,
         Icon
     },
-    props: {
-        // type: {
-        //     type: String,
-        //     default: 'success',
-        //     validator (value) {
-        //         const valueList = ['success', 'warning', 'error'];
-        //         return hasParam(value, valueList);
-        //     }
-        // },
-        // autoClose: {
-        //     type: Boolean,
-        //     default: false
-        // },
-        // text: String,
-        // onOk: {
-        //     type: Function,
-        //     default () {}
-        // }
-    },
+    props: {},
     data() {
         return {
             prefixCls,
@@ -71,7 +53,11 @@ export default {
         cancel () {
             this.onCancel && this.onCancel();
             this.destroy();
-            // console.log(this.destroy())
+        },
+        hideMask () {
+            const { onCancel, cancel, ok } = this;
+            if (onCancel) return cancel()
+            ok()
         }
     },
     filters: {
