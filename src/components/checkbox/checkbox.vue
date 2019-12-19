@@ -1,11 +1,6 @@
 <template>
-    <label :class="[
-            `${prefixCls}`, 
-            disabled && `${prefixCls}-disabled`, 
-            currentValue && `${prefixCls}-active`, 
-            partial && `${prefixCls}-partial`,
-            ]">
-        <span :class="[`${prefixCls}-icon`, `${prefixCls}-${theme}`]">
+    <label :class="labelStyles">
+        <span :class="checkboxStyles">
             <Icon :type="icon" :size="14" class="checked" v-show="currentValue" />
             <input type="checkbox" v-if="group" 
                 :name="name"
@@ -51,29 +46,13 @@ export default {
             type: Boolean,
             default: false
         },
-        active: {
-            type: Boolean,
-            default: false
-        },
-        vertical: {
-            type: Boolean,
-            default: false
-        },
-        partial: {
+        partial: {            //暂且不考虑
             type: Boolean,
             default: false
         },
         name: {
             type: String
         },
-        theme: {
-            type: String,
-            default: 'default',
-            validator (value) {
-                const valueList = ['default', 'primary'];
-                return hasParam(value, valueList)
-            }
-        }
     },
     data () {
         return {
@@ -93,6 +72,22 @@ export default {
             this.updateModel()
         }
     }, 
+    computed: {
+        labelStyles () {
+            const { prefixCls, disabled, partial } = this;
+            return [`${prefixCls}`, {
+                [`${prefixCls}-disabled`]: disabled,
+                // [`${prefixCls}-partial`]: partial 
+            }]
+        },
+        checkboxStyles () {
+            const { prefixCls, currentValue } = this;
+            return [`${prefixCls}-icon`, { 
+                [`${prefixCls}-active`]: currentValue,
+                 
+            }]
+        }
+    },
     methods: {
         init () {
             this.parent = findComponentParents(this, 'CheckboxGroup');

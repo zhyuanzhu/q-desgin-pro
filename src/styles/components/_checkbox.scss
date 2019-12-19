@@ -2,12 +2,10 @@
 @import "../common/var";
 @import "../mixins/mixin";
 
-$checkBoxPrefix: "#{$prefixCls}checkbox";
+$checkbox: "#{$prefixCls}checkbox";
 
-.#{$checkBoxPrefix} {
-    position: relative;
+.#{$checkbox} {
     font-size: 0;
-    display: block;
     cursor: pointer;
     &-icon { 
         position: relative; 
@@ -20,107 +18,78 @@ $checkBoxPrefix: "#{$prefixCls}checkbox";
         border: 1px solid $lightC; 
         box-sizing: border-box; 
         transition: all $animate-time;
-        &::before { 
-            content: ""; 
-            display: none; 
-            @include absolute();
-            @include wh(8px, 2px);
-            margin-left: -4px; 
-            margin-top: -1px; 
-            background-color: $white; 
-            transition: all $animate-time;
-        }
+        // &::before { 
+        //     content: ""; 
+        //     display: none; 
+        //     @include absolute();
+        //     @include wh(8px, 2px);
+        //     margin-left: -4px; 
+        //     margin-top: -1px; 
+        //     background-color: $white; 
+        //     transition: all $animate-time;
+        // }
         .checked {
-            content: ''; 
             position: absolute;
             top: 1px;
             left: -1px;
-            color: #fff; 
-            transition: all $animate-time; 
+            color: $white;
         }
 
-        &.#{$checkBoxPrefix}-primary {
-            &::after {
-                border: 0 solid $green; 
+        &.#{$checkbox}-active {
+            @include border($primary, $primary);
+            & + .#{$checkbox}-value {
+                color: $main-dark;
             }
         }
+        .#{$checkbox}-ipt {
+            @include opacityCovert();
+            cursor: $cursor-pointer;
+        }
     }
-    &-ipt {
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        z-index: 1;
-        opacity: 0;
-        cursor: pointer;
-    }
+    
     &-value {
         font-size: $font-size-base;
         color: $main;
-        // @include setH(14px);
         vertical-align: middle;
     }
     &:hover {
-        .#{$checkBoxPrefix}-icon {
-            @include border($blue);
-            &.#{$checkBoxPrefix}-primary {
-                @include border($green);
-            }
+        .#{$checkbox}-icon {
+            @include border($primary);
         }
     }
-    &-active {
-        .#{$checkBoxPrefix}-icon {
-            @include border($blue, $blue);
-            &.#{$checkBoxPrefix}-primary {
-                @include border($green, $green);
-            }
-        }  
-        .#{$checkBoxPrefix}-value {
-            color: $main-dark;
-        } 
-    }
-    &-partial.#{$checkBoxPrefix}-active {
-        .#{$checkBoxPrefix}-icon {
-            @include border($blue, $blue);
-            &::before {
-                display: block;
-            }
-            &.#{$checkBoxPrefix}-primary {
-                @include border($green, $green);
-            }
-        }
-    }
+    // &-partial{
+    //     .#{$checkbox}-icon {
+    //         &.#{$checkbox}-active {
+    //             @include border($primary, $primary);
+    //             &::before {
+    //                 display: block;
+    //             }
+    //         }
+    //     }
+    // }
     &-disabled {
         cursor: $cursor-disabled;
-        .#{$checkBoxPrefix}-icon {
+        .#{$checkbox}-icon {
             @include border($lightC, $border-color);
-            &::before {
-                display: none;
-            }
-            &.#{$checkBoxPrefix}-primary {
-                @include border($lightC, $border-color);
-            }
-        }
-        &:hover {
-            .#{$checkBoxPrefix}-icon { 
-                @include border($lightC, $border-color);
-                &.#{$checkBoxPrefix}-primary {
-                    @include border($lightC, $border-color);
+            &.#{$checkbox}-active {
+                & + .#{$checkbox}-value {
+                    color: $main-light;
                 }
             }
+            .#{$checkbox}-ipt {
+                cursor: $cursor-disabled;
+            }
         }
-        .#{$checkBoxPrefix}-value {
+        .checked {
             color: $main-light;
         }
-    }
-    &-active.#{$checkBoxPrefix}-disabled {
-        cursor: $cursor-disabled;
-        .#{$checkBoxPrefix}-icon {
-            @include border($lightC, $border-color);
-            &.#{$checkBoxPrefix}-primary {
+        &:hover {
+            .#{$checkbox}-icon { 
                 @include border($lightC, $border-color);
             }
+        }
+        .#{$checkbox}-value {
+            color: $main-light;
         }
     }
 }
