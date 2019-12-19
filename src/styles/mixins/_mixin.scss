@@ -88,3 +88,13 @@
     background: $bgColor;
     z-index: $zIndex;
 }
+
+@mixin opacityCovert($pos: absolute, $zIndex: 1) {
+    position: $pos;
+    z-index: $zIndex;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    opacity: 0;
+}
