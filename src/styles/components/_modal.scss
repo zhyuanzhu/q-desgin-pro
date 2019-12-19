@@ -2,23 +2,22 @@
 @import "../common/var";
 @import "../mixins/mixin";
 
-$modalPrefix: "#{$prefixCls}modal";
-.#{$modalPrefix} {
-    @include centerBox();
-    height: 100%;
+$modal: "#{$prefixCls}modal";
+.#{$modal} {
+    position: absolute;
+    left: 50%;
+    top: 20%;
     &-mask {
         @include mask(rgba($black, .2), 999);
     }
     &-main {
         position: relative;
-        z-index: 1000;
         background-color: $white;
-        width: 500px;
         box-shadow: 0 2px 8px rgba($black, .05);
         border-radius: $border-radius-large;
         box-sizing: border-box;
         overflow: hidden;
-        .#{$modalPrefix}-header {
+        .#{$modal}-header {
             padding: 35px 50px 15px 20px;
             box-shadow: 0 2px 8px 0 rgba($black, .05);
             position: relative;
@@ -34,10 +33,10 @@ $modalPrefix: "#{$prefixCls}modal";
                 right: 20px;
             }
         }
-        .#{$modalPrefix}-container {
+        .#{$modal}-container {
             padding: 35px 20px;
         }
-        .#{$modalPrefix}-footer{
+        .#{$modal}-footer{
             padding: 25px 40px 20px;
             border-top: 1px solid $border-color;
             display: flex;
@@ -48,5 +47,12 @@ $modalPrefix: "#{$prefixCls}modal";
                 }
             }
         }
+    }
+    .modal-slide-down-enter, .modal-slide-down-leave-to {
+        opacity: 0;
+        transform: translateY(-400px);
+    }
+    .modal-slide-down-enter-active, .modal-slide-down-leave-active {
+        transition: all .8s;
     }
 }
