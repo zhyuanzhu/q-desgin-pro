@@ -7,28 +7,27 @@ $btn-border-hover: #f6f8fc;
 
 .#{$buttonPrefix} {
     color: $white;
-    background-color: $blue;
-    padding: 0 15px;
+    background-color: $primary;
+    padding: 0 20px;
     border: 1px solid;
-    border-color: $blue;
+    border-color: $primary;
     border-radius: $border-radius-middle;
     outline: none;
     box-sizing: border-box;
     transition: all $animate-time;
     cursor: $cursor-pointer;
-    box-shadow: 0 2px 5px rgba($blue, .5);
+    box-shadow: 0 2px 5px rgba($primary, .5);
     font-size: $font-size-base;
     @include setH(32px, 30px);
-
     &:hover {
-        background-color: $blue-dark;
+        background-color: $primary-dark;
     }
     &:active {
         @extend .#{$buttonPrefix}:hover;
         @include boxShadow(#000, inset);
     }
     &:disabled {
-        @include btnDisabled($blue-disabled, transparent, $white)
+        @include btnDisabled($primary, $primary, #999)
     }
 
     &-text {
@@ -44,7 +43,7 @@ $btn-border-hover: #f6f8fc;
         background-color: $white;
         color: $main;
         &:hover {
-            color: $blue;
+            color: $primary;
         }
         &:active {
             @extend .#{$buttonPrefix}-text:hover;
@@ -61,8 +60,8 @@ $btn-border-hover: #f6f8fc;
         background-color: $white;
         color: $main;
         &:hover {
-            color: $green;
-            border-color: $green;
+            color: $primary;
+            border-color: $primary;
         }
         &:active {
             @extend .#{$buttonPrefix}-primary:hover;
@@ -75,29 +74,29 @@ $btn-border-hover: #f6f8fc;
 
     //蓝框蓝字，hover底色变蓝
     &.#{$buttonPrefix}-empty {
-        color: $blue; 
+        color: $primary; 
         background-color: $white; 
-        border-color: $blue; 
+        border-color: $primary; 
         box-shadow: none;
         &:hover { 
-            background-color: $blue-dark;
+            background-color: $primary-dark;
             color: $white;
-            box-shadow: 0 2px 5px rgba($blue, .5);
+            box-shadow: 0 2px 5px rgba($primary, .5);
         }
         &:active { 
             @extend .#{$buttonPrefix}-empty;
             box-shadow: none; 
         }
         &:disabled {  
-            @include btnDisabled($white, $btn-border-hover)
+            @include btnDisabled($white, $primary, rgba($primary, $disable-opacity))
         }
     }
 
     //绿色背景白字
     &.#{$buttonPrefix}-success {
-        background-color: $green;
-        border-color: $green;
-        box-shadow: 0 2px 5px rgba($green, .5);
+        background-color: $success;
+        border-color: $success;
+        box-shadow: 0 2px 5px rgba($success, .5);
         &:hover {
             background-color: $green-dark;
         }
@@ -106,15 +105,15 @@ $btn-border-hover: #f6f8fc;
             box-shadow: none;
         }
         &:disabled {
-            @include btnDisabled($white, rgba($green, .4))
+            @include btnDisabled($success, $success, $lightC)
         }
     }
 
     //红背景白字
     &.#{$buttonPrefix}-error {
-        background-color: $red;
+        background-color: $error;
         color: $white;
-        border-color: $red;
+        border-color: $error;
         box-shadow: 0 2px 5px rgba($red, .5);
         &:hover {
             background-color: $red-dark;
@@ -124,7 +123,7 @@ $btn-border-hover: #f6f8fc;
             box-shadow: none;
         }
         &:disabled {
-            @include btnDisabled($white, rgba($red, .2));
+            @include btnDisabled($error, $error);
         }
     }
 
@@ -142,7 +141,7 @@ $btn-border-hover: #f6f8fc;
             box-shadow: none;
         }
         &:disabled {
-            @include btnDisabled($white, rgba($orange, .3))
+            @include btnDisabled($orange, $orange)
         }
     }
 
@@ -151,18 +150,18 @@ $btn-border-hover: #f6f8fc;
         background-color: $white;
         border: none;
         box-shadow: none;
-        color: $blue;
+        color: $primary;
         &:hover {
-            color: $blue-dark;
+            color: $primary-dark;
         }
         &:active {
             @extend .#{$buttonPrefix}-link:hover;
         }
         &.#{$buttonPrefix}-link-disabled {
-            color: $blue-disabled;
+            opacity: $disable-opacity;
             cursor: $cursor-disabled;
             &:hover {
-                color: $blue-disabled;
+                opacity: $disable-opacity;
             }
             &:active {
                 @extend .#{$buttonPrefix}-link-disabled:hover;
@@ -173,7 +172,7 @@ $btn-border-hover: #f6f8fc;
     //设置尺寸
     &.#{$buttonPrefix}-large {
         @include setH(40px, 38px);
-        padding: 0 25px;
+        padding: 0 35px;
         &-text {
             font-size: $font-size-large;
         }

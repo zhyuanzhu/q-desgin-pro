@@ -28,9 +28,9 @@ export default {
         },
         type: {   
             type: String,
-            default: 'main',
+            default: 'default',
             validator (value) {
-                const valueList = ['main', 'text', 'info', 'primary', 'success', 'warning', 'error', 'empty'];
+                const valueList = ['default', 'text', 'info', 'primary', 'success', 'warning', 'error', 'empty'];
                 return hasParam(value, valueList);
             }
         },
@@ -82,9 +82,7 @@ export default {
                 this.isTagA && `${prefixCls}-link`,
                 this.isTagA && this.disabled && `${prefixCls}-link-disabled`,
             ]
-            
         }
-
     },
 }
 </script>
