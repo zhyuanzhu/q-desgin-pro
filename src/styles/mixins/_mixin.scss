@@ -49,8 +49,8 @@
 @mixin btnDisabled ($bgc, $bdc, $color: $lightC) {
     box-shadow: none;
     cursor: $cursor-disabled;
-    background-color: $bgc;
-    border-color: $bdc;
+    background-color: rgba($bgc, $button-disabled-opacity);
+    border-color: rgba($bdc, $button-disabled-opacity);
     color: $color;
 }
 
