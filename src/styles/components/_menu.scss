@@ -2,19 +2,14 @@
 @import "../common/var";
 @import "../mixins/mixin";
 
-$menuPrefix: "#{$prefixCls}menu";
+$menu: "#{$prefixCls}menu";
 $dark: #515a6e;
 $dark-open: #363e4f;
 $dark-active: $blue;
-$light: #f5f5f5;
-$light-open: '';
-$light-active: #f0faff;
-$arrow: "http://p0.qhimg.com/t011244f24d2bbac6d4.png";
 
-
-.#{$menuPrefix} {
+.#{$menu} {
     &-dark {
-        .#{$menuPrefix}-list {
+        .#{$menu}-list {
             background: $dark;
             color: rgba($white, .7);
         }
@@ -35,20 +30,15 @@ $arrow: "http://p0.qhimg.com/t011244f24d2bbac6d4.png";
                 color: inherit;
             }
         }
-        &-sub {
+        .#{$menu}-arrow {
             position: absolute;
-            @include wh(14px);
-            // top: 50%;
-            // transform: translateY(-50%);
             right: 10px;
-            // background: url($arrow) no-repeat center;
             transition: all $animate-time;
-            &.#{$menuPrefix}-item-sub-down {
+            &-down {
                 transform: rotate(0deg);
-                
             }
-            &.#{$menuPrefix}-item-sub-up {
-                transform: rotate(-180deg) translateY(-7px);
+            &-up {
+                transform: rotate(-180deg);
             }
         }
         &-children {
@@ -64,7 +54,7 @@ $arrow: "http://p0.qhimg.com/t011244f24d2bbac6d4.png";
         }
     }
     &-dark {
-        .#{$menuPrefix}-item {
+        .#{$menu}-item {
             &-title {
                 &:hover {
                     color: $white;
@@ -89,38 +79,24 @@ $arrow: "http://p0.qhimg.com/t011244f24d2bbac6d4.png";
         }
     }
     &-light {
-        .#{$menuPrefix}-list {
-            // background: $light;
+        .#{$menu}-list {
             color: $main;
         }
-        .#{$menuPrefix}-item {
-
+        .#{$menu}-item {
             &-title {
-                &.green-list {
-                    &:hover {
-                        color: $green;
-                    }
-                    &.item-title-active {
-                        color: $green;
-                        background: $green-mask;
-                        &::after {
-                            background: $green;
-                        }
-                    }
-                }
                 &:hover {
-                    color: $blue;
+                    color: $primary;
                 }
                 &.item-title-active {
-                    background: $light-active;
-                    color: $blue;
+                    background: rgba($primary, .1);
+                    color: $primary;
                     position: relative;
                     &::after {
                         content: "";
                         position: absolute;
                         width: 2px;
                         height: 100%;
-                        background: $blue;
+                        background: $primary;
                         right: 0;
                         top: 0;
                     }
@@ -129,46 +105,17 @@ $arrow: "http://p0.qhimg.com/t011244f24d2bbac6d4.png";
             &-children {
                 background: $white;
                 .item {
-                    &.green-item {
-                        &:hover {
-                            color: $green;
-                        }
-                        &.item-active {
-                            color: $green;
-                            background: $green-mask;
-                            &::after {
-                                background: $green;
-                            }
-                        }
-                    }
                     &-active {
-                        background: $light-active;
-                        color: $blue;
-                        position: relative;
+                        @extend .#{$menu}-item-title.item-title-active;
                         &::after {
-                            content: "";
-                            position: absolute;
-                            width: 2px;
-                            height: 100%;
-                            background: $blue;
-                            right: 0;
-                            top: 0;
+                            @extend .#{$menu}-item-title.item-title-active::after;
                         }
                     }
                     &:hover {
-                        color: $blue;
+                        color: $primary;
                     }
                 }
             }
         }
-    }
-
-
-    .svg-icon {
-        width: 14px; 
-        height: 14px;
-        vertical-align: middle;
-        fill: currentColor;
-        overflow: hidden;
     }
 }
