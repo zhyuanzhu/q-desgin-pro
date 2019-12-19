@@ -61,26 +61,16 @@ $radio: "#{$prefixCls}radio";
         cursor: $cursor-disabled;
         .#{$radio}-icon {
             @include border($lightC, $border-color);
-            &::after {
-                display: none;
-            }
             .#{$radio}-ipt { 
                 cursor: $cursor-disabled;
             }
             &.#{$radio}-active {
                 @include border($lightC, $lightC);
-                &::after {
-                    display: block;
-                    border-color: $white;
-                }
             }
         }
         &:hover {
             .#{$radio}-icon {
-                @include border($lightC, $border-color);
-                &.#{$radio}-active {
-                    @include border($lightC, $lightC);
-                }
+                border-color: $lightC;
             }
         }
         .#{$radio}-value {
