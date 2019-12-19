@@ -43,12 +43,10 @@ export default {
     data() {
         return {
             prefixCls,
-            isActive: false,
             group: false,
             radioName: this.name,
             parent: findComponentParents(this, 'RadioGroup'),
             currentValue: '',
-            single: false
         }
     },
     methods: {
@@ -65,9 +63,7 @@ export default {
             const isChecked = evt.target.checked;
             this.currentValue = isChecked;
             this.$emit('input', isChecked)
-            parent.change({
-                value: value 
-            })
+            parent.change({ value })
         },
         updateValue () {
             this.currentValue = this.value
