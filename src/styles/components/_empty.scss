@@ -1,13 +1,19 @@
 @charset "utf-8";
 @import "../common/var";
 
-$emptyPrefix: "#{$prefixCls}empty";
+$empty: "#{$prefixCls}empty";
 
-.#{$emptyPrefix} {
+.#{$empty} {
     text-align: center;
     &-text {
         font-size: $font-size-base;
         color: $main;
         padding-top: 5px;
+    }
+    &-retry {
+        color: $primary;
+        &:hover {
+            text-decoration: underline;
+        }
     }
 }
