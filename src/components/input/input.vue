@@ -1,11 +1,5 @@
 <template>
-    <div :class="[`${prefixCls}-main`, 
-        `${prefixCls}-${size}`, 
-        disabled && `${prefixCls}-disabled`, 
-        !border && `${prefixCls}-noborder`,
-        `${prefixCls}-${errPosition}`,
-        error && `${prefixCls}-error`]"
-        >
+    <div :class="inputwrap">
         <input 
         :class="[`${prefixCls}`, `${prefixCls}-${theme}`]"
         :type="type"
@@ -28,7 +22,7 @@
         >
         <i v-text="unit" v-show="unit" :class="`${prefixCls}-unit`"></i>
         <div :class="[`${prefixCls}-err`, `${errPosition}`]" v-show="error && errText">
-            <i :class="[`${prefixCls}-err-icon`, `${prefixCls}-icon`]"></i>
+            <Icon :size="14" :color="errorColor" :type="'warning'" style="margin-right:5px;" />
             <span :class="`${prefixCls}-err-text`" v-text="errText"></span>
         </div>
         
@@ -36,13 +30,15 @@
 </template>
 <script>
 
+const prefixCls = 'qui-input';
 import { hasParam } from '../../utils/util';
 import emitter from '../../mixins/emitter';
-const prefixCls = 'qui-input';
+import Icon from '../icon'
 
 export default {
     name: 'Input',
     mixins: [emitter],
+    components: { Icon },
     props: {
         type: {
             type: String,
@@ -110,7 +106,8 @@ export default {
     data () {
         return {
             prefixCls,
-            currentValue: this.value
+            currentValue: this.value,
+            errorColor: '#f52f3e'
         }
     },
     watch: {
@@ -119,6 +116,17 @@ export default {
         },
         currentValue (value) {
             this.$emit('input', value)
+        }
+    },
+    computed: {
+        inputwrap () {
+            const { prefixCls, size, disabled, border, errPosition, error } = this;
+            return [`${prefixCls}-main`, `${prefixCls}-${size}`, `${prefixCls}-${errPosition}`,
+            {
+                [`${prefixCls}-disabled`]: disabled,
+                [`${prefixCls}-noborder`]: !border,
+                [`${prefixCls}-error`]: error
+            }]
         }
     },
     methods: {

@@ -1,20 +1,14 @@
 @charset "utf-8";
 @import "../common/var";
 @import "../mixins/mixin";
-$iptPrefix: "#{$prefixCls}input";
+$input: "#{$prefixCls}input";
 
-.#{$iptPrefix}-main {
+.#{$input}-main {
     vertical-align: middle;
     font-size: 0;
     line-height: 38px;
    
-    .#{$iptPrefix} {
-        &.#{$iptPrefix}-primary {
-            &:focus {
-                border-color: $green;
-                box-shadow: 0 0 5px rgba($green, .5);
-            }
-        }
+    .#{$input} {
         box-sizing: border-box;
         @include wh(240px, 38px);
         padding: 10px;
@@ -24,32 +18,32 @@ $iptPrefix: "#{$prefixCls}input";
         font-size: $font-size-base;
         border-radius: $border-radius-middle;
         &:focus {
-            border-color: $blue;
+            border-color: $primary;
             outline: 0;
-            box-shadow: 0 0 5px rgba($blue, .5);
+            box-shadow: 0 0 5px rgba($primary, .5);
         }
     }
     ::-webkit-input-placeholder {
         color: $lightC;
     }
-    .#{$iptPrefix}-unit {
+    .#{$input}-unit {
         font-size: $font-size-base;
         font-style: normal;
         color: $main;
         margin-left: 10px;
     }
 
-    &.#{$iptPrefix}-large {
+    &.#{$input}-large {
         line-height: 46px;
-        .#{$iptPrefix} {
+        .#{$input} {
             padding: 15px 10px;
             font-size: $font-size-large;
             height: 46px;
         }
-        .#{$iptPrefix}-unit {
+        .#{$input}-unit {
             font-size: $font-size-large;
         }
-        .#{$iptPrefix}-err {
+        .#{$input}-err {
             &.right {
                 padding-top: 10px;
                 margin-left: 10px;
@@ -57,8 +51,8 @@ $iptPrefix: "#{$prefixCls}input";
         }
     }
 
-    &.#{$iptPrefix}-middle {
-        .#{$iptPrefix}-err {
+    &.#{$input}-middle {
+        .#{$input}-err {
             &.right {
                 padding-top: 5px;
                 margin-left: 10px;
@@ -66,64 +60,50 @@ $iptPrefix: "#{$prefixCls}input";
         }
     }
 
-    &.#{$iptPrefix}-small {
+    &.#{$input}-small {
         line-height: 26px;
-        .#{$iptPrefix} {
+        .#{$input} {
             padding: 5px 10px;
             font-size: $font-size-small;
             height: 26px;
         }
-        .#{$iptPrefix}-unit {
+        .#{$input}-unit {
             font-size: $font-size-small;
         }
-        .#{$iptPrefix}-err {
+        .#{$input}-err {
             &.right {
                 padding-top: 0px;
                 margin-left: 10px;
             }
         }
     }
-    .#{$iptPrefix}-icon {
-        display: inline-block;
-        @include wh(25px);
-        background-repeat: no-repeat;
-        background-position: center;
-        pointer-events: none;
 
-    }
-    &.#{$iptPrefix}-error {
-        &.#{$iptPrefix}-right {
+    &.#{$input}-error {
+        &.#{$input}-right {
             display: flex;
         }
-        .#{$iptPrefix} {
-            border-color: $red;
-            color: $red;
+        .#{$input} {
+            border-color: $error;
+            color: $error;
             &:focus {
                 border-color: $red-dark;
-                box-shadow: 0 0 5px 0 $red;
+                box-shadow: 0 0 5px 0 $error;
             }
         }
         ::-webkit-input-placeholder {
-            color: $red;
+            color: $error;
         }
-        .#{$iptPrefix}-err {
+        .#{$input}-err {
             @include setH(25px);
-            padding-left: 20px;
-            &-icon {
-                // background-image: url(../../assets/images/error-icon.png);
-                background-image: url("http://p0.qhimg.com/t0165cc15aed7f13691.png");
-                margin-left: -25px;
-                vertical-align: top;
-            }
             &-text {
-                color: $red;
+                color: $error;
                 font-size: $font-size-small;
             }
             
         }
     }
-    &.#{$iptPrefix}-disabled {
-        .#{$iptPrefix} {
+    &.#{$input}-disabled {
+        .#{$input} {
             cursor: $cursor-disabled;
             background: $elebg;
         }
