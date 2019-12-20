@@ -1,0 +1,85 @@
+@charset "utf-8";
+@import "../common/_var";
+
+@mixin make-transition ($transitionName, $keyframeName, $time: $animate-time) {
+    .#{$transitionName} {
+        &-enter-active, &-appear {
+            @include transition-commen-status($time);
+            animation-play-state: paused;
+        }
+        &-leave-active {
+            @include transition-commen-status($time);
+            animation-play-state: paused;
+        }
+        &-enter-active, &-appear {
+            animation-name: "#{$keyframeName}In";
+            animation-play-state: running;
+        }
+        &-leave-active {
+            animation-name: "#{$keyframeName}Out";
+            animation-play-state: running;
+        }
+    }
+}
+
+@mixin transition-commen-status ($time) {
+    animation-duration: $time;
+    animation-fill-mode: both;
+}
+
+@mixin fade ($transitionName, $keyframeName) {
+    @include make-transition($transitionName, $keyframeName, $animate-time-quick);
+    .#{$transitionName} {
+        &-enter-active, &-appear {
+            opacity: 0;
+            animation-timing-function: linear;
+        }
+        &-leave-active {
+            animation-timing-function: linear;
+        }
+    }
+}
+
+@mixin slide ($transitionName, $keyframeName) {
+    @include make-transition($transitionName, $keyframeName);
+    .#{$transitionName} {
+        &-enter-active, &-appear {
+            opacity: 0;
+            animation-timing-function: $ease-in-out;
+        }
+        &-leave-active {
+            animation-timing-function: $ease-in-out;
+        }
+    }
+}
+
+@mixin move ($transitionName, $keyframeName) {
+    @include make-transition($transitionName, $keyframeName);
+    .#{$transitionName} {
+        &-enter-active, &-appear {
+            opacity: 0;
+            animation-timing-function: $ease-in-out;
+        }
+        &-leave-active {
+            animation-timing-function: $ease-in-out;
+        }
+    }
+
+}
+
+@mixin ease ($transitionName, $keyframeName) {
+    @include make-transition($transitionName, $keyframeName);
+    .#{$transitionName} {
+        &-enter-active, &-appear {
+            opacity: 0;
+            animation-timing-function: linear;
+            animation-duration: $animate-time-middle;
+        }
+        &-leave-active {
+            animation-timing-function: linear;
+            animation-duration: $animate-time-middle;
+        }
+    }
+
+}
+
