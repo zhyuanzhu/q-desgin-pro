@@ -1,5 +1,3 @@
-// thanks for https://github.com/iview/iview/blob/2.0/src/components/date-picker/util.js
-
 import dateUtil from '../../utils/date';
 
 export const toDate = function(date) {
