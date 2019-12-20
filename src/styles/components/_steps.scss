@@ -1,19 +1,19 @@
 @charset "utf-8";
-@import "../common/var";
-@import "../mixins/mixin";
+@import "../common/_var";
+@import "../mixins/_mixin";
 
-$stepPrefix: "#{$prefixCls}steps";
+$steps: "#{$prefixCls}steps";
 
-.#{$stepPrefix} {
+.#{$steps} {
     font-size: $font-size-base;
     color: $main;
 
-    &.#{$stepPrefix}-row {
+    &.#{$steps}-row {
         display: flex;
-        .#{$stepPrefix}-item {
+        .#{$steps}-item {
             flex: 1;
             overflow: hidden;
-            .#{$stepPrefix}-content{
+            .#{$steps}-content{
                 width: calc(100% - 36px);
                 padding: 0 5px;
                 box-sizing: border-box;
@@ -38,10 +38,10 @@ $stepPrefix: "#{$prefixCls}steps";
             }
         }
     }
-    &.#{$stepPrefix}-column {
-        .#{$stepPrefix}-item {
+    &.#{$steps}-column {
+        .#{$steps}-item {
             height: 140px;
-            .#{$stepPrefix}-content {
+            .#{$steps}-content {
                 height: 100%;
                 box-sizing: border-box;
                 padding-bottom: 20px;
@@ -51,7 +51,7 @@ $stepPrefix: "#{$prefixCls}steps";
                     overflow: hidden;
                 }
             }
-            .#{$stepPrefix}-icon {
+            .#{$steps}-icon {
                 margin-right: 8px;
             }
         }
@@ -62,68 +62,71 @@ $stepPrefix: "#{$prefixCls}steps";
             position: relative;
             left: 17px;
             top: 41px;
+            &.no-border-line {
+                left: 13px;
+            }
         }
     }
     &-item {
         position: relative;
-        .#{$stepPrefix}-icon {
+        .#{$steps}-icon {
             float: left;  
             @include wh(34px);
             @include border($lightC);
             border-radius: 50%;
             text-align: center;
             line-height: 34px;  
+            &.no-border {
+                border: none;
+                @include wh(26px)
+            }
         }
-        .#{$stepPrefix}-content {
+        .#{$steps}-content {
             float: left;
             width: calc(100% - 45px);
         }
-        &.#{$stepPrefix}-active {
-            .#{$stepPrefix}-icon {
-                border-color: $blue;
+        &.#{$steps}-active {
+            .#{$steps}-icon {
+                border-color: $primary;
             }
             .step-icon {
-                color: $blue;
+                color: $primary;
             }
             .title {
                 color: $main-dark;
             }
         }
-        &.#{$stepPrefix}-finished {
-            .#{$stepPrefix}-icon {
-                border-color: $blue;
+        &.#{$steps}-finished {
+            .#{$steps}-icon {
+                border-color: $primary;
                 .active {
                     display: block;
                     height: 100%;
-                    background: url("http://p0.qhimg.com/t01386d050c81abc024.png") no-repeat center;
+                    color: $primary;
                 }
             }
             .line {
-                background: $blue;
+                background: $primary !important;
             }
         }
-        &.#{$stepPrefix}-error {
-            .#{$stepPrefix}-icon {
-                border-color: $red;
+        &.#{$steps}-error {
+            .#{$steps}-icon {
+                border-color: $error;
                 .error-icon {
                     display: block;
-                    color: $red;
-                    transform: scale(2.2) rotate(45deg);
+                    color: $error;
                 }
             }
             .line {
-                background: $red !important;
+                background: $error !important;
             }
-            .title {
-                color: $red;
-            }
-            .summary {
-                color: $red;
+            .title, .summary {
+                color: $error;
             }
         }
-        &.#{$stepPrefix}-err {
+        &.#{$steps}-err {
             .line {
-                background: $blue !important;
+                background: $primary !important;
             }
         }
         .title {
