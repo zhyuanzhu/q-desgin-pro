@@ -1,0 +1,512 @@
+@charset "utf-8";
+@import "../common/var";
+
+
+$date-picker-prefix-cls: "qui-date-picker";
+$picker-prefix-cls: "qui-picker";
+
+$date-picker-cells-width: 196px;
+$date-picker-cells-width-with-weeknumbers: 226px;
+
+.qui-select-dropdown{
+    width: inherit;
+    overflow: auto;
+    margin: 5px 0;
+    padding: 5px 0;
+    background-color: #fff;
+    box-sizing: border-box;
+    border-radius: 4px;
+    box-shadow: 0 1px 6px rgba(0,0,0,.2);
+    position: absolute;
+    z-index: 900
+}
+
+.#{$date-picker-prefix-cls} {
+    //position: relative;
+    display: inline-block;
+    line-height: normal;
+    &-rel{
+        position: relative;
+    }
+    .qui-select-drop {
+        width: auto;
+        padding: 0;
+        overflow: visible;
+        max-height: none;
+    }
+    &-cells{
+        width: $date-picker-cells-width;
+        margin: 10px;
+        white-space: normal;
+        span{
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+
+            em{
+                display: inline-block;
+                width: 24px;
+                height: 24px;
+                line-height: 24px;
+                margin: 2px;
+                font-style: normal;
+                border-radius: 2px;
+                text-align: center;
+                transition: all .3s ease-in-out;
+            }
+        }
+        &-header span{
+            line-height: 24px;
+            text-align: center;
+            margin: 2px;
+            color: rgb(81, 90, 110);
+        }
+        &-cell:hover{
+            em{
+                background: rgba($primary, .1);
+            }
+        }
+        &-focused{
+            em{
+                box-shadow: 0 0 0 1px $primary inset;
+            }
+        }
+        span.#{$date-picker-prefix-cls}-cells-cell{
+            width: 28px;
+            height: 28px;
+            cursor: pointer;
+            color: $main;
+        }
+        &-cell{
+            &-prev-month,&-next-month{
+                em{
+                    color: #ccc;
+                }
+                &:hover{
+                    em{
+                        background: transparent;
+                    }
+                }
+            }
+            &-week-label,&-week-label:hover,&-disabled,&-disabled:hover{
+                cursor: $cursor-disabled;
+                color: #ccc;
+                em{
+                    color: inherit;
+                    background: inherit;
+                }
+            }
+            &-disabled,&-disabled:hover{
+                background: #333;
+            }
+            &-today{
+                em {
+                    position: relative;
+                    &:after{
+                        content: '';
+                        display: block;
+                        width: 6px;
+                        height: 6px;
+                        border-radius: 50%;
+                        background: $primary;
+                        position: absolute;
+                        top: 1px;
+                        right: 1px;
+                    }
+                }
+            }
+            &-range{
+                position: relative;
+                em{
+                    position: relative;
+                    z-index: 1;
+                }
+                &:before{
+                    content: '';
+                    display: block;
+                    background: rgba($primary, .1);
+                    border-radius: 0;
+                    border: 0;
+                    position: absolute;
+                    top: 2px;
+                    bottom: 2px;
+                    left: 0;
+                    right: 0;
+                }
+            }
+            &-selected,&-selected:hover
+            {
+                em{
+                    background: $primary;
+                    color: #fff;
+                }
+            }
+            &-disabled {
+                &.#{$date-picker-prefix-cls}-cells-cell-selected{
+                    em {
+                        background: rgba($primary, .1);
+                        color: #333;
+                    }
+                }
+            }
+            &-today &-selected
+            {
+                em{
+                    &:after{
+                        background: #fff;
+                    }
+                }
+            }
+        }
+    }
+
+    &-cells-show-week-numbers {
+        width: $date-picker-cells-width-with-weeknumbers;
+    }
+
+    &-cells-year,&-cells-month{
+        margin-top: 14px;
+        span{
+            width: 40px;
+            height: 28px;
+            line-height: 28px;
+            margin: 10px 12px;
+            border-radius: 2px;
+            em{
+                width: 40px;
+                height: 28px;
+                line-height: 28px;
+                margin: 0;
+            }
+        }
+
+        .#{$date-picker-prefix-cls}-cells-cell-focused{
+            background-color: tint($primary, 80%);
+        }
+
+    }
+
+    &-header{
+        height: 32px;
+        line-height: 32px;
+        text-align: center;
+        border-bottom: 1px solid $lightC;
+        &-label{
+            cursor: pointer;
+            transition: color .3s ease-in-out;
+            &:hover{
+                color: $primary;
+            }
+        }
+    }
+    &-btn-pulse{
+        background-color: tint($primary, 80%) !important;
+        border-radius: 2px;
+        transition: background-color .3s ease-in-out;
+    }
+    &-prev-btn{
+        float: left;
+        &-arrow-double{
+            margin-left: 10px;
+            
+        }
+    }
+    &-next-btn{
+        float: right;
+        &-arrow-double{
+            margin-right: 10px;
+        }
+    }
+
+    &-with-range{
+        .#{$picker-prefix-cls}-panel{        
+            &-body{
+                min-width: ($date-picker-cells-width + 20) * 2;
+            }
+            &-content{
+                float: left;
+            }
+        }
+        .#{$picker-prefix-cls}-cells-show-week-numbers {
+            min-width: ($date-picker-cells-width-with-weeknumbers + 20) * 2;
+        }
+
+    }
+
+    &-with-week-numbers{
+        .#{$picker-prefix-cls}-panel{
+            &-body-date {
+                min-width: ($date-picker-cells-width-with-weeknumbers + 20) * 2;
+            }
+        }
+    }
+
+    &-transfer{
+        z-index: 111;
+        max-height: none;
+        width: auto;
+    }
+
+    &-focused input{
+        // .active();
+    }
+}
+
+.#{$picker-prefix-cls} {
+    &-panel{
+        &-icon-btn{
+            display: inline-block;
+            width: 20px;
+            height: 24px;
+            line-height: 26px;
+            margin-top: 4px;
+            text-align: center;
+            cursor: pointer;
+            color: #c5c8ce;
+            transition: color .3s ease-in-out;
+            &:hover{
+                color: $primary;
+            }
+            i{
+                font-size: 18px;
+            }
+            .qui-icon {
+                vertical-align: 0;
+            }
+        }
+
+        &-body-wrapper &-with-sidebar{
+            padding-left: 92px;
+        }
+        &-sidebar{
+            width: 92px;
+            float: left;
+            margin-left: -92px;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            background: #ccc;
+            border-right: 1px solid #333;
+            border-radius: 2px 0 0 2px;
+            overflow: auto;
+        }
+        &-shortcut{
+            padding: 5px 10px;
+            transition: all .3s ease-in-out;
+            cursor: pointer;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+
+            &:hover{
+                background: #333;
+            }
+        }
+        &-body{
+            float: left;
+        }
+    }
+
+    &-confirm{
+        border-top: 1px solid $lightC;
+        text-align: right;
+        padding: 8px;
+        clear: both;
+        & > span{
+            color: $primary;
+            cursor: pointer;
+            user-select: none;
+            float: left;
+            padding: 2px 0;
+            transition: all .3s ease-in-out;
+            &:hover{
+                color: $primary;
+            }
+            &:active{
+                color: $primary;
+            }
+        }
+
+        &-time{
+            float: left;
+        }
+    }
+}
+
+
+@mixin slide-motion($cls, $transition) {
+    @include make-motion($cls, $transition);
+    .#{$cls} {
+        &-enter-active, &-appear {
+            opacity: 0;
+            animation-timing-function: ease-in-out;
+        }
+        &-leave-active {
+            animation-timing-function: ease-in-out;
+        }
+    }
+}
+
+@mixin make-motion ($classname, $keyframeName, $time: .3s){
+    .#{$classname} {
+        &-enter-active, &-appear {
+            @include motion-common($time);
+            animation-play-state: paused;
+        }
+        &-leave-active {
+            @include motion-common($time);
+            animation-play-state: paused;
+        }
+        &-enter-active, &-appear {
+            animation-name: "#{$keyframeName}In";
+            animation-play-state: running;
+        }
+        &-leave-active {
+            animation-name: "#{$keyframeName}Out";
+            animation-play-state: running;
+        }
+    }
+}
+
+@mixin motion-common($time) {
+    animation-duration: $time;
+    animation-fill-mode: both;
+}
+
+
+@include slide-motion(transition-drop, ivuTransitionDrop);
+@include slide-motion(slide-up, ivuSlideUp);
+@include slide-motion(slide-down, ivuSlideDown);
+@include slide-motion(slide-left, ivuSlideLeft);
+@include slide-motion(slide-right, ivuSlideRight);
+
+
+
+
+
+
+@keyframes ivuTransitionDropIn {
+    0% {
+        opacity: 0;
+        transform: scaleY(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: scaleY(1);
+    }
+}
+
+@keyframes ivuTransitionDropOut {
+    0% {
+        opacity: 1;
+        transform: scaleY(1);
+    }
+    100% {
+        opacity: 0;
+        transform: scaleY(0.8);
+    }
+}
+
+@keyframes ivuSlideUpIn {
+    0% {
+        opacity: 0;
+        transform-origin: 0% 0%;
+        transform: scaleY(.8);
+    }
+    100% {
+        opacity: 1;
+        transform-origin: 0% 0%;
+        transform: scaleY(1);
+    }
+}
+
+@keyframes ivuSlideUpOut {
+    0% {
+        opacity: 1;
+        transform-origin: 0% 0%;
+        transform: scaleY(1);
+    }
+    100% {
+        opacity: 0;
+        transform-origin: 0% 0%;
+        transform: scaleY(.8);
+    }
+}
+
+@keyframes ivuSlideDownIn {
+    0% {
+        opacity: 0;
+        transform-origin: 100% 100%;
+        transform: scaleY(.8);
+    }
+    100% {
+        opacity: 1;
+        transform-origin: 100% 100%;
+        transform: scaleY(1);
+    }
+}
+
+@keyframes ivuSlideDownOut {
+    0% {
+        opacity: 1;
+        transform-origin: 100% 100%;
+        transform: scaleY(1);
+    }
+    100% {
+        opacity: 0;
+        transform-origin: 100% 100%;
+        transform: scaleY(.8);
+    }
+}
+
+@keyframes ivuSlideLeftIn {
+    0% {
+        opacity: 0;
+        transform-origin: 0% 0%;
+        transform: scaleX(.8);
+    }
+    100% {
+        opacity: 1;
+        transform-origin: 0% 0%;
+        transform: scaleX(1);
+    }
+}
+
+@keyframes ivuSlideLeftOut {
+    0% {
+        opacity: 1;
+        transform-origin: 0% 0%;
+        transform: scaleX(1);
+    }
+    100% {
+        opacity: 0;
+        transform-origin: 0% 0%;
+        transform: scaleX(.8);
+    }
+}
+
+@keyframes ivuSlideRightIn {
+    0% {
+        opacity: 0;
+        transform-origin: 100% 0%;
+        transform: scaleX(.8);
+    }
+    100% {
+        opacity: 1;
+        transform-origin: 100% 0%;
+        transform: scaleX(1);
+    }
+}
+
+@keyframes ivuSlideRightOut {
+    0% {
+        opacity: 1;
+        transform-origin: 100% 0%;
+        transform: scaleX(1);
+    }
+    100% {
+        opacity: 0;
+        transform-origin: 100% 0%;
+        transform: scaleX(.8);
+    }
+}
