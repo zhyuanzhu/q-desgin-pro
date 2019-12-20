@@ -69,17 +69,22 @@ export default {
         next () {
             let next = this.now + 1;
             next <= this.totalPage() && this.changePage(next);
-            
         },
         prevFast () {
-            const { now, fastSize } = this;
-            console.log(now, fastSize)
+            const { now, fastSize, changePage } = this;
+            const fastPrev = now - fastSize > 0 ? now - fastSize : 1;
+            changePage(fastPrev)
+            if (fastPrev - 3 <= 1) {              
+                this.prevIcon = 'dot'
+            }
         },
         nextFast () {
             const { now, fastSize, totalPage, changePage } = this;
             const fastNext = now + fastSize < totalPage() ? now + fastSize : totalPage();
             changePage(fastNext)
-            
+            if (fastNext + 3 >= totalPage()) { 
+                this.nextIcon = 'dot'
+            }
         },
         changePage (page) {
             if (this.now === page) return;

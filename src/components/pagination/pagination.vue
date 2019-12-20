@@ -1,6 +1,6 @@
 <template>
     <div :class="[`${prefixCls}`]" v-if="total > 0">
-        <Page :total="total" :pageSize="pageSize" :circle="circle" @changePage="changePage" :theme="theme" />
+        <Page :total="total" :pageSize="pageSize" :circle="circle" @changePage="changePage" :fastSize="fastSize" />
         <page-size :now="now" :total="total" v-if="showSize" />
     </div>
 </template>
@@ -42,14 +42,6 @@ export default {
         showSize: {
             type: Boolean,
             default: false
-        },
-        theme: {
-            type: String,
-            default: 'default',
-            validator (value) {
-                const valueList = ['default', 'primary'];
-                return hasParam(value, valueList)
-            }
         }
     },
     data() {

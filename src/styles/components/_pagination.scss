@@ -1,6 +1,6 @@
 @charset "utf-8";
-@import "../common/var";
-@import "../mixins/mixin";
+@import "../common/_var";
+@import "../mixins/_mixin";
 
 $prefixPage: "#{$prefixCls}page";
 $page: "page";
@@ -24,33 +24,6 @@ $page: "page";
                     font-size: $font-size-small;
                 }
             }
-            &.#{$page}-primary {
-                .#{$page}-item {
-                    &:hover {
-                        color: $green;
-                        border-color: $green;
-                        box-shadow: 0 0 4px 0 rgba($green, .3);
-                    }
-                    &.#{$page}-active {
-                        color: $green;
-                        border-color: $green;
-                        box-shadow: 0 0 4px 0 rgba($green, .3);
-                    }
-                }
-                .#{$page}-next, .#{$page}-prev {
-                    &:hover {
-                        color: $green;
-                        box-shadow: 0 0 4px 0 rgba($green, .3);
-                    }
-                    &-disabled {
-                        &:hover {
-                            box-shadow: none;
-                            color: $lightC;
-                            border-color: $lightC;
-                        }
-                    }
-                }
-            }
         }
         
         &-item {
@@ -66,9 +39,9 @@ $page: "page";
             user-select: none;
             transition: all $animate-time;
             &:hover {
-                color: $blue;
-                border-color: $blue;
-                box-shadow: 0 0 4px 0 rgba($blue, .3);
+                color: $primary;
+                border-color: $primary;
+                box-shadow: 0 0 4px 0 rgba($primary, .3);
             }
             &:active {
                 box-shadow: none;
@@ -79,52 +52,43 @@ $page: "page";
         }
         &-next-fast, &-prev-fast {
             color: $lightC;
-            @include wh(32px);
+            @include wh(30px, 32px);
             text-align: center;
             line-height: 32px;
+            padding-top: 3px;
+            &:hover {
+                color: $primary;
+                cursor: $cursor-pointer;
+            }
         }
-        &-next, &-prev {
+        &-next-fast {
+            transform: rotate(180deg);
+        }
+        &-prev {
             @extend .#{$page}-item;
             color: $main;
+            &:hover {
+                color: $primary;
+                box-shadow: 0 0 4px 0 rgba($primary, .3);
+            }
             &-disabled {
                 cursor: $cursor-disabled;
                 color: $lightC;
-            }
-            &:hover {
-                color: $blue;
-                box-shadow: 0 0 4px 0 rgba($blue, .3);
-            }
-        }
-        &-prev {
-            &-disabled {
                 &:hover {
                     box-shadow: none;
                     color: $lightC;
                     border-color: $lightC;
                 }
             }
-            .prev {
-                display: inline-block;
-                @include wh(6px);
-                transform: rotate(45deg);
-                border-left: 2px solid;
-                border-bottom: 2px solid;
-                margin-left: 2px;
-            }
+            
         }
         &-next {
             @extend .#{$page}-prev;
             &-disabled {
+                @extend .#{$page}-prev-disabled;
                 &:hover {
-                    box-shadow: none;
-                    color: $lightC;
-                    border-color: $lightC;
+                    @extend .#{$page}-prev-disabled:hover;
                 }
-            }
-            .next {
-                @extend .prev;
-                margin-right: 2px;
-                transform: rotate(-135deg);
             }
         }
     }
