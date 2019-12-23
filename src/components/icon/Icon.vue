@@ -10,9 +10,12 @@ export default {
     props: {
         type: {
             type: String,
-            default: ''
+            required: true
         },
-        size: [Number, String],
+        size: {
+            type: [Number, String],
+            default: 16
+        },
         color: String,
         custom: {
             type: String,
@@ -52,12 +55,13 @@ export default {
 </script>
 <style lang="scss" type="text/css">
     @import "../../styles/iconfont/_fonts.scss";
+    $version: 0.1;
     @font-face {
     font-family: 'iconfont';
-    src: url(../../styles/iconfont/fonts/iconfont.woff2) format("woff2"),
-         url(../../styles/iconfont/fonts/iconfont.woff) format("woff"),
-         url(../../styles/iconfont/fonts/iconfont.ttf) format("truetype"),
-         url(../../styles/iconfont/fonts/iconfont.svg) format("svg");
+    src: url(../../styles/iconfont/fonts/iconfont.woff2?v=#{$version}) format("woff2"),
+         url(../../styles/iconfont/fonts/iconfont.woff?v=#{$version}) format("woff"),
+         url(../../styles/iconfont/fonts/iconfont.ttf?v=#{$version}) format("truetype"),
+         url(../../styles/iconfont/fonts/iconfont.svg?v=#{$version}) format("svg");
     font-weight: normal;
     font-style: normal;
 }
@@ -76,6 +80,6 @@ export default {
     vertical-align: -0.125em;
     text-align: center;
     font-style: normal;
-    font-size: 46px;
+    // font-size: 46px;
 }
 </style>
