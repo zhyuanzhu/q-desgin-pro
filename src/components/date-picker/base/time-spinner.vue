@@ -1,16 +1,16 @@
 <template>
     <div :class="classes">
-        <div :class="[prefixCls+ '-list']" ref="hours">
+        <div :class="[prefixCls+ '-list']" ref="hours" v-scroll>
             <ul :class="[prefixCls + '-ul']">
                 <li :class="getCellCls(item)" v-for="item in hoursList" v-show="!item.hide" @click="handleClick('hours', item)">{{ formatTime(item.text) }}</li>
             </ul>
         </div>
-        <div :class="[prefixCls+ '-list']" ref="minutes">
+        <div :class="[prefixCls+ '-list']" ref="minutes"  v-scroll>
             <ul :class="[prefixCls + '-ul']">
                 <li :class="getCellCls(item)" v-for="item in minutesList" v-show="!item.hide" @click="handleClick('minutes', item)">{{ formatTime(item.text) }}</li>
             </ul>
         </div>
-        <div :class="[prefixCls+ '-list']" v-show="showSeconds" ref="seconds">
+        <div :class="[prefixCls+ '-list']" v-show="showSeconds" ref="seconds" v-scroll>
             <ul :class="[prefixCls + '-ul']">
                 <li :class="getCellCls(item)" v-for="item in secondsList" v-show="!item.hide" @click="handleClick('seconds', item)">{{ formatTime(item.text) }}</li>
             </ul>
@@ -19,14 +19,16 @@
 </template>
 <script>
     import Options from '../time-mixins';
-    import { deepCopy, scrollTop, firstUpperCase } from '../../../utils/assist';
+    import { deepCopy, scrollTop, firstUpperCase } from '../../../utils/util'
 
-    const prefixCls = 'q-uitime-picker-cells';
+    const prefixCls = 'qui-time-picker-cells';
     const timeParts = ['hours', 'minutes', 'seconds'];
+    import scroll from '../../../directives/scroll';
 
     export default {
         name: 'TimeSpinner',
         mixins: [Options],
+        directives: { scroll },
         props: {
             hours: {
                 type: [Number, String],

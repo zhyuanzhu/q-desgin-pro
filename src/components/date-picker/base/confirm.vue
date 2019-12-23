@@ -1,26 +1,26 @@
 <template>
     <div :class="[prefixCls + '-confirm']" @keydown.tab.capture="handleTab">
-        <i-button :class="timeClasses" size="small" type="text" :disabled="timeDisabled" v-if="showTime" @click="handleToggleTime">
+        <Button :class="timeClasses" size="small" type="text" :disabled="timeDisabled" v-if="showTime" @click="handleToggleTime">
             {{labels.time}}
-        </i-button>
-        <i-button size="small" type="primary" @click.native="handleClear" @keydown.enter.native="handleClear">
+        </Button>
+        <Button size="small" type="primary" @click.native="handleClear" @keydown.enter.native="handleClear">
             {{labels.clear}}
-        </i-button>
-        <i-button size="small"  @click.native="handleSuccess" @keydown.enter.native="handleSuccess">
+        </Button>
+        <Button size="small"  @click.native="handleSuccess" @keydown.enter.native="handleSuccess">
             {{labels.ok}}
-        </i-button>
+        </Button>
     </div>
 </template>
 <script>
-    import iButton from '../../button/button.vue';
+    import Button from '../../button/button.vue';
     import Locale from '../../../mixins/locale';
-    import Emitter from '../../../mixins/emitter';
+    // import Emitter from '../../../mixins/emitter';
 
     const prefixCls = 'qui-picker';
 
     export default {
-        mixins: [Locale, Emitter],
-        components: {iButton},
+        mixins: [Locale],
+        components: { Button },
         props: {
             showTime: false,
             isTime: false,
@@ -54,8 +54,8 @@
             handleToggleTime () {
                 if (this.timeDisabled) return;
                 this.$emit('on-pick-toggle-time');
-                this.dispatch('CalendarPicker', 'focus-input');
-                this.dispatch('CalendarPicker', 'update-popper');
+                // this.dispatch('CalendarPicker', 'focus-input');
+                // this.dispatch('CalendarPicker', 'update-popper');
             },
             handleTab(e) {
                 const tabbables = [...this.$el.children];
@@ -64,7 +64,7 @@
                 if (document.activeElement === expectedFocus) {
                     e.preventDefault();
                     e.stopPropagation();
-                    this.dispatch('CalendarPicker', 'focus-input');
+                    // this.dispatch('CalendarPicker', 'focus-input');
                 }
             }
         }

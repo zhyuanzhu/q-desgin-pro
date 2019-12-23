@@ -12,7 +12,7 @@
 </template>
 <script>
     import { clearHours } from '../util';
-    import { deepCopy } from '../../../utils/assist';
+    import { deepCopy } from '../../../utils/util';
     import mixin from './mixin';
     import prefixCls from './prefixCls';
 
