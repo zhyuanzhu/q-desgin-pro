@@ -1,13 +1,13 @@
 <template>
-    <div class="qui-select-dropdown" :class="className" :style="styles"><slot></slot></div>
+    <div class="qui-date-picker-dropdown" :class="className" :style="styles"><slot></slot></div>
 </template>
 <script>
     import Vue from 'vue';
-    import { getStyle } from '../../../utils/assist';
+    import { getStyle } from '../../../utils/util';
     const Popper = require('popper.js/dist/umd/popper.js');  // eslint-disable-line
 
     import { transferIndex, transferIncrease } from '../../../utils/transfer-queue';
-
+    //import scroll from '../../../directives/scroll';
     export default {
         name: 'Drop',
         props: {
