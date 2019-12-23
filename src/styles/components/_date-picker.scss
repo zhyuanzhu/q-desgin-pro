@@ -1,7 +1,8 @@
 @charset "utf-8";
 @import "../common/var";
-$color: #c5c8ce;
 @import "./time-picker";
+@import "../animation/_animation";
+$picker-line: #c5c8ce;
 
 
 
@@ -195,7 +196,7 @@ $date-picker-cells-width-with-weeknumbers: 226px;
         height: 32px;
         line-height: 32px;
         text-align: center;
-        border-bottom: 1px solid $color;
+        border-bottom: 1px solid $picker-line;
         &-label{
             cursor: pointer;
             color: $main;
@@ -295,7 +296,7 @@ $date-picker-cells-width-with-weeknumbers: 226px;
             top: 0;
             bottom: 0;
             background: #f9f9f9;
-            border-right: 1px solid $color;
+            border-right: 1px solid $picker-line;
             border-radius: 2px 0 0 2px;
             overflow: auto;
         }
@@ -343,58 +344,10 @@ $date-picker-cells-width-with-weeknumbers: 226px;
 }
 
 
-@mixin slide-motion($cls, $transition) {
-    @include make-motion($cls, $transition);
-    .#{$cls} {
-        &-enter-active, &-appear {
-            opacity: 0;
-            animation-timing-function: ease-in-out;
-        }
-        &-leave-active {
-            animation-timing-function: ease-in-out;
-        }
-    }
-}
-
-@mixin make-motion ($classname, $keyframeName, $time: .3s){
-    .#{$classname} {
-        &-enter-active, &-appear {
-            @include motion-common($time);
-            animation-play-state: paused;
-        }
-        &-leave-active {
-            @include motion-common($time);
-            animation-play-state: paused;
-        }
-        &-enter-active, &-appear {
-            animation-name: "#{$keyframeName}In";
-            animation-play-state: running;
-        }
-        &-leave-active {
-            animation-name: "#{$keyframeName}Out";
-            animation-play-state: running;
-        }
-    }
-}
-
-@mixin motion-common($time) {
-    animation-duration: $time;
-    animation-fill-mode: both;
-}
+@include slide(transition-drop, quiTransitionDrop);
 
 
-@include slide-motion(transition-drop, ivuTransitionDrop);
-@include slide-motion(slide-up, ivuSlideUp);
-@include slide-motion(slide-down, ivuSlideDown);
-@include slide-motion(slide-left, ivuSlideLeft);
-@include slide-motion(slide-right, ivuSlideRight);
-
-
-
-
-
-
-@keyframes ivuTransitionDropIn {
+@keyframes quiTransitionDropIn {
     0% {
         opacity: 0;
         transform: scaleY(0.8);
@@ -405,7 +358,7 @@ $date-picker-cells-width-with-weeknumbers: 226px;
     }
 }
 
-@keyframes ivuTransitionDropOut {
+@keyframes quiTransitionDropOut {
     0% {
         opacity: 1;
         transform: scaleY(1);
@@ -416,106 +369,6 @@ $date-picker-cells-width-with-weeknumbers: 226px;
     }
 }
 
-@keyframes ivuSlideUpIn {
-    0% {
-        opacity: 0;
-        transform-origin: 0% 0%;
-        transform: scaleY(.8);
-    }
-    100% {
-        opacity: 1;
-        transform-origin: 0% 0%;
-        transform: scaleY(1);
-    }
-}
 
-@keyframes ivuSlideUpOut {
-    0% {
-        opacity: 1;
-        transform-origin: 0% 0%;
-        transform: scaleY(1);
-    }
-    100% {
-        opacity: 0;
-        transform-origin: 0% 0%;
-        transform: scaleY(.8);
-    }
-}
 
-@keyframes ivuSlideDownIn {
-    0% {
-        opacity: 0;
-        transform-origin: 100% 100%;
-        transform: scaleY(.8);
-    }
-    100% {
-        opacity: 1;
-        transform-origin: 100% 100%;
-        transform: scaleY(1);
-    }
-}
 
-@keyframes ivuSlideDownOut {
-    0% {
-        opacity: 1;
-        transform-origin: 100% 100%;
-        transform: scaleY(1);
-    }
-    100% {
-        opacity: 0;
-        transform-origin: 100% 100%;
-        transform: scaleY(.8);
-    }
-}
-
-@keyframes ivuSlideLeftIn {
-    0% {
-        opacity: 0;
-        transform-origin: 0% 0%;
-        transform: scaleX(.8);
-    }
-    100% {
-        opacity: 1;
-        transform-origin: 0% 0%;
-        transform: scaleX(1);
-    }
-}
-
-@keyframes ivuSlideLeftOut {
-    0% {
-        opacity: 1;
-        transform-origin: 0% 0%;
-        transform: scaleX(1);
-    }
-    100% {
-        opacity: 0;
-        transform-origin: 0% 0%;
-        transform: scaleX(.8);
-    }
-}
-
-@keyframes ivuSlideRightIn {
-    0% {
-        opacity: 0;
-        transform-origin: 100% 0%;
-        transform: scaleX(.8);
-    }
-    100% {
-        opacity: 1;
-        transform-origin: 100% 0%;
-        transform: scaleX(1);
-    }
-}
-
-@keyframes ivuSlideRightOut {
-    0% {
-        opacity: 1;
-        transform-origin: 100% 0%;
-        transform: scaleX(1);
-    }
-    100% {
-        opacity: 0;
-        transform-origin: 100% 0%;
-        transform: scaleX(.8);
-    }
-}
