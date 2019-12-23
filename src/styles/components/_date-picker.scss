@@ -1,5 +1,8 @@
 @charset "utf-8";
 @import "../common/var";
+$color: #c5c8ce;
+@import "./time-picker";
+
 
 
 $date-picker-prefix-cls: "qui-date-picker";
@@ -8,18 +11,6 @@ $picker-prefix-cls: "qui-picker";
 $date-picker-cells-width: 196px;
 $date-picker-cells-width-with-weeknumbers: 226px;
 
-.qui-select-dropdown{
-    width: inherit;
-    overflow: auto;
-    margin: 5px 0;
-    padding: 5px 0;
-    background-color: #fff;
-    box-sizing: border-box;
-    border-radius: 4px;
-    box-shadow: 0 1px 6px rgba(0,0,0,.2);
-    position: absolute;
-    z-index: 900
-}
 
 .#{$date-picker-prefix-cls} {
     //position: relative;
@@ -27,6 +18,18 @@ $date-picker-cells-width-with-weeknumbers: 226px;
     line-height: normal;
     &-rel{
         position: relative;
+    }
+    .qui-date-picker-dropdown {
+        width: inherit;
+        overflow: hidden;
+        margin: 5px 0;
+        padding: 5px 0;
+        background-color: #fff;
+        box-sizing: border-box;
+        border-radius: 4px;
+        box-shadow: 0 1px 6px rgba(0,0,0,.2);
+        position: absolute;
+        z-index: 900
     }
     .qui-select-drop {
         width: auto;
@@ -55,11 +58,13 @@ $date-picker-cells-width-with-weeknumbers: 226px;
                 transition: all .3s ease-in-out;
             }
         }
-        &-header span{
-            line-height: 24px;
-            text-align: center;
-            margin: 2px;
-            color: rgb(81, 90, 110);
+        &-header {
+            span{
+                line-height: 24px;
+                text-align: center;
+                margin: 2px;
+                color: rgb(81, 90, 110);
+            }
         }
         &-cell:hover{
             em{
@@ -190,9 +195,10 @@ $date-picker-cells-width-with-weeknumbers: 226px;
         height: 32px;
         line-height: 32px;
         text-align: center;
-        border-bottom: 1px solid $lightC;
+        border-bottom: 1px solid $color;
         &-label{
             cursor: pointer;
+            color: $main;
             transition: color .3s ease-in-out;
             &:hover{
                 color: $primary;
@@ -275,9 +281,12 @@ $date-picker-cells-width-with-weeknumbers: 226px;
             }
         }
 
-        &-body-wrapper &-with-sidebar{
-            padding-left: 92px;
+        &-body-wrapper {
+            &.#{$picker-prefix-cls}-panel-with-sidebar{
+                padding-left: 92px;
+            }
         }
+         
         &-sidebar{
             width: 92px;
             float: left;
@@ -285,8 +294,8 @@ $date-picker-cells-width-with-weeknumbers: 226px;
             position: absolute;
             top: 0;
             bottom: 0;
-            background: #ccc;
-            border-right: 1px solid #333;
+            background: #f9f9f9;
+            border-right: 1px solid $color;
             border-radius: 2px 0 0 2px;
             overflow: auto;
         }
@@ -297,9 +306,9 @@ $date-picker-cells-width-with-weeknumbers: 226px;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
-
+            color: $main;
             &:hover{
-                background: #333;
+                background: #e8eaec;
             }
         }
         &-body{
