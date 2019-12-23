@@ -3,7 +3,7 @@ import TimePickerPanel from '../panel/Time/time.vue';
 import RangeTimePickerPanel from '../panel/Time/time-range.vue';
 import Options from '../time-mixins';
 
-import { findComponentsDownward, oneOf } from '../../../utils/assist';
+import { findComponentChildren, hasParam } from '../../../utils/assist';
 
 export default {
     mixins: [Picker, Options],
@@ -11,7 +11,7 @@ export default {
     props: {
         type: {
             validator (value) {
-                return oneOf(value, ['time', 'timerange']);
+                return hasParam(value, ['time', 'timerange']);
             },
             default: 'time'
         },
@@ -34,7 +34,7 @@ export default {
         visible(visible){
             if (visible) {
                 this.$nextTick(() => {
-                    const spinners = findComponentsDownward(this, 'TimeSpinner');
+                    const spinners = findComponentChildren(this, 'TimeSpinner');
                     spinners.forEach(instance => instance.updateScroll());
                 });
             }
