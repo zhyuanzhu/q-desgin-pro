@@ -1,6 +1,7 @@
 @charset "utf-8";
 @import "../common/var";
 @import "../mixins/mixin";
+@import "../animation/animation";
 
 $dropdownPrefix: "#{$prefixCls}dropdown";
 .#{$dropdownPrefix} {

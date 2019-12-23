@@ -1,6 +1,7 @@
 @charset "urf-8";
 @import "../common/var";
 @import "../mixins/mixin";
+@import "../animation/animation";
 
 $select: "#{$prefixCls}select";
 
@@ -105,5 +106,29 @@ $select: "#{$prefixCls}select";
         .#{$select}-arrow {
             left: 140px;
         }
+    }
+}
+
+@include slide(transition-drop, quiTransitionDrop);
+
+@keyframes quiTransitionDropIn {
+    0% {
+        opacity: 0;
+        transform: scaleY(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: scaleY(1);
+    }
+}
+
+@keyframes quiTransitionDropOut {
+    0% {
+        opacity: 1;
+        transform: scaleY(1);
+    }
+    100% {
+        opacity: 0;
+        transform: scaleY(0.8);
     }
 }
