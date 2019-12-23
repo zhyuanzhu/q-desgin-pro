@@ -1,5 +1,5 @@
 
-import { oneOf } from '../../../../utils/assist';
+import { hasParam } from '../../../../utils/util';
 import {initTimeDate } from '../../util';
 
 
@@ -16,7 +16,7 @@ export default {
         selectionMode: {
             type: String,
             validator (value) {
-                return oneOf(value, ['year', 'month', 'date', 'time']);
+                return hasParam(value, ['year', 'month', 'date', 'time']);
             },
             default: 'date'
         },
