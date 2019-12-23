@@ -254,9 +254,9 @@ $date-picker-cells-width-with-weeknumbers: 226px;
         width: auto;
     }
 
-    &-focused input{
+    // &-focused input{
         // .active();
-    }
+    // }
 }
 
 .#{$picker-prefix-cls} {
