@@ -1,5 +1,5 @@
 <template>
-    <transition :name="transition">
+    <transition name="transition-drop">
         <div v-show="show" v-scroll="data" 
         :class="[`${prefixCls}`, `${prefixCls}-${size}`, !autoWidth && `${prefixCls}-inherit`]" 
         :style="boxStyle"

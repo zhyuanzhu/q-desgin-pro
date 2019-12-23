@@ -7,7 +7,6 @@
     const Popper = require('popper.js/dist/umd/popper.js');  // eslint-disable-line
 
     import { transferIndex, transferIncrease } from '../../../utils/transfer-queue';
-    //import scroll from '../../../directives/scroll';
     export default {
         name: 'Drop',
         props: {
