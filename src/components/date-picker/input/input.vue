@@ -26,12 +26,12 @@
 
 const prefixCls = 'qui-input';
 import { hasParam } from '../../../utils/util';
-import emitter from '../../../mixins/emitter';
+// import emitter from '../../../mixins/emitter';
 import Icon from '../../icon'
 
 export default {
     name: 'Input',
-    mixins: [emitter],
+    // mixins: [emitter],
     components: { Icon },
     props: {
         type: {
