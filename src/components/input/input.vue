@@ -1,7 +1,7 @@
 <template>
     <div :class="inputwrap">
         <input 
-        :class="[`${prefixCls}`, `${prefixCls}-${theme}`]"
+        :class="prefixCls"
         :type="type"
         :disabled="disabled"
         :readonly="readonly"
@@ -32,12 +32,12 @@
 
 const prefixCls = 'qui-input';
 import { hasParam } from '../../utils/util';
-import emitter from '../../mixins/emitter';
+// import emitter from '../../mixins/emitter';
 import Icon from '../icon'
 
 export default {
     name: 'Input',
-    mixins: [emitter],
+    // mixins: [emitter],
     components: { Icon },
     props: {
         type: {
@@ -93,14 +93,6 @@ export default {
         border: {       //是否拥有边框
             type: Boolean,
             default: true
-        },
-        theme: {
-            type: String,
-            default: 'default',
-            validator (value) {
-                const valueList = ['default', 'primary'];
-                return hasParam(value, valueList)
-            }
         }
     },
     data () {
@@ -140,7 +132,7 @@ export default {
             this.$emit('keypress', evt);
         },
         handleFocus (evt) {
-            this.$emit('focus', evt);
+            this.$emit('on-focus', evt);
         },
         handleBlur (evt) {
             this.$emit('blur', evt);
