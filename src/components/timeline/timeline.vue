@@ -15,7 +15,7 @@
 const prefixCls = 'qui-timeline';
 
 export default {
-    name: 'TimeLine',
+    name: 'Timeline',
     props: {
         data: {
             type: Array,

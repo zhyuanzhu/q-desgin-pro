@@ -31,7 +31,7 @@ import Icon from '../icon'
 
 
 export default {
-    name: 'TextArea',
+    name: 'Textarea',
     components: { Icon },
     props: {
         value: [String, Number],

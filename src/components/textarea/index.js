@@ -1,3 +1,3 @@
-import TextArea from './textarea.vue';
+import Textarea from './textarea.vue';
 
-export default TextArea;
+export default Textarea;
