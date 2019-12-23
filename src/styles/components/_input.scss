@@ -23,6 +23,20 @@ $input: "#{$prefixCls}input";
             box-shadow: 0 0 5px rgba($primary, .5);
         }
     }
+    .#{$input}-picker {
+        @extend .#{$input};
+        @include wh(220px, 36px);
+        &:focus {
+            @extend .#{$input}:focus;
+        }
+    }
+    .pick-icon {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 10px;
+        color: $main;
+    }
     ::-webkit-input-placeholder {
         color: $lightC;
     }
