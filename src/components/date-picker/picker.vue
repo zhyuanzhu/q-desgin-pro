@@ -28,7 +28,7 @@
                     @mouseenter.native="handleInputMouseenter"
                     @mouseleave.native="handleInputMouseleave"
                 >
-                    <Icon @click="handleIconClick" :type="arrowType" :custom="customArrowType" :size="arrowSize" slot="suffix" />
+                    <Icon @click="handleIconClick" :type="arrowType" class="pick-icon" size="16" slot="suffix" />
                 </i-input>
             </slot>
         </div>
@@ -78,15 +78,15 @@
 <script>
 
 
-    import iInput from '../../components/input/input.vue';
+    import iInput from './input/input.vue';
     import Drop from './drop/dropdown.vue';
     import Icon from '../../components/icon/Icon.vue';
     import {directive as clickOutside} from 'v-click-outside-x';
     import TransferDom from '../../directives/transfer-dom';
-    import { oneOf } from '../../utils/assist';
+    import { hasParam, findComponentChildren } from '../../utils/util';
     import { DEFAULT_FORMATS, TYPE_VALUE_RESOLVER_MAP, getDayCountOfMonth } from './util';
-    import {findComponentsDownward} from '../../utils/assist';
-    import Emitter from '../../mixins/emitter';
+    
+    // import Emitter from '../../mixins/emitter';
 
     const prefixCls = 'qui-date-picker';
     const pickerPrefixCls = 'qui-picker';
@@ -121,7 +121,7 @@
 
 
     export default {
-        mixins: [ Emitter ],
+        // mixins: [ Emitter ],
         components: { iInput, Drop, Icon },
         directives: { clickOutside, TransferDom },
         props: {
@@ -173,7 +173,7 @@
             },
             size: {
                 validator (value) {
-                    return oneOf(value, ['small', 'large', 'middle']);
+                    return hasParam(value, ['small', 'large', 'middle']);
                 },
                 default () {
                     return 'middle';
@@ -185,7 +185,7 @@
             },
             placement: {
                 validator (value) {
-                    return oneOf(value, ['top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left', 'left-start', 'left-end', 'right', 'right-start', 'right-end']);
+                    return hasParam(value, ['top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left', 'left-start', 'left-end', 'right', 'right-start', 'right-end']);
                 },
                 default: 'bottom-start'
             },
@@ -281,65 +281,20 @@
             },
             // 3.4.0, global setting customArrow 有值时，arrow 赋值空
             arrowType () {
-                let type = '';
-
+                let _type = '';
                 if (this.type === 'time' || this.type === 'timerange') {
-                    type = 'arrow-down';
+                    _type = 'time';
                 } else {
-                    type = 'time';
+                    _type = 'calendar';
                 }
-                if (this.showClose) type = 'close';
-                return type;
+                if (this.showClose) _type = 'close';
+                return _type;
             },
-            // 3.4.0, global setting
-            customArrowType () {
-                let type = '';
-
-                if (!this.showClose) {
-                    if (this.type === 'time' || this.type === 'timerange') {
-                        if (this.$IVIEW) {
-                            if (this.$IVIEW.timePicker.customIcon) {
-                                type = this.$IVIEW.timePicker.customIcon;
-                            }
-                        }
-                    } else {
-                        if (this.$IVIEW) {
-                            if (this.$IVIEW.datePicker.customIcon) {
-                                type = this.$IVIEW.datePicker.customIcon;
-                            }
-                        }
-                    }
-                }
-
-                return type;
-            },
-            // 3.4.0, global setting
-            arrowSize () {
-                let size = '';
-
-                if (!this.showClose) {
-                    if (this.type === 'time' || this.type === 'timerange') {
-                        if (this.$IVIEW) {
-                            if (this.$IVIEW.timePicker.iconSize) {
-                                size = this.$IVIEW.timePicker.iconSize;
-                            }
-                        }
-                    } else {
-                        if (this.$IVIEW) {
-                            if (this.$IVIEW.datePicker.iconSize) {
-                                size = this.$IVIEW.datePicker.iconSize;
-                            }
-                        }
-                    }
-                }
-
-                return size;
-            }
         },
         methods: {
             onSelectionModeChange(type){
                 if (type.match(/^date/)) type = 'date';
-                this.selectionMode = oneOf(type, ['year', 'month', 'date', 'time']) && type;
+                this.selectionMode = hasParam(type, ['year', 'month', 'date', 'time']) && type;
                 return this.selectionMode;
             },
             // 开启 transfer 时，点击 Drop 即会关闭，这里不让其关闭
@@ -437,7 +392,7 @@
 
                 // select date, "Enter" key
                 if (keyCode === 13){
-                    const timePickers = findComponentsDownward(this, 'TimeSpinner');
+                    const timePickers = findComponentChildren(this, 'TimeSpinner');
                     if (timePickers.length > 0){
                         const columnsPerPicker = timePickers[0].showSeconds ? 3 : 2;
                         const pickerIndex = Math.floor(this.focusedTime.column / columnsPerPicker);
@@ -450,7 +405,7 @@
                     if (this.type.match(/range/)){
                         this.$refs.pickerPanel.handleRangePick(this.focusedDate, 'date');
                     } else {
-                        const panels = findComponentsDownward(this, 'PanelTable');
+                        const panels = findComponentChildren(this, 'PanelTable');
                         const compareDate = (d) => {
                             const sliceIndex = ['year', 'month', 'date'].indexOf((this.type)) + 1;
                             return [d.getFullYear(), d.getMonth(), d.getDate()].slice(0, sliceIndex).join('-');
@@ -476,7 +431,7 @@
                 this.focusedTime.active = true;
                 const horizontal = direction.match(/left|right/);
                 const vertical = direction.match(/up|down/);
-                const timePickers = findComponentsDownward(this, 'TimeSpinner');
+                const timePickers = findComponentChildren(this, 'TimeSpinner');
 
                 const maxNrOfColumns = (timePickers[0].showSeconds ? 3 : 2) * timePickers.length;
                 const column = (currentColumn => {
@@ -529,7 +484,7 @@
             },
             navigateDatePanel(direction, shift){
 
-                const timePickers = findComponentsDownward(this, 'TimeSpinner');
+                const timePickers = findComponentChildren(this, 'TimeSpinner');
                 if (timePickers.length > 0) {
                     // we are in TimePicker mode
                     this.navigateTimePanel(direction, shift, timePickers);
@@ -638,7 +593,7 @@
                 this.visible = false;
                 this.internalValue = this.internalValue.map(() => null);
                 this.$emit('on-clear');
-                this.dispatch('FormItem', 'on-form-change', '');
+                // this.dispatch('FormItem', 'on-form-change', '');
                 this.emitChange(this.type);
                 this.reset();
 
@@ -650,7 +605,7 @@
             emitChange (type) {
                 this.$nextTick(() => {
                     this.$emit('on-change', this.publicStringValue, type);
-                    this.dispatch('FormItem', 'on-form-change', this.publicStringValue);
+                    // this.dispatch('FormItem', 'on-form-change', this.publicStringValue);
                 });
             },
             parseDate(val) {
