@@ -1,7 +1,7 @@
 <template>
     <label :class="labelStyles">
         <span :class="checkboxStyles">
-            <Icon :type="icon" :size="14" class="checked" v-show="currentValue" />
+            <Icon :type="icon" :size="16" class="checked" v-show="currentValue" />
             <input type="checkbox" v-if="group" 
                 :name="name"
                 :disabled="disabled"
