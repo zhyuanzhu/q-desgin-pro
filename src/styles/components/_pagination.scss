@@ -61,9 +61,9 @@ $page: "page";
                 cursor: $cursor-pointer;
             }
         }
-        &-next-fast {
-            transform: rotate(180deg);
-        }
+        // &-next-fast {
+        //     transform: rotate(180deg);
+        // }
         &-prev {
             @extend .#{$page}-item;
             color: $main;
