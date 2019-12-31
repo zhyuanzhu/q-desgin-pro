@@ -10,24 +10,24 @@
             <div :class="[datePrefixCls + '-header']" v-show="currentView !== 'time'">
                 <span
                     :class="iconBtnCls('prev', '-double')"
-                    @click="changeYear(-1)"><Icon type="arrow_2"></Icon></span>
+                    @click="changeYear(-1)"><Icon type="doubleleft"></Icon></span>
                 <span
                     v-if="pickerTable === 'date-table'"
                     :class="iconBtnCls('prev')"
                     @click="changeMonth(-1)"
-                    v-show="currentView === 'date'"><Icon type="arrow" style="transform:rotate(180deg);position:relative;top:-3px;"></Icon></span>
+                    v-show="currentView === 'date'"><Icon type="left"></Icon></span>
                 <date-panel-label
                     :date-panel-label="datePanelLabel"
                     :current-view="pickerTable.split('-').shift()"
                     :date-prefix-cls="datePrefixCls"></date-panel-label>
                 <span
                     :class="iconBtnCls('next', '-double')"
-                    @click="changeYear(+1)"><Icon type="arrow_2" style="transform:rotate(180deg);position:relative;top:-3px;"></Icon></span>
+                    @click="changeYear(+1)"><Icon type="doubleright"></Icon></span>
                 <span
                     v-if="pickerTable === 'date-table'"
                     :class="iconBtnCls('next')"
                     @click="changeMonth(+1)"
-                    v-show="currentView === 'date'"><Icon type="arrow"></Icon></span>
+                    v-show="currentView === 'date'"><Icon type="right"></Icon></span>
             </div>
             <div :class="[prefixCls + '-content']">
                 <component

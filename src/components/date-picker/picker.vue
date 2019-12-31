@@ -191,9 +191,7 @@
             },
             transfer: {
                 type: Boolean,
-                default () {
-                    return !this.$IVIEW || this.$IVIEW.transfer === '' ? false : this.$IVIEW.transfer;
-                }
+                default: false
             },
             name: {
                 type: String
