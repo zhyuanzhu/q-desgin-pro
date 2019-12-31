@@ -47,11 +47,9 @@ export default {
         return {
             prefixCls,
             now: this.current,
-            totalPage: () => {
-                return Math.ceil(this.total / this.pageSize)
-            },
-            prevIcon: 'dot',
-            nextIcon: 'dot'
+            totalPage: () => Math.ceil(this.total / this.pageSize),
+            prevIcon: 'ellipsis',
+            nextIcon: 'ellipsis'
         }
     },
     watch: {
@@ -75,7 +73,7 @@ export default {
             const fastPrev = now - fastSize > 0 ? now - fastSize : 1;
             changePage(fastPrev)
             if (fastPrev - 3 <= 1) {              
-                this.prevIcon = 'dot'
+                this.prevIcon = 'ellipsis'
             }
         },
         nextFast () {
@@ -83,7 +81,7 @@ export default {
             const fastNext = now + fastSize < totalPage() ? now + fastSize : totalPage();
             changePage(fastNext)
             if (fastNext + 3 >= totalPage()) { 
-                this.nextIcon = 'dot'
+                this.nextIcon = 'ellipsis'
             }
         },
         changePage (page) {
@@ -92,10 +90,11 @@ export default {
             this.$emit('changePage', page)
         },
         mouseEnter (type) {
-            this[`${type}Icon`] = 'arrow_2'
+            let arrow = type == 'prev' ? 'doubleleft' : 'doubleright'
+            this[`${type}Icon`] = arrow
         },
         mouseLeave (type) {
-            this[`${type}Icon`] = 'dot'
+            this[`${type}Icon`] = 'ellipsis'
         }
 
     },
