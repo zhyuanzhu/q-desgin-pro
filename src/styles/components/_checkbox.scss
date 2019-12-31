@@ -30,7 +30,7 @@ $checkbox: "#{$prefixCls}checkbox";
         // }
         .checked {
             position: absolute;
-            top: 1px;
+            // top: 1px;
             left: -1px;
             color: $white;
         }
