@@ -1,7 +1,7 @@
 <template>
     <transition :name="transition">
         <div :class="[`${prefixCls}`, `${prefixCls}-${type}`]" v-show="visible">
-            <Icon :type="'warning-sign'" :size="16" />
+            <Icon :type="type | iconFilter" :size="16" />
             {{ text }}
         </div>
     </transition>
@@ -44,7 +44,19 @@ export default {
             timer: null,
             visible: false
         }
-    },    
+    }, 
+    filters: {
+        iconFilter (type) {
+            if (!type) return;
+            const enums = {
+                success: 'smile',
+                warning: 'meh',
+                error: 'frown',
+                info: 'warning-circle'
+            };
+            return enums[type]
+        }
+    }   
 }
 </script>
 <style lang="scss" type="text/scss">
