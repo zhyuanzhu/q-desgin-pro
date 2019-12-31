@@ -2,7 +2,7 @@
     <div :class="prefixCls">
         <div :class="`${prefixCls}-main`">
             <div :class="`${prefixCls}-text`">
-                <Icon :type="type" :color="type | filterColor" :size="32" style="margin-right: 5px;" />
+                <Icon :type="type" :color="type | filterColor" :size="28" style="margin-right: 5px;" />
                 <div :class="`${prefixCls}-content`" v-text="text"></div>
             </div>
             <div :class="`${prefixCls}-btn`">
