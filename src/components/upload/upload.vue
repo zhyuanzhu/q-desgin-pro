@@ -1,9 +1,9 @@
 <template>
     <div :class="[prefixCls, `${prefixCls}-${type}`, disabled && `${prefixCls}-disabled`]">
-        <form class="upload" :class="[`upload-${type}`, type != 'default' && `upload-other`, `theme-${theme}` ]" enctype="multipart/form-data">
+        <form class="upload" :class="[`upload-${type}`, type != 'default' && `upload-other` ]" enctype="multipart/form-data">
             <input type="file" :name="name" class="file" ref="file" title="" @change="upload" v-if="!disabled">
             <div v-if="type != 'default'" class="upload-btn">
-                <span :class="`${type}`" v-html="setIcon(type)"></span>
+                <Icon :type="type" />
                 {{ title }}
             </div>
             <!-- <div :class="`${prefixCls}-mask`" v-if="disabled"></div> -->
@@ -19,20 +19,17 @@
 //暂不支持拖拽上传
 //将上传后的数据传递给父组件，formData,base64
 
-import { hasParam } from '../../utils/util';
-
 const prefixCls = 'qui-upload';
+import { hasParam } from '../../utils/util';
+import Icon from '../icon'
 
 export default {
     name: 'Upload',
+    components: { Icon },
     props: {
         type: {
             type: String,
-            default: 'default',
-            validator (value) {
-                const valueList = ['cloud', 'camera', 'default', 'arrow']
-                return hasParam(value, valueList);
-            }
+            default: 'cloud'
         },
         disabled: {
             type: Boolean,
@@ -63,14 +60,6 @@ export default {
             type: String,
             default: '上传'
         },
-        theme: {
-            type: String,
-            default: 'default',
-            validator (value) {
-                const valueList = ['default', 'primary'];
-                return hasParam(value, valueList)
-            }
-        }
     },
     data() {
         return {

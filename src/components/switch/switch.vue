@@ -32,6 +32,10 @@ export default {
                 const valueList = ['small', 'middle', 'large'];
                 return hasParam(value, valueList);
             }
+        },
+        readonly: {
+            type: Boolean,
+            default: true
         }
     },
     data() {
@@ -50,7 +54,8 @@ export default {
     methods: {
         toggle () {
             const _this = this;
-            if (_this.disabled) return;
+            const { disabled, readonly } = _this;
+            if (disabled || readonly) return;
             _this.checked = !_this.checked;
             _this.$emit('input', _this.checked)
             _this.$emit('on-change', _this.checked)
