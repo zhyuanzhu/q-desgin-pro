@@ -1,7 +1,7 @@
 <template>
     <div :class="styles" 
         @click="toggle">
-        <input type="hidden">
+        <input type="hidden" :value="value">
         <div :class="`${prefixCls}-inner`"></div>
         <div :class="`${prefixCls}-txt`">
             <div class="open" v-if="$slots.on" v-show="checked"><slot name="on"></slot></div>
@@ -21,10 +21,6 @@ export default {
             type: Boolean,
             default: false
         },
-        active: {
-            type: Boolean,
-            default: false
-        },
         size: {
             type: String,
             default: 'middle',
@@ -36,16 +32,20 @@ export default {
         readonly: {
             type: Boolean,
             default: true
+        },
+        value: {
+            type: Boolean,
+            default: true
         }
     },
     data() {
         return {
             prefixCls,
-            checked: this.active
+            checked: this.value
         }
     }, 
     watch: {
-        active (v) {
+        value (v) {
             if (this.checked != v) {
                 this.checked = v;
             }
