@@ -1,0 +1,42 @@
+@charset "utf-8";
+// @import "./animation";
+
+@keyframes quiTransitionDropIn {
+    0% {
+        opacity: 0;
+        transform: scaleY(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: scaleY(1);
+    }
+}
+
+@keyframes quiTransitionDropOut {
+    0% {
+        opacity: 1;
+        transform: scaleY(1);
+    }
+    100% {
+        opacity: 0;
+        transform: scaleY(0.8);
+    }
+}
+
+@keyframes quiFadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes quiFadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
