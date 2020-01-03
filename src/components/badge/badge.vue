@@ -1,6 +1,6 @@
 <template>
     <div :class="[prefixCls]">
-        <span v-if="count > 0">{{ setCount(count, maxCount) }}</span>
+        TODO: Badge
     </div>
 </template>
 <script>
