@@ -7,21 +7,21 @@
                 <div :class="[`${prefixCls}-item-title`, !hasChild(menu) && menu.active && 'item-title-active']" 
                     @click="toggleMenu(data, menu, menu.active)"
                     >
-                    <i :class="[iconClass, menu.icon && `${prefixCls}-${menu.icon}`]"></i>
+                    <Icon :type="menu.icon" v-if="menu.icon" />
                     <a href="javascript:;">{{ menu.label }}</a>
                     <Icon v-if="hasChild(menu)" 
                         :type="'arrow-up'" 
                         :size="16" 
                         :class="[`${prefixCls}-arrow`, menu.active ? `${prefixCls}-arrow-up`: `${prefixCls}-arrow-down`]" />
                 </div>
-                <transition :name="setTransition(menu)">
+                <!-- <transition :name="setTransition(menu)"> -->
+                <transition name="transition-menu-drop">
                     <div :class="[`${prefixCls}-item-children`, `${menu.id}-children`]" v-if="hasChild(menu)" v-show="menu.active">
                         <ul :class="`${menu.id}-list`">
                             <li v-for="(item, idx) in menu.children" :key="item.id || idx" 
                                 @click="clickItem(menu.children, item, item.active, data)"
                                 :class="[`item`, `${item.id}-item`, item.active && `item-active`]"
                                 >
-                                <!-- <router-link :to="item.to">{{ item.label }}</router-link> -->
                                 <a href="javascript:;">{{ item.label }}</a>
                             </li>
                         </ul>
@@ -36,7 +36,7 @@
 const [prefixCls, iconClass] = ['qui-menu', 'menu-icon'];
 import { hasParam } from '../../utils/util';
 import Icon from '../icon'
-//跳转的version-1，需要写跳转的绝对路径 /xx的形式，后续会添加判断，类似于button
+
 
 export default {
     name: 'Menu',
