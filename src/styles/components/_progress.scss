@@ -1,0 +1,119 @@
+@charset "utf-8";
+@import "../common/var";
+@import "../mixins/mixin";
+
+$progress: "#{$prefixCls}progress";
+//todo vertical styles
+.#{$progress} {
+    display: inline-block;
+    width: 100%;
+    position: relative;
+    font-size: $font-size-base;
+    &.#{$progress}-vertical {
+        @include wh(auto, 100%);
+        .#{$progress}-main {
+            @include wh(auto, 100%);
+        }
+    }
+    &.#{$progress}-show-info {
+        .#{$progress}-main {
+            width: calc(100% - 55px);
+        }
+    }
+    &-main {
+        display: inline-block;
+        width: 100%;
+        background-color: #f3f3f3;
+        border-radius: 100px;
+        vertical-align: middle;
+        position: relative;
+        &-bg {
+            text-align: right;
+            border-radius: 100px;
+            background-color: $primary;
+            transition: all $animate-time-middle linear;
+            position: relative;
+            &:after{
+                content: '';
+                display: inline-block;
+                height: 100%;
+                vertical-align: middle;
+            }
+        }
+        &-bg-success {
+            border-radius: 100px;
+            background-color: $success;
+            transition: all $animate-time-middle linear;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .#{$progress}-text-inside {
+            display: inline-block;
+            vertical-align: middle;
+            color: #fff;
+            font-size: 12px;
+            margin: 0 6px;
+        }
+    }
+
+    &-text {
+        display: inline-block;
+        margin-left: 5px;
+        text-align: left;
+        font-size: 1em;
+        vertical-align: middle; 
+        &-info {
+            vertical-align: middle; 
+        }
+    }
+    &.#{$progress}-active {
+        .#{$progress}-main-bg {
+            &::before {
+                content: '';
+                background: #fff;
+                @include opacityCovert;
+                border-radius: 10px;
+                animation: qui-progress-active 2s $ease-in-out infinite;
+            }
+        }
+    }
+    &.#{$progress}-wrong {
+        .#{$progress}-main-bg {
+            background-color: $error;
+        }
+        .#{$progress}-text {
+            color: $error;
+        }
+    }
+    &.#{$progress}-success {
+        .#{$progress}-main-bg {
+            background-color: $success;
+        }
+        .#{$progress}-text {
+            color: $success;
+        }
+    }
+}
+
+@keyframes qui-progress-active {
+    0% {
+        opacity: .3;
+        width: 0;
+    }
+    100% {
+        opacity: 0;
+        width: 100%;
+    }
+}
+
+@keyframes qui-progress-active-vertical {
+    0% {
+        opacity: .3;
+        height: 0;
+    }
+    100% {
+        opacity: 0;
+        height: 100%;
+    }
+}
