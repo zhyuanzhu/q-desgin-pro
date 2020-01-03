@@ -13,8 +13,6 @@ const prefixCls = 'qui-alert';
 import { hasParam } from '../../utils/util';
 import Icon from '../icon'
 
-//处理成像toast那样
-
 
 export default {
     name: 'Alert',
@@ -35,7 +33,8 @@ export default {
         },
         transition: {
             type: String,
-            default: 'alert-fade-in-move-up'
+            // default: 'alert-fade-in-move-up'
+            default: 'qui-Fade'
         }
     },
     data() {
