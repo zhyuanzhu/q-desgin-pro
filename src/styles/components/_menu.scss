@@ -1,6 +1,8 @@
 @charset "utf-8";
 @import "../common/var";
 @import "../mixins/mixin";
+@import "../animation/_animation";
+// @import "../animation/_transition";
 
 $menu: "#{$prefixCls}menu";
 $dark: #515a6e;
@@ -119,3 +121,5 @@ $dark-active: $blue;
         }
     }
 }
+
+@include slide(transition-menu-drop, quiTransitionDrop);

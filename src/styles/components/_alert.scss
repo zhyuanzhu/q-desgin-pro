@@ -1,6 +1,7 @@
 @charset "utf-8";
 @import "../common/var";
 @import "../mixins/mixin";
+@import "../animation/animation";
 
 $alert: "#{$prefixCls}alert";
 
@@ -31,3 +32,5 @@ $alert: "#{$prefixCls}alert";
         color: $error;
     }
 }
+
+@include fade(qui-Fade, quiFade);
