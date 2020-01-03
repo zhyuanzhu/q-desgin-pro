@@ -36,6 +36,18 @@ $upload: "#{$prefixCls}upload";
                     opacity: 1;
                 }
             }
+            &.#{$upload}-list-file-error {
+                color: $error;
+                &:hover {
+                    & > span {
+                        color: $error;
+                    }
+                    .#{$upload}-list-remove {
+                        opacity: 1;
+                        color: $error;
+                    }
+                }
+            }
             
         }
         &-remove{
