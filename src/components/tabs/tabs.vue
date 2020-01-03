@@ -1,22 +1,12 @@
 <template>
     <div :class="[prefixCls]">
         <ul :class="`${prefixCls}-header`">
-            <!-- <component :is="tagName(item.to)" 
-                v-for="(item, index) in data" :key="item.id" 
-                v-bind="tagProps(item.to, index)"
-                >{{item[primaryKey]}}</component> -->
             <li v-for="(item, index) in data" 
-                :key="item.id || index"
-                :class="[`${prefixCls}-tab`, item.disabled && `${prefixCls}-tab-disabled`, 
-                item.active && `${prefixCls}-tab-active`,
-                item.icon && `${prefixCls}-icon`,
-                `${prefixCls}-${type}`
-                ]"
-                :style="item.icon && `background-image:url(${item.icon});`"
-                @click="handleClick(item, index)"
-                ref="tab"
-                >
-                {{ item[primaryKey] }}</li>
+                :key="item.id || index" :class="setListClasses(item)"
+                @click="handleClick(item, index)" ref="tab">
+                <Icon :type="item.icon" v-if="item.icon" />
+                {{ item[primaryKey] }}
+            </li>
             <li :class="[type !== 'card' ? `${prefixCls}-underline` : `${prefixCls}-card-underline`]" ref="line"></li>
         </ul>
     </div>
@@ -26,10 +16,13 @@
 const prefixCls = 'qui-tabs';
 import { hasParam } from '../../utils/util.js';
 import mixinsLink from '../../mixins/link';
+import Icon from '../icon'
 
 export default {
     name: 'Tabs',
-    // mixins: [mixinsLink],
+    components: {
+        Icon
+    },
     props: {
         data: {
             type: Array,
@@ -55,20 +48,9 @@ export default {
         }
     },
     methods: {
-        // tagName (dom) {
-        //     return dom ? 'a' : 'li';
-        // },
-        // tagProps (isTagA, index) {
-        //     if (isTagA) {
-        //         const { listUrl, target, disabled } = this;
-        //         const href = disabled ? 'javascript:void(0)' : listUrl[index];
-        //         return {href, target}
-        //     }
-        // },
         handleClick (item, index) {
             const { active, disabled } = item;
-            if (active) return;
-            if (disabled) return;
+            if (active || disabled) return;
             this.data.map((v, i) => {
                 if (v.active) {
                     v.active = false;
@@ -82,6 +64,17 @@ export default {
             const { domWidth: _w } = this;
             let distance = activeIndex * 8 + activeIndex * _w + 'px'
             this.$refs.line.style.transform = `translateX(${distance})`
+        },
+        setListClasses (item) {
+            const { prefixCls, type } = this;
+            const { active, disabled } = item;
+            return [
+                `${prefixCls}-tab`, 
+                {
+                    [`${prefixCls}-tab-disabled`]: disabled, 
+                    [`${prefixCls}-tab-active`]: active 
+                },
+                `${prefixCls}-${type}`]
         }
     },
     mounted() {
@@ -98,7 +91,7 @@ export default {
         })
         this.$refs.line.style.width = _w + 'px';
         this.domWidth = _w;
-    },
+    }
 }
 </script>
 <style lang="scss" type="text/scss">
