@@ -31,7 +31,6 @@ import { hasParam } from '../../utils/util';
 import UploadList from './upload-list.vue';
 import ajax from './ajax';
 
-
 export default {
     name: 'Upload',
     components: { UploadList },
@@ -279,8 +278,11 @@ export default {
             const fileList = this.fileList;
 
             _file.status = 'fail';
+            setTimeout(() => {
+                _file.showProgress = false;
+            }, 1000);
 
-            fileList.splice(fileList.indexOf(_file), 1);
+            // fileList.splice(fileList.indexOf(_file), 1);
 
             this.onError(err, response, file);
         },
@@ -297,8 +299,6 @@ export default {
         clearFiles () {
             this.fileList = []
         }
-
-
     },
     computed: {
         uploadClass () {

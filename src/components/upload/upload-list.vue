@@ -1,13 +1,13 @@
 <template>
     <ul :class="`${prefix}-list`">
-        <li v-for="file in files" :key="file.id"
+        <li v-for="file in files"
             :class="setFileClass(file)"
             @click="handleClick(file)">
             <span @click="handlePreview(file)">
                 <Icon :type="formatType(file)" />{{ file.name }}
             </span>
-            <Icon type="close" :class="`${prefix}-list-remove`"
-                v-show="file.status === 'finished'"
+            <Icon type="delete" :class="`${prefix}-list-remove`"
+                v-show="file.status === 'finished' || file.status === 'fail'"
                 @click.native="handleRemove(file)" />
             <transition name="upload-fade">
                 <Progress v-if="file.showProgress" :strokeWidth="2" 
@@ -43,11 +43,11 @@ export default {
     },
     methods: {
         setFileClass (file) {
-            console.log(file)
             const { prefix } = this;
             return [
                 `${prefix}-list-file`, {
-                    [`${prefix}-list-file-finish`]: file.status === 'finished'
+                    [`${prefix}-list-file-finish`]: file.status === 'finished',
+                    [`${prefix}-list-file-error`]: file.status === 'fail',
                 }
             ]
         },
