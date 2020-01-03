@@ -15,12 +15,5 @@
  .menu-move-down-leave-active {
     transition: all $animate-time ease-out;
     opacity: 0;
-    // transform-origin: 0% 0%;
     transform: scaleY(.8);
-    // transform: translateY(-50px);
   }
-// .menu-move-down-enter, .menu-move-down-leave-to {
-//     opacity: 1;
-//     transform-origin: 0% 0%;
-//     transform: scaleY(1);
-// }

@@ -1,5 +1,6 @@
 @charset "utf-8";
 @import "../common/_var";
+@import "./_transition";
 
 @mixin make-transition ($transitionName, $keyframeName, $time: $animate-time) {
     .#{$transitionName} {
