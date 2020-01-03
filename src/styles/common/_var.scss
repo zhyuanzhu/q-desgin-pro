@@ -3,7 +3,7 @@
 //项目前缀
 $prefixCls: "qui-";
 //字体
-$fontFamily: "PingFang SC", "Hiragino Sans GB", "Microsoft Yahei", "微软雅黑", Arial, sans-serif;
+$fontFamily: "Microsoft Yahei", "微软雅黑", Arial, sans-serif, "PingFang SC", "Hiragino Sans GB";
 
 $font-size-base: 14px;
 
@@ -38,6 +38,11 @@ $primary-disabled: #9fcbff !default;
 $primary-mask: #f0faff !default;
 $main: #727682 !default;
 
+//状态色
+$success: #23ac38 !default;
+$error: #f52f3e !default;
+$warning: #f90 !default;
+
 
 //颜色
 $white: #fff;
@@ -64,19 +69,9 @@ $blue-dark: #006def;
 $blue-active: #0064da;
 $blue-disabled: #9fcbff;
 
-//状态色
-$success: #23ac38;
-$error: #f52f3e;
-$warning: #f90;
-
 $disable-opacity: .6;
 
 $button-disabled-opacity: .2;
-
-
-
-
-
 
 $green:#23ac38;
 $green-dark: #19912b;
