@@ -6,7 +6,7 @@
             <span @click="handlePreview(file)">
                 <Icon :type="formatType(file)" />{{ file.name }}
             </span>
-            <Icon type="close" :class="`${prefix}-list-move`"
+            <Icon type="close" :class="`${prefix}-list-remove`"
                 v-show="file.status === 'finished'"
                 @click.native="handleRemove(file)" />
             <transition name="upload-fade">
@@ -43,10 +43,11 @@ export default {
     },
     methods: {
         setFileClass (file) {
+            console.log(file)
             const { prefix } = this;
             return [
                 `${prefix}-list-file`, {
-                    [`${prefixCls}-list-file-finish`]: file.status === 'finished'
+                    [`${prefix}-list-file-finish`]: file.status === 'finished'
                 }
             ]
         },
