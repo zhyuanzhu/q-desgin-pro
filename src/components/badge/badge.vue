@@ -1,6 +1,14 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-01-04 01:04:21
+ * @LastEditTime: 2020-01-04 01:14:29
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: \q-desgin-pro\src\components\badge\badge.vue
+ -->
 <template>
     <div :class="[prefixCls]">
-        TODO: Badge
+        TODO: Badge-
     </div>
 </template>
 <script>
