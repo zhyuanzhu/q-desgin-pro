@@ -103,8 +103,6 @@
     position: absolute;
     right: $x;
     top: $y;
-    @if $noX {
-        transform: translateX(-50%);
-    }
+    transform: translateX(-50%);
     
 }
