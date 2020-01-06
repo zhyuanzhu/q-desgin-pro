@@ -1,0 +1,22 @@
+@charset "utf-8";
+@import "../common/var";
+
+$loading: "#{$prefixCls}loading-bar";
+
+.#{$loading} {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    &-main {
+        transition: width $animate-time linear;
+        &.#{$loading}-main-primary {
+            background: $primary;
+        }
+        &.#{$loading}-main-error {
+            background: $error;
+        }
+    }
+}
