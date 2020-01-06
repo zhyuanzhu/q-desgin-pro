@@ -2,11 +2,14 @@
     <div :class="[prefixCls, disabled && `${prefixCls}-disabled`]" @mouseleave="handleMouseleave">
         <input type="hidden" :name="name" :value="currentValue">
         <div :class="`${prefixCls}-star-wrap`">
-            <Icon v-for="item in maxCount" :type="setIconTtpe(item)" :class="`${prefixCls}-star`" :key="item"
-                @mousemove="handleMousemove(item, $event)"
+            <Icon v-for="item in maxCount" :type="iconType" :key="item"
+                :class="setStarClasses(item)"
+                @mousemove.native="handleMousemove(item, $event)"
+                @click.native="handleClick(item)"
                 :size="iconSize"
-                :color="color"
-            />
+                >
+                <span :class="`${prefixCls}-star-content`" type="half"></span>
+            </Icon>
         </div>
         <div v-if="showText" :class="`${prefixCls}-text`" v-show="currentValue > 0">
             <slot>{{ currentValue }}</slot>
@@ -51,10 +54,10 @@ export default {
             type: [Number, String],
             default: 20
         },
-        color: {
-            type: String,
-            default: '#F7B84F'
-        }
+        // iconType: {
+        //     type: String,
+        //     default: 'star'
+        // }
     },
     data() {
         return {
@@ -62,8 +65,8 @@ export default {
             currentValue: this.value,
             hoverIndex: -1,
             isHover: false,
+            iconType: 'star',
             isHalf: this.allowHalf && this.value.toString().indexOf('.') >= 0,
-            iconType: 'staroutline'
         }
     },
     watch: {
@@ -71,37 +74,56 @@ export default {
             this.currentValue = v;
         },
         currentValue (v) {
-            // this.setHalf(v);
+            this.setHalf(v);
         }
     },
     methods: {
-
-        setIconTtpe (value) {
-            const { hoverIndex, isHover, currentValue, isHalf } = this;
+        setStarClasses (value) {
+            const { hoverIndex, isHover, currentValue, isHalf, prefixCls } = this;
             const currentIndex = isHover ? hoverIndex : currentValue;
-            let iconType = 'staroutline', isFull = false, isLast = false;
+            let isFull = false, isLast = false;
             if (currentIndex >= value) isFull = true;
             if (isHover) {
                 isLast = currentIndex === value;
             } else {
                 isLast = Math.ceil(currentValue) === value;
             }
-            if (!isLast && isFull || isLast && !isHalf) {
-                iconType = 'star'
+            return [`${prefixCls}-star`, {
+                [`${prefixCls}-star-full`]: (!isLast && isFull) || (isLast && !isHalf),
+                [`${prefixCls}-star-half`]: isLast && isHalf,
+                [`${prefixCls}-star-zero`]: !isFull
+            }]
+
+        },
+        handleClick (v) {
+            if (this.disabled) return;
+            if (this.isHalf) {
+                v -= .5;
             }
-
-            if (isLast && isHalf) {
-                iconType = 'starhalf'
-            }
-
-            return iconType;
-
+            this.currentValue = v;
+            this.$emit('input', v)
+            this.$emit('on-change', v)
         },
         handleMouseleave () {
-
+            if (this.disabled) return;
+            this.isHover = false;
+            console.log(this.currentValue)
+            this.setHalf(this.currentValue);
+            this.hoverIndex = -1;
         },
         handleMousemove (item, evt) {
-
+            if (this.disabled) return;
+            this.isHover = true;
+            if (this.allowHalf) {
+                const domType = evt.target.getAttribute('type') || false;
+                this.isHalf = domType === 'half';
+            } else {
+                this.isHalf = false;
+            }
+            this.hoverIndex = item;
+        },
+        setHalf (v) {
+            this.isHalf = this.allowHalf && v.toString().indexOf('.') >= 0;
         }
 
     },
