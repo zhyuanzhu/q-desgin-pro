@@ -5,11 +5,131 @@
 $badgePrefix: "#{$prefixCls}badge";
 
 .#{$badgePrefix} {
-    font-size: $font-size-small;
-    color: #fff;
-    background: $red;
-    position: absolute;
-    @include setH(22px);
-    border-radius: 11px;
-    padding: 0 6px;
+    position: relative;
+    display: inline-block;
+
+    &-count {
+        font-family: "Monospaced Number";
+        line-height: 1;
+        vertical-align: middle;
+        position: absolute;
+        transform: translateX(50%);
+        top: -10px;
+        right: 0;
+        height: 20px;
+        border-radius: 10px;
+        min-width: 20px;
+        background: $primary;
+        border: 1px solid transparent;
+        color: $white;
+        line-height: 18px;
+        text-align: center;
+        padding: 0 6px;
+        font-size: $font-size-small;
+        white-space: nowrap;
+        transform-origin: -10% center;
+        z-index: 10;
+        box-shadow: 0 0 0 1px $white;
+        box-sizing: border-box;
+        &-custom{
+            background: transparent;
+            color: inherit;
+            border-color: transparent;
+            box-shadow: none;
+        }
+
+        a,
+        a:hover {
+            color: #fff;
+        }
+
+        &-alone {
+            top: auto;
+            display: block;
+            position: relative;
+            transform: translateX(0);
+        }
+
+        &-primary{
+            background: $primary;
+        }
+        &-success{
+            background: $success;
+        }
+        &-error{
+            background: $error;
+        }
+        &-warning{
+            background: $warning;
+        }
+        &-info{
+            background: $primary;
+        }
+        // &-normal{
+        //     background: @normal-color;
+        //     color: @subsidiary-color;
+        // }
+    }
+
+    &-dot {
+        transform-origin: 0 center;
+        @include absoluteRightX(-4px, -8px);
+        @include wh(8px);
+        border-radius: 100%;
+        background: $error;
+        z-index: 10;
+        box-shadow: 0 0 0 1px $white;
+    }
+
+    &-status {
+        line-height: inherit;
+        vertical-align: baseline;
+
+        &-dot {
+            @include wh(6px);
+            display: inline-block;
+            border-radius: 50%;
+            vertical-align: middle;
+            position: relative;
+            top: -1px;
+        }
+        &-success {
+            background-color: $success;
+        }
+        &-processing {
+            // background-color: @processing-color;
+            position: relative;
+            &:after {
+                content: '';
+                @include absoluteRightX(0, 0, true);
+                @include wh(100%);
+                border-radius: 50%;
+                // border: 1px solid @processing-color;
+                // animation: aniStatusProcessing 1.2s infinite ease-in-out;
+            }
+        }
+        &-default {
+            background-color: $primary;
+        }
+        &-error {
+            background-color: $error;
+        }
+        &-warning {
+            background-color: $warning;
+        }
+        &-text {
+            display: inline-block;
+            color: $main;
+            font-size: $font-size-base;
+            margin-left: 6px;
+        }
+
+        $colors: pink, magenta, red, volcano, orange, yellow, gold, cyan, lime, green, blue, geekblue, purple;
+
+        @each $color in $colors {
+            .#{$badgePrefix}-status-#{$color} {
+                background-color: $color;
+            }
+        }
+    }
 }

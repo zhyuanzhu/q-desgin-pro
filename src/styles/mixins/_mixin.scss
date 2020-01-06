@@ -98,3 +98,13 @@
     right: 0;
     opacity: 0;
 }
+
+@mixin absoluteRightX($x, $y, $noX: false) {
+    position: absolute;
+    right: $x;
+    top: $y;
+    @if $noX {
+        transform: translateX(-50%);
+    }
+    
+}
