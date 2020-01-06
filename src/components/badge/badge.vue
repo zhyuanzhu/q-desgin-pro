@@ -7,14 +7,17 @@
  * @FilePath: \q-desgin-pro\src\components\badge\badge.vue
  -->
 <template>
+    <!-- 只有一个小原点的情况 -->
     <div v-if="dot" :class="prefixCls" ref="badge">
         <slot></slot>
-        <sup :class="`${prefixCls}-dot`" :style="styles" v-show="badge"></sup>
+        <sup :class="`${prefixCls}-dot`" :style="styles" v-show="badge"></sup>            
     </div>
+    <!-- 小圆点 + 文字 -->
     <div v-else-if="status || color" :class="[prefixCls, `${prefixCls}-status`]" ref="badge" >
         <span :class="statusClasses" :style="statusStyles"></span>
         <span :class="`${prefixCls}-status-text`"><slot name="text">{{ text }}</slot></span>
     </div>
+    <!-- clone只有个文字，里面有slot是在右上角 -->
     <div v-else :class="prefixCls" ref="badge">
         <slot></slot>
         <sup v-if="$slots.count" :style="styles" :class="customCountClasses">

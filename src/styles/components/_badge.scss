@@ -73,7 +73,7 @@ $badgePrefix: "#{$prefixCls}badge";
 
     &-dot {
         transform-origin: 0 center;
-        @include absoluteRightX(-4px, -8px);
+        @include absoluteRightX(-8px, -4px);
         @include wh(8px);
         border-radius: 100%;
         background: $error;
