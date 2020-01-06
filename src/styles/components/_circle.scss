@@ -1,0 +1,21 @@
+@charset "utf-8";
+@import "../common/var";
+@import "../mixins/mixin";
+
+$circle: "#{$prefixCls}circle";
+
+.#{$circle} {
+    position: relative;
+    display: inline-block;
+    &-svg {
+        transform: rotate(-90deg);
+    }
+    &-text {
+        width: 100%;
+        @include absolute(0);
+        transform: translateY(-50%);
+        text-align: center;
+        color: $main;
+        font-size: $font-size-base;
+    }
+}
