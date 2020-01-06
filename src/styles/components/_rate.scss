@@ -1,0 +1,9 @@
+@charset "utf-8";
+@import "../common/var";
+@import "../mixins/mixin";
+
+$rate: "#{$prefixCls}rate";
+
+.#{$rate} {
+    
+}
