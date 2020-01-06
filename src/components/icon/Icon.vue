@@ -1,5 +1,5 @@
 <template>
-    <i :class="classes" :style="styles" @click="handleClick"></i>
+    <i :class="classes" :style="styles" @click="handleClick"><slot></slot></i>
 </template>
 <script>
 
