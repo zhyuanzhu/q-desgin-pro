@@ -32,10 +32,13 @@ $ease-in-out: ease-in-out;
 
 //主题色
 $primary: #0074ff !default;
-$primary-active: #0064da !default;
-$primary-dark: #006def !default;
-$primary-disabled: #9fcbff !default;
-$primary-mask: #f0faff !default;
+
+$primary-active: darken($primary, 3%);
+$primary-dark: darken($primary, 4%);
+// $primary-active: #0064da !default;
+// $primary-dark: #006def !default;
+// $primary-disabled: #9fcbff !default;
+// $primary-mask: #f0faff !default;
 $main: #727682 !default;
 
 //状态色
@@ -84,4 +87,6 @@ $orange-dark: #f90;
 $red: #f52f3e;
 $red-dark: #de2b38;
 $red-disabled: #feadb3;
+
+ 
 
