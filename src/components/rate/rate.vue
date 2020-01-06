@@ -6,8 +6,7 @@
                 :class="setStarClasses(item)"
                 @mousemove.native="handleMousemove(item, $event)"
                 @click.native="handleClick(item)"
-                :size="iconSize"
-                >
+                :size="iconSize" >
                 <span :class="`${prefixCls}-star-content`" type="half"></span>
             </Icon>
         </div>
@@ -90,8 +89,7 @@ export default {
             }
             return [`${prefixCls}-star`, {
                 [`${prefixCls}-star-full`]: (!isLast && isFull) || (isLast && !isHalf),
-                [`${prefixCls}-star-half`]: isLast && isHalf,
-                [`${prefixCls}-star-zero`]: !isFull
+                [`${prefixCls}-star-half`]: isLast && isHalf
             }]
 
         },
@@ -107,7 +105,6 @@ export default {
         handleMouseleave () {
             if (this.disabled) return;
             this.isHover = false;
-            console.log(this.currentValue)
             this.setHalf(this.currentValue);
             this.hoverIndex = -1;
         },
