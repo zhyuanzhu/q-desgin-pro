@@ -17,7 +17,6 @@ $c: #ccc;
     }
     &-middle {
         @include wh(44px, 22px);
-        height: 22px;
         min-width: 44px;
         @include border($lightC, $c);
         border-radius: 11px;
