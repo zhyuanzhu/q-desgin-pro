@@ -3,7 +3,61 @@
 @import "../mixins/mixin";
 
 $rate: "#{$prefixCls}rate";
+$star-bg: #e9e9e9;
 
 .#{$rate} {
-    
+    display: flex;
+    &-star {
+        margin-right: 8px;
+        position: relative;
+        transition: all 0.3s ease;
+        vertical-align: .15em !important;
+        &.#{$rate}-star-full, &.#{$rate}-star-zero {
+            position: relative;
+        }
+        &:hover {
+            transform: scale(1.1);
+        }
+        &::before {
+            color: $star-bg;
+            cursor: $cursor-pointer;
+            transition: all $animate-time-middle $ease-in-out;
+        }
+        &-content {
+            @include halfParent(50%);
+            &::before {
+                @extend .#{$rate}-star::before;
+                display: block;
+                color: transparent;
+                content: "\f133";
+                font-family: "iconfont" !important;
+            }
+        }
+        &.#{$rate}-star-full {
+            &::before {
+                color: $orange;
+            }
+            &:hover {
+                &::before {
+                    color: darken($orange, 10%);
+                }
+            }
+        }
+        &.#{$rate}-star-half {
+            .#{$rate}-star-content {
+                &::before {
+                    color: $orange;
+                }
+                &:hover {
+                    color: darken($orange, 10%);
+                }
+            }
+        }
+    }
+    &-text {
+        margin-left: 8px;
+        vertical-align: middle;
+        font-size: $font-size-base;
+        color: $main;
+    }
 }

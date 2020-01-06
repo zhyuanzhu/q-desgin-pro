@@ -104,5 +104,13 @@
     right: $x;
     top: $y;
     transform: translateX(-50%);
-    
+}
+
+@mixin halfParent($w: 100%, $h: 100%) {
+    position: absolute;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+    width: $w;
+    height: $h;
 }
