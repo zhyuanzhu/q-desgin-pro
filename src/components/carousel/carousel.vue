@@ -112,7 +112,7 @@ export default {
         this.updateItems();
         this.$nextTick(() => {
     //   addResizeListener(this.$el, this.resetItemPosition);
-            on(window, 'resize', this.handleResize);
+            // on(window, 'resize', this.handleResize);
             if (this.initialIndex < this.items.length && this.initialIndex >= 0) {
                 this.activeIndex = this.initialIndex;
             }
