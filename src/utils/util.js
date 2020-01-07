@@ -146,6 +146,37 @@ export function getStyle (element, styleName) {
     }
 }
 
+/**
+ * 事件绑定
+ */
+export const on = (function () {
+    if (document.addEventListener) {
+        return function (ele, type, fn) {
+            ele.addEventListener(type, fn, false)
+        }
+    } else {
+        return function (ele, type, fn) {
+            ele.attachEvent(`on${type}`, fn)
+        }
+    }
+})();
+
+
+/**
+ * 解除事件绑定
+ */
+export const off = (function (){
+    if (document.addEventListener) {
+        return function (ele, type, fn) {
+            ele.removeEventListener(type, fn, false)
+        }
+    } else {
+        return function (ele, type, fn) {
+            ele.detachEvent(`on${type}`, fn)
+        }
+    }
+})()
+
 function typeOf (obj) {
     const toString  = Object.prototype.toString;
     const map = {
