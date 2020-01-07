@@ -1,0 +1,128 @@
+@charset "utf-8";
+@import "../common/var";
+@import "../mixins/mixin";
+@import "../animation/animation";
+
+$carousel: "#{$prefixCls}carousel";
+
+.#{$carousel} {
+    position: relative;
+    box-sizing: border-box;
+    &-horizontal {
+        overflow-x: hidden;
+    }
+    &-vertical {
+        overflow-y: hidden;
+    }
+    &-container {
+        position: relative;
+        height: 300px;
+    }
+    &-arrow-left {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        @include wh(36px);
+        line-height: 36px;
+        border-radius: 50%;
+        background-color: rgba(0, 0, 0, .4);
+        color: $white;
+        text-align: center;
+        left: 16px;
+        transition: background-color $animate-time-middle;
+        z-index: 10;
+        &:hover {
+            cursor: $cursor-pointer;
+            background-color: rgba(0, 0, 0, .5);
+        }
+        .#{$prefixCls}icon {
+            vertical-align: middle;
+        }
+    }
+    &-arrow-right {
+        @extend .#{$carousel}-arrow-left;
+        left: auto;
+        right: 16px;
+    }
+
+    &-dot {
+        position: absolute;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        z-index: 3;
+        &-horizontal {
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        &-vertical {
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            .#{$carousel}-dot-item {
+                display: block;
+            }
+            .#{$carousel}-dot-btn {
+                @include wh(2px, 24px);
+                margin: 5px;
+            }
+        }
+        &-item {
+            display: inline-block;
+            opacity: .5;
+            &.dot-active {
+                opacity: 1;
+                &:hover {
+                    opacity: 1;
+                }
+            }
+            &:hover {
+                opacity: .7;
+            }
+        }
+        &-outside {
+
+        }
+        &-labels {
+            left: 0;
+            right: 0;
+            transform: none;
+            text-align: center;
+            
+        }
+        &-btn {
+            @include wh(24px, 2px);
+            display: block;
+            background-color: $white;
+            cursor: pointer;
+            margin: 0 5px;
+            transition: all $animate-time;
+        }
+        
+    }
+
+    &-item {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: inline-block;
+        motion: 0;
+        padding: 0;
+
+        overflow: hidden;
+        z-index: 1;
+        // background-color: red;
+        &.#{$carousel}-item-active {
+            z-index: 2;
+        }
+        &.#{$carousel}-item-animate {
+            transition: transform 1s ease-in-out;
+        }
+    }
+    @include fade(carousel-show, quiFade);
+}
+
+
