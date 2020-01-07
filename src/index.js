@@ -49,6 +49,24 @@ import Timeline from './components/timeline'
 
 import Upload from './components/upload'
 
+import Progress from './components/progress'
+
+import Rate from './components/rate'
+
+import Badge from './components/badge'
+
+import Avatar from './components/avatar'
+
+import Circle from './components/circle'
+
+import BackTop from './components/back-top'
+
+import LoadingBar from './components/loading-bar'
+
+import Carousel from './components/carousel'
+
+import CarouselItem from './components/carousel-item'
+
 
 const components = {
     Alert,
@@ -75,7 +93,16 @@ const components = {
     Tabs,
     Textarea,
     Timeline,
-    Upload
+    Upload,
+    Progress,
+    Rate,
+    Badge,
+    Avatar,
+    Circle,
+    BackTop,
+    LoadingBar,
+    Carousel,
+    CarouselItem
 };
 
 const install = function (Vue, options = {}) {
