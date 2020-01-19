@@ -26,11 +26,26 @@ export default {
             show: true
         }
     },
+    mounted() {
+        this.filterShow(this.parent.value)
+    },
     methods: {
         handleClick () {
-            const { value } = this;
-            this.parent.updateModel(value)
+            const { value, label } = this;
+            this.parent.updateModel(value, label)
             this.$emit('on-select-option', value)
+        },
+        filterShow (v) {
+            const _filter = this.parent.filter;
+            if (!_filter) return;
+            const { label } = this;
+            if (label.indexOf(v) === -1) {
+                this.show = false;
+                this.parent.empty = true;
+            } else {
+                this.show = true;
+                this.parent.empty = false;
+            }
         }
     },
     computed: {
@@ -44,7 +59,13 @@ export default {
     },
     watch: {
         currentValue (v) {
-            if (this.value.indexOf(v) > -1) {
+            if (v === '') {
+                this.parent.updateChildCurrentValue(true);
+                this.parent.empty = false;
+                return;
+            }
+
+            if (this.label.indexOf(v) > -1) {
                 this.show = true
                 if (this.parent.empty) {
                     this.parent.empty = false;
@@ -53,6 +74,6 @@ export default {
             if (this.currentValue === v) return;
             this.currentValue = v;
         }
-    },
+    }
 }
 </script>

@@ -1,7 +1,7 @@
 <template>
     <div :class="`${prefix}-list`" >
         <slot></slot>
-        <div :class="`${prefix}-option`" v-show="empty">暂无数据</div>
+        <div :class="`${prefix}-option`" v-show="filter && empty">暂无数据</div>
     </div>
 </template>
 <script>
@@ -30,23 +30,49 @@ export default {
             prefix,
             currentValue: this.value,
             childrens: findComponentChildren(this, 'Option'),
-            empty: true
+            empty: true,
+            currentLabel: ''
         }
     },
+    mounted() {
+        this.setDefaultLabel()
+    },
     methods: {
-        updateChildCurrentValue () {
+        updateChildCurrentValue (isShow = false) {
             const { currentValue, childrens, filter } = this;
-            this.childrens = findComponentChildren(this, 'Option')
-            this.childrens && this.childrens.map(child => {
+            // this.childrens =  findComponentChildren(this, 'Option');
+            childrens && childrens.map(child => {
                 child.currentValue = currentValue;
-                child.show = !filter;
+                if (filter) {
+                    child.show = isShow;
+                }
             })
         },
-        updateModel (data) {
-            this.$parent.emitValue(data)
+        updateModel (value, label) {
+            this.$parent.emitValue(value, label)
         },
         checkOption () {
             this.empty = false;
+        },
+        setDefaultLabel () {
+            if (this.value === '') {
+                this.$parent.selectLabel = '请选择';
+            } else {
+                this.$nextTick(() => {
+                    let showDefault = true;
+                    this.childrens =  findComponentChildren(this, 'Option');
+                    this.childrens && this.childrens.map(child => {
+                        if (this.value == child.value) {
+                            this.$parent.selectLabel = child.label;
+                            showDefault = false;
+                            return child.currentValue = child.value;
+                        }
+                    })
+                    if (showDefault) {
+                        this.$parent.selectLabel = '请选择';
+                    }
+                })
+            }
         }
     },
     watch: {

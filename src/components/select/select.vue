@@ -1,7 +1,7 @@
 <template>
     <div :class="setClassName" v-clickoutside="handleClickOutSide">
         <div :class="[`${prefixCls}-main`]" @click="!disabled && (arrowDown = !arrowDown)">
-            <span :class="`${prefixCls}-value`" v-if="!filter">{{ selectValue }}</span>
+            <span :class="`${prefixCls}-value`" v-if="!filter">{{ selectLabel }}</span>
             <input :type="filter ?'text': 'hidden'" v-model="selectValue" :class="`${prefixCls}-input`" >
             <Icon :size="14" :type="'arrow-down'" :class="[arrowDown ? `${prefixCls}-down` : `${prefixCls}-up`, `${prefixCls}-arrow`]" />
         </div>
@@ -67,7 +67,8 @@ export default {
             prefixCls,
             dropData: this.data,
             selectValue: this.defaultValue,
-            arrowDown: true
+            arrowDown: true,
+            selectLabel: ''
         }
     },
     methods: {
@@ -82,8 +83,9 @@ export default {
             const { maxLength } = this;
             return maxLength * lineH + mt * (maxLength - 1) + 5;
         },
-        emitValue (v) {
+        emitValue (v, label) {
             this.selectValue = v
+            this.selectLabel = label;
             this.arrowDown = !this.arrowDown;
             this.$emit('input', v)
             this.$emit('on-select', v)
@@ -94,7 +96,7 @@ export default {
             this.getDefaultValue()
         }
     },
-    mounted() {
+    created () {
         this.getDefaultValue();
     },
     computed: {
