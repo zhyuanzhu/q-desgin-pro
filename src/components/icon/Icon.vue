@@ -77,7 +77,7 @@ export default {
     line-height: 1;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    vertical-align: -0.125em;
+    // vertical-align: -0.125em;
     text-align: center;
     font-style: normal;
     // font-size: 46px;
