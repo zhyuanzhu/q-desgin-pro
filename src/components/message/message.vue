@@ -1,31 +1,32 @@
 <template>
     <div :class="prefixCls">
-        <div :class="`${prefixCls}-main`">
-            <div :class="`${prefixCls}-text`">
-                <Icon :type="type" :color="type | filterColor" :size="28" style="margin-right: 5px;" />
-                <div :class="`${prefixCls}-content`" v-text="text"></div>
+        <transition name="message-ease-in">
+            <div :class="`${prefixCls}-wrap`" v-if="show" @click="hideMask">
+                <div :class="`${prefixCls}-main`">
+                    <div :class="`${prefixCls}-text`">
+                        <Icon :type="type" :color="type | filterColor" :size="28" style="margin-right: 5px;" />
+                        <div :class="`${prefixCls}-content`" v-text="text"></div>
+                    </div>
+                    <div :class="`${prefixCls}-btn`">
+                        <Button @click.stop="ok">确认</Button>
+                        <Button @click.stop="cancel" :type="'primary'" v-if="onCancel">取消</Button>
+                    </div>
+                    <div :class="`${prefixCls}-close`" v-if="onCancel"></div>
+                </div>
             </div>
-            <div :class="`${prefixCls}-btn`">
-                <Button @click="ok">确认</Button>
-                <Button @click="cancel" :type="'primary'" v-if="onCancel">取消</Button>
-            </div>
-            <div :class="`${prefixCls}-close`" v-if="onCancel"></div>
-        </div>
-        <div :class="`${prefixCls}-mask`" @click="hideMask"></div>
+        </transition>
+        <transition name="message-mask-fade">
+            <div :class="`${prefixCls}-mask`" v-if="show" @click="hideMask"></div>
+        </transition>
     </div>
 </template>
 <script>
 
 const prefixCls = 'qui-message';
 
-
 import Button from '../button';
 import ButtonGroup from '../button-group'
-import Icon from '../icon'
-import { hasParam } from '../../utils/util';
-
-//是否需要关闭icon，如果没有注册确认事件和关闭事件，默认确认和关闭直接destroy组件
-//组件是直接删除还是简单的显示隐藏~ ^_^
+import Icon from '../icon';
 
 export default {
     name: 'Message',
@@ -42,22 +43,21 @@ export default {
             text: '',
             onOk: null,
             onCancel: null,
-            destroy: null
+            destroy: null,
+            show: null
         }
     },    
     methods: {
         ok () {
             this.onOk && this.onOk();
-            this.destroy();
+            this.show = false;
         },
         cancel () {
             this.onCancel && this.onCancel();
-            this.destroy();
+            this.show = false;
         },
         hideMask () {
-            const { onCancel, cancel, ok } = this;
-            if (onCancel) return cancel()
-            ok()
+            this.cancel()
         }
     },
     filters: {

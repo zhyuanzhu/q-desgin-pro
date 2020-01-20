@@ -2,7 +2,7 @@
     <div :class="`${prefixCls}`">
         <transition :name="animate"  @after-leave="modalHide">  
             <div :class="`${prefixCls}-wrap`" v-if="visible" :style="`z-index: ${zIndex};`" @click="hideMask">
-                <div :class="`${prefixCls}-main`" :style="`width:${width}px; z-index:${zIndex + 1}`" ref="modal">
+                <div :class="`${prefixCls}-main`" :style="`width:${width}px;`" ref="modal">
                     <section :class="`${prefixCls}-header`" v-if="header">
                         <h3 :class="`${prefixCls}-header-title`" v-text="title"></h3>
                         <Icon type="close" :size="24" color="#999" :class="`${prefixCls}-header-close`" v-if="close" @click.native.stop="cancel" />

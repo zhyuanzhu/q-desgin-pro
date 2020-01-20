@@ -23,6 +23,7 @@ Message.newInstance = (_props = {}) => {
             // message.type = options.type;
             // message.onOk = options.onOk;
             // message.destroy = d;
+            options.show = true;
             Object.assign(message, options)
         },
         destroy() {

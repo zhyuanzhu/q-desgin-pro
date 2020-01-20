@@ -19,7 +19,6 @@ $modal: "#{$prefixCls}modal";
         }
     }
     &-main {
-        position: relative;
         background-color: $white;
         box-shadow: 0 2px 8px rgba($black, .05);
         border-radius: $border-radius-large;
