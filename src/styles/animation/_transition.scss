@@ -23,6 +23,8 @@
     }
 }
 
+
+//fade
 @keyframes quiFadeIn {
     0% {
         opacity: 0;
@@ -38,5 +40,29 @@
     }
     100% {
         opacity: 0;
+    }
+}
+
+
+//ease
+@keyframes quiEaseIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes quiEaseOut {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0.9);
     }
 }
