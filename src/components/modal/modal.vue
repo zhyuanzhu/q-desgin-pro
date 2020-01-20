@@ -1,20 +1,23 @@
 <template>
-    <div :class="`${prefixCls}`" :style="styles">
-        <transition :name="animate">  
-            <div :class="`${prefixCls}-main`" :style="mainstyles" v-if="visible" ref="modal">
-                <section :class="`${prefixCls}-header`" v-if="header">
-                    <h3 :class="`${prefixCls}-header-title`" v-text="title"></h3>
-                    <Icon :type="'close'" :size="24" :color="'#999'" :class="`${prefixCls}-header-close`" v-if="close" @click.native="cancel" />
-                </section>
-                <section :class="`${prefixCls}-container`"><slot></slot></section>
-                <section :class="`${prefixCls}-footer`" v-if="footer">
-                    <div :class="`${prefixCls}-footer-btn`">
-                        <button-group>
-                            <Button v-if="hasConfirm"  :size="'large'" v-text="confirmTxt" @click.native="confirm"></Button>
-                            <Button v-if="hasCancel" :type="'primary'" :size="'large'" v-text="cancelTxt" @click.native="cancel"></Button>
-                        </button-group>
-                    </div>
-                </section>
+    <div :class="`${prefixCls}`">
+        <transition :name="animate"  @after-leave="modalHide">  
+            <div :class="`${prefixCls}-wrap`" v-if="visible" :style="`z-index: ${zIndex};`" @click="hideMask">
+                <div :class="`${prefixCls}-main`" :style="`width:${width}px; z-index:${zIndex + 1}`" ref="modal">
+                    <section :class="`${prefixCls}-header`" v-if="header">
+                        <h3 :class="`${prefixCls}-header-title`" v-text="title"></h3>
+                        <Icon type="close" :size="24" color="#999" :class="`${prefixCls}-header-close`" v-if="close" @click.native.stop="cancel" />
+                    </section>
+                    <section :class="`${prefixCls}-container`"><slot></slot></section>
+                    <section :class="`${prefixCls}-footer`" v-if="footer">
+                        <div :class="`${prefixCls}-footer-btn`">
+                            <button-group>
+                                <Button v-if="hasConfirm" size="large" v-text="confirmTxt" @click.native.stop="confirm"></Button>
+                                <Button v-if="hasCancel" type="primary" size="large" v-text="cancelTxt" @click.native.stop="cancel"></Button>
+                                <div v-if="$slots.footer"><slot name="footer"></slot></div>
+                            </button-group>
+                        </div>
+                    </section>
+                </div>
             </div>
         </transition>
         <modal-mask :visible="visible" :zIndex="zIndex - 1" @on-hide-mask="hideMask" />
@@ -77,7 +80,7 @@ export default {
         title: String,
         animate: {
             type: String,
-            default: 'modal-slide-down'
+            default: 'modal-ease-in'
         },
         width: {
             type: Number,
@@ -87,8 +90,7 @@ export default {
     data() {
         return {
             prefixCls,
-            zIndex: 9999,
-            height: 0
+            zIndex: 999
         }
     },
     methods: {
@@ -100,16 +102,9 @@ export default {
         },
         hideMask () {
             this.cancel()
-        }
-    },
-    computed: {
-        styles () {
-            const { width, height } = this;
-            return `margin-left: -${ width/2 }px`;
         },
-        mainstyles () {
-            const { zIndex, width } = this;
-            return `z-index: ${zIndex}; width: ${width}px`;
+        modalHide () {
+            this.$emit('on-hide-mask');
         }
     },
     watch: {

@@ -1,14 +1,22 @@
 @charset "utf-8";
 @import "../common/var";
 @import "../mixins/mixin";
+@import "../animation/animation";
 
 $modal: "#{$prefixCls}modal";
 .#{$modal} {
-    position: absolute;
-    left: 50%;
-    top: 20%;
     &-mask {
         @include mask(rgba($black, .2), 999);
+    }
+    &-wrap {
+        @include mask(transparent, 1000);
+        text-align: center;
+        &::after {
+            content: "";
+            display: inline-block;
+            height: 90%;
+            vertical-align: middle;
+        }
     }
     &-main {
         position: relative;
@@ -17,8 +25,11 @@ $modal: "#{$prefixCls}modal";
         border-radius: $border-radius-large;
         box-sizing: border-box;
         overflow: hidden;
+        display: inline-block;
+        vertical-align: middle;
+        text-align: left;
         .#{$modal}-header {
-            padding: 35px 50px 15px 20px;
+            padding: 30px 50px 15px 20px;
             box-shadow: 0 2px 8px 0 rgba($black, .05);
             position: relative;
             &-title {
@@ -34,7 +45,7 @@ $modal: "#{$prefixCls}modal";
             }
         }
         .#{$modal}-container {
-            padding: 35px 20px;
+            padding: 25px 20px;
         }
         .#{$modal}-footer{
             padding: 25px 40px 20px;
@@ -48,11 +59,7 @@ $modal: "#{$prefixCls}modal";
             }
         }
     }
-    .modal-slide-down-enter, .modal-slide-down-leave-to {
-        opacity: 0;
-        transform: translateY(-400px);
-    }
-    .modal-slide-down-enter-active, .modal-slide-down-leave-active {
-        transition: all .8s;
-    }
+    @include ease(modal-ease-in, quiEase);
+    @include fade(fade-modal-mask, quiFade)
 }
+//fade-modal-mask
