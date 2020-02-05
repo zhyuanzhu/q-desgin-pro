@@ -8,7 +8,7 @@ $alert: "#{$prefixCls}alert";
 .#{$alert} {
     @include setH(40px);
     min-width: 100px;
-    @include border(rgba($primary, .4), rgba($primary, .1));
+    @include border(rgba($primary, .4), rgba($primary, .2));
     color: $primary;
     font-size: $font-size-base;
     padding: 0 10px;
@@ -18,19 +18,22 @@ $alert: "#{$prefixCls}alert";
     transform: translate(-50%);
     
     &.#{$alert}-warning {
-        @include border(rgba($warning, .2), rgba($warning, .1));
+        @include border(rgba($warning, .4), rgba($warning, .2));
         color: $warning;
+    }
+    &-text {
+        color: $main;
     }
 
     &.#{$alert}-success {
-        @include border(rgba($success, .2), rgba($success, .1));
+        @include border(rgba($success, .4), rgba($success, .2));
         color: $success;
     }
 
     &.#{$alert}-error {
-        @include border(rgba($error, .4), rgba($error, .1));
+        @include border(rgba($error, .4), rgba($error, .2));
         color: $error;
     }
 }
 
-@include fade(qui-Fade, quiFade);
+@include fade(alert-fade, quiFade);

@@ -1,8 +1,16 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-02-05 12:07:07
+ * @LastEditTime : 2020-02-05 12:21:53
+ * @LastEditors  : Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \q-desgin-pro\src\components\alert\alert.vue
+ -->
 <template>
     <transition :name="transition">
-        <div :class="[`${prefixCls}`, `${prefixCls}-${type}`]" v-show="visible">
+        <div :class="[`${prefixCls}`, `${prefixCls}-${type}`]" v-if="visible">
             <Icon :type="type | iconFilter" :size="16" />
-            {{ text }}
+            <span :class="`${prefixCls}-text`">{{ text }}</span>
         </div>
     </transition>
 </template>
@@ -34,7 +42,7 @@ export default {
         transition: {
             type: String,
             // default: 'alert-fade-in-move-up'
-            default: 'qui-Fade'
+            default: 'alert-fade'
         }
     },
     data() {
