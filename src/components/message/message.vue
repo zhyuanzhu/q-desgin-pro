@@ -1,3 +1,11 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-02-05 12:07:07
+ * @LastEditTime: 2020-02-05 15:54:49
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: \q-desgin-pro\src\components\message\message.vue
+ -->
 <template>
     <div :class="prefixCls">
         <transition name="message-ease-in">
@@ -56,7 +64,9 @@ export default {
             this.onCancel && this.onCancel();
             this.show = false;
         },
-        hideMask () {
+        hideMask (e) {
+            const dom = e.target;
+            if (dom.className !== 'qui-message-wrap') return;
             this.cancel()
         }
     },
