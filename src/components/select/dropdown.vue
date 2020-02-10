@@ -1,3 +1,11 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-02-05 12:07:07
+ * @LastEditTime : 2020-02-10 09:42:52
+ * @LastEditors  : Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \q-desgin-pro\src\components\select\dropdown.vue
+ -->
 <template>
     <div :class="`${prefix}-list`" >
         <slot></slot>
@@ -39,14 +47,16 @@ export default {
     },
     methods: {
         updateChildCurrentValue (isShow = false) {
-            const { currentValue, childrens, filter } = this;
-            // this.childrens =  findComponentChildren(this, 'Option');
-            childrens && childrens.map(child => {
+            const { currentValue, filter } = this;
+            console.log(currentValue)
+            this.childrens =  findComponentChildren(this, 'Option');
+            this.childrens && this.childrens.map(child => {
                 child.currentValue = currentValue;
                 if (filter) {
                     child.show = isShow;
                 }
             })
+            this.setDefaultLabel()
         },
         updateModel (value, label) {
             this.$parent.emitValue(value, label)
@@ -77,6 +87,7 @@ export default {
     },
     watch: {
         value (val) {
+            console.log(val)
             if (this.currentValue === val) return;
             this.currentValue = val;
             this.$nextTick(() => {

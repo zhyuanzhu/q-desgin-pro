@@ -1,3 +1,11 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-02-05 12:07:07
+ * @LastEditTime : 2020-02-10 09:42:18
+ * @LastEditors  : Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \q-desgin-pro\src\components\select\option.vue
+ -->
 <template>
     <div :class="setClass" @click="handleClick" v-show="show"> {{ label }} </div>
 </template>
