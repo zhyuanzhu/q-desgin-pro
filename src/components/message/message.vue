@@ -56,7 +56,9 @@ export default {
             this.onCancel && this.onCancel();
             this.show = false;
         },
-        hideMask () {
+        hideMask (e) {
+            const dom = e.target;
+            if (dom.className !== 'qui-message-wrap') return;
             this.cancel()
         }
     },

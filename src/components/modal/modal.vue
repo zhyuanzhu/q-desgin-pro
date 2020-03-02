@@ -30,6 +30,7 @@ import ButtonGroup from '../button-group'
 import Button from '../button'
 import Icon from '../icon'
 import ModalMask from './modal-mask'
+import clickoutside from '../../directives/clickoutside';
 
 const prefixCls = 'qui-modal';
 export default {
@@ -100,7 +101,9 @@ export default {
         cancel (evt) {
             this.$emit('on-cancel', evt)
         },
-        hideMask () {
+        hideMask (e) {
+            const dom = e.target;
+            if (dom.className !== 'qui-modal-wrap') return;
             this.cancel()
         },
         modalHide () {
@@ -114,6 +117,7 @@ export default {
             } 
         }
     },
+    directives: { clickoutside }
 }
 </script>
 <style lang="scss" type="text/scss">

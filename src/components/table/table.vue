@@ -15,8 +15,8 @@
 
 const prefixCls = 'qui-table';
 //处理成 可以带多选框，无数据直接提示，自动带分页，错误的时候展示错误页面，点击可以调用部分ajax获取数据
-import Empty from '../empty';
-import Pagination from '../pagination';
+import Empty from '../empty'
+import Pagination from '../pagination'
 import TableHeader from './tableheader'
 import TableMain from './tablemain'
 

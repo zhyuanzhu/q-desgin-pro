@@ -1,0 +1,89 @@
+@charset "utf-8";
+@import "../common/var";
+@import "../mixins/mixin";
+@import "../animation/animation";
+
+$drawer: "#{$prefixCls}drawer";
+
+
+.#{$drawer} {
+    
+    &-main {
+        // width: auto;
+        // height: 100%;
+        @include wh(auto, 100%);
+        position: fixed;
+        top: 0;
+        &.#{$drawer}-left{
+            left: 0;
+        }
+        &.#{$drawer}-right{
+            right: 0;
+        }
+    }
+    
+    &-mask {
+        @include mask(rgba($black, .2), 1000);
+        height: 100%;
+    }
+
+    &-wrapper {
+        position: fixed;
+        @include mask(transparent, 1000);
+        overflow: auto;
+        outline: 0; 
+    }
+
+    &-hidden {
+        display: none !important;
+    }
+
+    &-content {
+        @include wh(100%);
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        background-color: $white;
+        border: 0;
+        background-clip: padding-box;
+        box-shadow: 0 4px 12px rgba($black, .15);
+
+    }
+
+    &-header {
+        border-bottom: 1px solid $lightC;
+        padding: 14px 16px;
+    }
+
+    &-close {
+        cursor: pointer;
+        position: absolute;
+        top: 9px;
+        right: 12px;
+        color: #999;
+        transition: color .2s;
+        &-icon {
+            font-size: 28px !important;
+        }
+        &:hover {
+            color: darken($color: #999, $amount: 5%);
+        }
+    }
+
+    &-body {
+        @include wh(100%, calc(100% - 51px));
+        padding: 16px;
+        font-size: $font-size-base;
+        line-height: 1.5;
+        word-wrap: break-word;
+        // position: absolute;
+        overflow: auto;
+    }
+
+    &-no-header &-body{
+        height: 100%;
+    }
+    @include move(drawer-move-right, quiMoveRight);
+    @include move(drawer-move-left, quiMoveLeft);
+    @include fade(drawer-mask-fade, quiFade)
+}

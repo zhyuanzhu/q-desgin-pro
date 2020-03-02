@@ -39,14 +39,16 @@ export default {
     },
     methods: {
         updateChildCurrentValue (isShow = false) {
-            const { currentValue, childrens, filter } = this;
-            // this.childrens =  findComponentChildren(this, 'Option');
-            childrens && childrens.map(child => {
+            const { currentValue, filter } = this;
+            console.log(currentValue)
+            this.childrens =  findComponentChildren(this, 'Option');
+            this.childrens && this.childrens.map(child => {
                 child.currentValue = currentValue;
                 if (filter) {
                     child.show = isShow;
                 }
             })
+            this.setDefaultLabel()
         },
         updateModel (value, label) {
             this.$parent.emitValue(value, label)
@@ -77,6 +79,7 @@ export default {
     },
     watch: {
         value (val) {
+            console.log(val)
             if (this.currentValue === val) return;
             this.currentValue = val;
             this.$nextTick(() => {

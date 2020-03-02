@@ -123,31 +123,31 @@ export default {
     },
     methods: {
         handleKeyup (evt) {
-            this.$emit('keyup', evt);
+            this.$emit('on-keyup', evt.target.value);
         },
         handleEnter (evt) {
-            this.$emit('enter', evt);
+            this.$emit('on-enter', evt.target.value);
         },
         handleKeypress (evt) {
-            this.$emit('keypress', evt);
+            this.$emit('on-keypress', evt.target.value);
         },
         handleFocus (evt) {
-            this.$emit('on-focus', evt);
+            this.$emit('on-focus', evt.target.value);
         },
         handleBlur (evt) {
-            this.$emit('blur', evt);
+            this.$emit('on-blur', evt.target.value);
         },
         handleInput (evt) {
             let _val = evt.target.value;
             this.setCurrentValue(_val);
-            this.$emit('change', _val);
+            // this.$emit('change', _val);
             this.$emit('input', _val);
         },
         handleChange (evt) {
-            this.$emit('change', evt);
+            this.$emit('on-change', evt.target.value);
         },
         handleClick (evt) {
-            this.$emit('click', evt)
+            this.$emit('click', evt.target.value)
         },
         setCurrentValue (v) {
             if (v === this.currentValue) return;

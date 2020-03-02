@@ -1,8 +1,8 @@
 <template>
     <transition :name="transition">
-        <div :class="[`${prefixCls}`, `${prefixCls}-${type}`]" v-show="visible">
+        <div :class="[`${prefixCls}`, `${prefixCls}-${type}`]" v-if="visible">
             <Icon :type="type | iconFilter" :size="16" />
-            {{ text }}
+            <span :class="`${prefixCls}-text`">{{ text }}</span>
         </div>
     </transition>
 </template>
@@ -34,7 +34,7 @@ export default {
         transition: {
             type: String,
             // default: 'alert-fade-in-move-up'
-            default: 'qui-Fade'
+            default: 'alert-fade'
         }
     },
     data() {
