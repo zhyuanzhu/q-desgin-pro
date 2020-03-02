@@ -48,6 +48,23 @@ export function findComponentChildren (context, componentName, ignoreComponentNa
 }
 
 /**
+ * 
+ * @param {*} context 
+ * @param {*} componentName 
+ * @param {*} excepteMe 
+ */
+export function findComponentBrothers (context, componentName, excepteMe = true) {
+    let res = context.$parent.$children.filter(item => {
+        return item.$options.name = componentName
+    });
+    let index = res.findIndex(item => item._uid === context._uid);
+    if (excepteMe) {
+        res.splice(index, 1)
+    }
+    return res;
+}
+
+/**
  * deepcopy
  * @param {*} data 
  */
