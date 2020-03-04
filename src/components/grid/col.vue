@@ -32,7 +32,29 @@ export default {
     },
     computed: {
         classes () {
+            const { prefixCls, span, order, offset, push, pull, className } = this;
+            const classList = [`${prefixCls}`, {
+                [`${prefixCls}-span-${span}`]: span,
+                [`${prefixCls}-order-${order}`]: order,
+                [`${prefixCls}-offset-${offset}`]: offset,
+                [`${prefixCls}-push-${push}`]: push,
+                [`${prefixCls}-pull-${pull}`]: pull,
+                [`${className}`]: !!className
+            }];
 
+            ['xs', 'sm', 'md', 'lg', 'xl', 'xxl'].forEach(size => {
+                if (typeof this[size] === 'number') {
+                    classList.push(`${prefixCls}-span-${size}-${this[size]}`);
+                } else if (typeof this[size] === 'object') {
+                    let props = this[size];
+                    Object.keys(props).forEach(prop => {
+                        let clsName = prop !== 'span' ? `${prefixCls}-${size}-${prop}-${props[prop]}` : `${prefixCls}-span-${size}-${props[prop]}`;
+                        classList.push(clsName)
+                    })
+                }
+            })
+
+            return classList;
         },
         styles () {
             let style = {};
