@@ -8,7 +8,7 @@
                         <div :class="`${prefixCls}-content`" v-text="text"></div>
                     </div>
                     <div :class="`${prefixCls}-btn`">
-                        <Button @click.stop="ok">确认</Button>
+                        <Button @click.stop="ok" :style=" onCancel && `margin-right: 10px;`">确认</Button>
                         <Button @click.stop="cancel" :type="'primary'" v-if="onCancel">取消</Button>
                     </div>
                     <div :class="`${prefixCls}-close`" v-if="onCancel"></div>
