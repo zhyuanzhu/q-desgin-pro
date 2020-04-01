@@ -9,30 +9,31 @@ const prefixCls = 'qui-row';
 import { hasParam, findComponentChildren } from '../../utils/util';
 
 export default {
-    name: 'Row',
+    name: 'qRow',
     props: {
         type: {
-            validator (value) {
-                return hasParam(value, ['flex'])
-            }
+            type: String
         },
-        align: {
+        justify: {
+            type: String,
+            default: 'start',
             validator (value) {
-                const valueList = ['top', 'middle', 'bottom'];
+                const valueList = ['start', 'end', 'center', 'space-around', 'space-between']
                 return hasParam(value, valueList)
             }
         },
-        justify: {
+        align: {
+            type: String,
+            default: 'top',
             validator (value) {
-                const valueList = ['start', 'end', 'center', 'space-around', 'space-between'];
+                const valueList = ['top', 'middle', 'buttom'];
                 return hasParam(value, valueList)
             }
         },
         gutter: {
             type: Number,
             default: 0
-        },
-        className: String
+        }
     },
     data() {
         return {
@@ -42,13 +43,14 @@ export default {
     computed: {
         clssses () {
             const { prefixCls, type, align, justify, className } = this;
-            return [{
-                [`${prefixCls}`]: !type,
-                [`${prefixCls}-${type}`]: !!type,
-                [`${prefixCls}-${type}-${align}`]: !!align,
-                [`${prefixCls}-${type}-${justify}`]: !!justify,
-                [`${className}`]: !!className
-            }]
+            return [ prefixCls,
+                {
+                    [`${prefixCls}-justify-${justify}`]: justify !== 'start',
+                    [`${prefixCls}-align-${align}`]: align !== 'top',                
+                    [`${prefixCls}-flex`]: type === 'flex',
+                    [className]: !!className
+                }
+            ]
         },
         styles () {
             let style = {};
@@ -61,20 +63,13 @@ export default {
         }
     },
     watch: {
-        gutter (v) {
-            this.updateGutter(v);
-        }
+        
     },
     methods: {
-        updateGutter (val) {
-            const Col = findComponentChildren(this, 'Col');
-            const colList = findComponentBrothers(Col, 'Col', false);
-            colList.length > 0 && colList.forEach(child => {
-                if (v !== 0) {
-                    child.gutter = val;
-                }
-            })
-        }
+
     },
 }
 </script>
+<style lang="scss" type="text/scss">
+    @import "../../styles/components/_row.scss";
+</style>

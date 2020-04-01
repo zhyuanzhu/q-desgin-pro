@@ -4,5 +4,49 @@
 $row: "#{$prefixCls}row";
 
 .#{$row} {
-    
+    position: relative;
+    box-sizing: border-box;
+    &::before {
+        content: "";
+        display: block;
+        height: 0;
+        clear: both;
+        visibility: hidden;
+    }
+    &::after {
+        @extend .#{$row}::before;
+    }
+
+    &-flex {
+        display: flex;
+        &::after, &::before {
+            display: none;
+        }
+
+        &.#{$row}-justify-center {
+            justify-content: center;
+        }
+
+        &.#{$row}-justify-end {
+            justify-content: end;
+        }
+
+        &.#{$row}-justify-space-between {
+            justify-content: space-between;
+        }
+
+        &.#{$row}-justify-space-around {
+            justify-content: space-around;
+        }
+
+        &.#{$row}-middle {
+            align-items: center;
+        }
+
+        &.#{$row}-bottom {
+            align-items: flex-end;
+        }
+
+
+    }
 }

@@ -9,75 +9,73 @@ const prefixCls = 'qui-col';
 import { findComponentParents } from '../../utils/util'
 
 export default {
-    name: 'Col',
+    name: 'qCol',
     props: {
-        span: [Number, String],
-        order: [Number, String],
-        offset: [Number, String],
-        push: [Number, String],
-        pull: [Number, String],
+        span: {
+            type: Number,
+            default: 24
+        },
+        offset: Number,
+        pull: Number,
+        push: Number,
         xs: [Number, Object],
         sm: [Number, Object],
         md: [Number, Object],
         lg: [Number, Object],
-        xl: [Number, Object],
-        xxl: [Number, Object]
-        className: String,
+        xl: [Number, Object]
     },
     data() {
         return {
-            prefixCls,
-            gutter: 0    
+            prefixCls   
         }
     },
     computed: {
+        gutter () {
+            let _parent = findComponentParents(this, 'qRow');
+            return _parent ? _parent.gutter : 0
+        },
         classes () {
-            const { prefixCls, span, order, offset, push, pull, className } = this;
-            const classList = [`${prefixCls}`, {
-                [`${prefixCls}-span-${span}`]: span,
-                [`${prefixCls}-order-${order}`]: order,
-                [`${prefixCls}-offset-${offset}`]: offset,
-                [`${prefixCls}-push-${push}`]: push,
-                [`${prefixCls}-pull-${pull}`]: pull,
-                [`${className}`]: !!className
-            }];
+            const { prefixCls } = this;
+            const classList = [ prefixCls ];
+            // debugger
+            const _list = ['span', 'offset', 'pull', 'push']; 
+            ['span', 'offset', 'pull', 'push'].map(item => {
+                if (this[item] || this[item] === 0) {
+                    classList.push(
+                        item === 'span' ? `${prefixCls}-${this[item]}` : `${prefixCls}-${item}-${this[item]}`
+                    )
+                }
+               
+            });
 
-            ['xs', 'sm', 'md', 'lg', 'xl', 'xxl'].forEach(size => {
-                if (typeof this[size] === 'number') {
-                    classList.push(`${prefixCls}-span-${size}-${this[size]}`);
-                } else if (typeof this[size] === 'object') {
-                    let props = this[size];
-                    Object.keys(props).forEach(prop => {
-                        let clsName = prop !== 'span' ? `${prefixCls}-${size}-${prop}-${props[prop]}` : `${prefixCls}-span-${size}-${props[prop]}`;
-                        classList.push(clsName)
+            ['xs', 'sm', 'md', 'lg', 'xl'].map(item => {
+                const size = this[item];
+                if (typeof size === 'number') {
+                    classList.push(`${prefixCls}-${item}-${size}`)
+                } else if (typeof size === 'object') {
+                    Object.keys(size).forEach(key => {
+                        classList.push(
+                            val === 'span' ? `${prefixCls}-${size[key]}` : `${prefixCls}-${key}-${size[key]}`
+                        )
                     })
                 }
             })
-
-            return classList;
+            return classList
         },
         styles () {
-            let style = {};
+            let style = {}
             const { gutter } = this;
             if (gutter !== 0) {
-                const dis = gutter / -2;
-                style = `margin-left: ${dis}px; margin-right: ${dis}px;`
+                const dis = gutter / 2;
+                style = `padding-left: ${dis}px; padding-right: ${dis}px;`
             }
-            return style;
+            return style
         }
-    },
-    mounted() {
-        this.updateGutter()
-    },
-    methods: {
-        updateGutter () {
-            const Row = findComponentParents(this, 'Row');
-            if (!Row) return;
-            Row.updateGutter(Row.gutter);
-        }
-    },
-    beforeDestroy() {
-        this.updateGutter()
-    },
+    }
+
 }
 </script>
+
+<style lang="scss" type="text/scss">
+    @import "../../styles/components/_col.scss";
+</style>
