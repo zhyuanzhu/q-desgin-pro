@@ -18,7 +18,7 @@ A PC UI library
 ```javascript
 
 BreadCrumb, Form, Tree
-Col, Row, Grid, Layout, Notice, PopTip, ToolTip, Tag
+Layout, Notice, PopTip, ToolTip, Tag
 
 Carousel只是一个最初模型，还存在bug，dot - outside 样式未完成，浏览器缩放的时候CarouselItem宽高有延迟
 
