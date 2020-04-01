@@ -314,6 +314,8 @@
     <Input :unit="'元'" :placeholder="'测试placeholder'" v-model="iptVal" />
     {{ iptVal }}
 
+
+
     <!-- <upload :theme="'primary'" :type="'cloud'" @on-change="onChangeUpload" :disabled="true" /> -->
 
     <!-- <Menu :data="menuData" :theme="'light'" /> -->
