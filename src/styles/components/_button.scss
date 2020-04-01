@@ -8,7 +8,7 @@ $btn-border-hover: #f6f8fc;
 .#{$buttonPrefix} {
     color: $white;
     background-color: $primary;
-    padding: 0 20px;
+    padding: 0 14px;
     border: 1px solid;
     border-color: $primary;
     border-radius: $border-radius-middle;
@@ -18,7 +18,7 @@ $btn-border-hover: #f6f8fc;
     cursor: $cursor-pointer;
     box-shadow: 0 2px 5px rgba($primary, .5);
     font-size: $font-size-base;
-    @include setH(32px, 30px);
+    @include setH(32px, $btn-height);
     &:hover {
         background-color: $primary-dark;
     }
@@ -171,16 +171,16 @@ $btn-border-hover: #f6f8fc;
 
     //设置尺寸
     &.#{$buttonPrefix}-large {
-        @include setH(40px, 38px);
-        padding: 0 35px;
+        @include setH(40px, $btn-height-large);
+        padding: 0 25px;
         &-text {
             font-size: $font-size-large;
         }
     }
 
     &.#{$buttonPrefix}-small {
-        @include setH(26px, 24px);
-        padding: 0 10px;
+        @include setH(26px, $btn-height-small);
+        padding: 0 8px;
         &-text {
             font-size: $font-size-small;
         }

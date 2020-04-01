@@ -11,7 +11,7 @@
                     <section :class="`${prefixCls}-footer`" v-if="footer">
                         <div :class="`${prefixCls}-footer-btn`">
                             <button-group>
-                                <Button v-if="hasConfirm" size="large" v-text="confirmTxt" @click.native.stop="confirm"></Button>
+                                <Button v-if="hasConfirm"  size="large" v-text="confirmTxt" @click.native.stop="confirm"></Button>
                                 <Button v-if="hasCancel" type="primary" size="large" v-text="cancelTxt" @click.native.stop="cancel"></Button>
                                 <div v-if="$slots.footer"><slot name="footer"></slot></div>
                             </button-group>
