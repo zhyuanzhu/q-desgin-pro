@@ -11,7 +11,7 @@ $radio: "#{$prefixCls}radio";
     &-icon {
         position: relative;
         display: inline-block;
-        @include wh(16px);
+        @include wh($radio-height);
         border-radius: 50%;
         margin-right: 10px;
         vertical-align: middle;

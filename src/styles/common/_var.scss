@@ -124,3 +124,19 @@ $screen-xxl-min: $screen-xxl;
 $screen-xxl-max: $screen-xxl-min - 1;
 
 
+//input
+$input-height: 32px;
+$input-height-small: $input-height - 8;
+$input-height-large: $input-height + 8;
+
+
+//select
+$select-height: 32px;
+$select-height-small: $select-height - 8;
+$select-height-large: $select-height + 8;
+
+//radio
+$radio-height: 14px;
+
+
+

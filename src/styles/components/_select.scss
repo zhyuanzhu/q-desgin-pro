@@ -7,8 +7,8 @@ $select: "#{$prefixCls}select";
 
 .#{$select} {
     position: relative;
-    @include wh(200px, 38px);
-    line-height: 38px;
+    @include wh(200px, $select-height);
+    line-height: $select-height;
     box-sizing: border-box;
     border: 1px solid $border-color;
     border-radius: $border-radius-middle;
@@ -94,15 +94,15 @@ $select: "#{$prefixCls}select";
         }
     }
     &.#{$select}-large {
-        @include wh(240px, 46px);
-        line-height: 46px;
+        @include wh(240px, $select-height-large);
+        line-height: $select-height-large;
         .#{$select}-arrow {
             left: 220px;
         }
     }
     &.#{$select}-small {
-        @include wh(160px, 26px);
-        line-height: 26px;
+        @include wh(160px, $select-height-small);
+        line-height: $select-height-small;
         .#{$select}-arrow {
             left: 140px;
         }

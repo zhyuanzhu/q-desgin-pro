@@ -6,11 +6,11 @@ $input: "#{$prefixCls}input";
 .#{$input}-main {
     vertical-align: middle;
     font-size: 0;
-    line-height: 38px;
+    line-height: $input-height;
    
     .#{$input} {
         box-sizing: border-box;
-        @include wh(240px, 38px);
+        @include wh(240px, $input-height);
         padding: 10px;
         @include border($lightC);
         outline: none;
@@ -25,7 +25,7 @@ $input: "#{$prefixCls}input";
     }
     .#{$input}-picker {
         @extend .#{$input};
-        @include wh(220px, 36px);
+        @include wh(220px, $input-height);
         &:focus {
             @extend .#{$input}:focus;
         }
@@ -48,11 +48,11 @@ $input: "#{$prefixCls}input";
     }
 
     &.#{$input}-large {
-        line-height: 46px;
+        line-height: $input-height-large;
         .#{$input} {
             padding: 15px 10px;
             font-size: $font-size-large;
-            height: 46px;
+            height: $input-height-large;
         }
         .#{$input}-unit {
             font-size: $font-size-large;
@@ -75,11 +75,11 @@ $input: "#{$prefixCls}input";
     }
 
     &.#{$input}-small {
-        line-height: 26px;
+        line-height: $input-height-small;
         .#{$input} {
             padding: 5px 10px;
             font-size: $font-size-small;
-            height: 26px;
+            height: $input-height-small;
         }
         .#{$input}-unit {
             font-size: $font-size-small;

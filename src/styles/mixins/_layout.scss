@@ -1,0 +1,9 @@
+@charset "utf-8";
+@import "../common/var";
+
+@mixin make-row($gutter: $grid-gutter-width) {
+    position: relative;
+    margin-left: $gutter / 2;
+    margin-right: $gutter / 2;
+    height: auto;
+}
