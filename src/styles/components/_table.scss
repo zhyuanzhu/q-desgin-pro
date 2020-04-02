@@ -3,80 +3,534 @@
 @import "../mixins/mixin";
 
 $table: "#{$prefixCls}table";
-$hover: #ebf7ff;
-$header: #f8f8f9;
+
+$border-color-base: #dcdee2;
+$text-color: #515a6e;
+$border-color-split: #e8eaec;
+$table-thead-bg: #f8f8f9;
+
+$table-select-item-prefix-cls: "#{$table}-filter-select-item";
 
 .#{$table} {
-    table {
+    &-wrapper{
+        position: relative;
+        //border: 1px solid $border-color-base;
+        //border-bottom: 0;
+        //border-right: 0;
+        overflow: hidden; // 开启 max-height 时，没有 overflow: hidden，则底部多出 1px，早期没有 overflow 是因为有些控件没有加 transfer
+        &-with-border{
+            border: 1px solid $border-color-base;
+            border-bottom: 0;
+            border-right: 0;
+        }
+    }
+    width: inherit;
+    height: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    color: $text-color;
+    font-size: $font-size-base;
+    background-color: #fff;
+
+    box-sizing: border-box;
+    //position: relative;
+
+    &-summary{
+        border-top: 1px solid $border-color-split;
+        tr td{
+            background-color: $table-thead-bg;
+        }
+    }
+
+    &-with-summary{
+        .ivu-table-tbody{
+            tr:last-child td{
+                border-bottom: none;
+            }
+        }
+    }
+
+    &-resize-line{
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 1px;
+        border-right: 1px dashed $border-color-split;
+    }
+
+    &-hide{
+        opacity: 0;
+    }
+
+    &:before{
+        content: '';
         width: 100%;
-        border: none;
-        border-spacing: 0;
+        height: 1px;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        background-color: $border-color-base;
+        z-index: 1;
     }
-    .table-flex {
-        display: flex;
-        text-align: center;
-        &-td {
-            flex: 1;
-            border-right: 1px solid $border-color;
-            &:last-child {
-                border-right: none;
-            }
-            .table-text {
-                text-align: left;
-                color: $main;
-                font-size: $font-size-base;
+
+    &-border:after{
+        content: '';
+        width: 1px;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        right: 0;
+        background-color: $border-color-base;
+        z-index: 3;
+    }
+
+    &-with-header{
+        //border-radius: @border-radius-base @border-radius-base 0 0;
+    }
+
+    &-with-footer{
+        //border: 1px solid $border-color-base;
+        //border-radius: 0 0 @border-radius-base @border-radius-base;
+    }
+
+    // &-with-header&-with-footer{
+    //     //border-radius: @border-radius-base;
+    // }
+
+    &-title, &-footer{
+        height: 48px;
+        line-height: 48px;
+        border-bottom: 1px solid $border-color-split;
+    }
+    &-footer{
+        border-bottom: none;
+    }
+
+    &-header{
+        overflow: hidden;
+        thead{
+            tr{
+                th{
+                    position: relative;
+                    height: 100%;
+                    padding: 8px 0;
+                }
             }
         }
-        .table-checkbox {
-            padding: 0 8px 0 18px;
-            border-right: 1px solid $border-color;
+        &-resizable{
+            position: absolute;
+            width: 10px;
+            height: 100%;
+            bottom: 0;
+            right: -5px;
+            cursor: col-resize;
+            z-index: 1;
         }
     }
-    .table-header {
-        background: $header;
-        @include setH(40px);
-        border-bottom: 1px solid $border-color;
-        border-top: 1px solid $lightC;
-        box-sizing: border-box;
+    &-body{
+        //overflow: auto;
+        //position: relative;
 
     }
-    .table-row-hover {
-        background: $hover;
-        transition: all $animate-time;
+    &-overflowX{
+        overflow-x: scroll;
     }
-    .table-main {
-        @include setH(46px);
+    &-overflowY{
+        overflow-y: scroll;
+    }
+    &-tip{
+        overflow-x: auto;
+        overflow-y: hidden;
+        //position: relative;
+    }
+
+    &-with-fixed-top,&-with-footer{
+        .#{$table}-footer{
+            border-top: 1px solid $border-color-base;
+        }
+        tbody tr:last-child td{
+            border-bottom: none;
+        }
+    }
+
+    th, td
+    {
+        min-width: 0;
+        height: 48px;
         box-sizing: border-box;
-        border-bottom: 1px solid $border-color;
-        padding: 0 8px;
-        .table-text {
-            display: inline-block;
-            width: 100%;
+        text-align: left;
+        text-overflow: ellipsis;
+        vertical-align: middle;
+        //position: relative;
+        border-bottom: 1px solid $border-color-split;
+    }
+
+    th {
+        height: 40px;
+        white-space: nowrap;
+        overflow: hidden;
+        background-color: $table-thead-bg;
+    }
+    td{
+        background-color: #fff;
+        transition: background-color $animate-time-middle $ease-in-out;
+    }
+
+    th.#{$table}-column,
+    td.#{$table}-column
+    {
+        &-left{
+            text-align: left;
+        }
+        &-center{
             text-align: center;
-            @include no-wrap();
+        }
+        &-right{
+            text-align: right;
         }
     }
-    &-border {
-        .#{$table}-main {
-            border-left: 1px solid $lightC;
-            border-right: 1px solid $lightC;
-        }
-        .#{$table}-header {
-            border-left: 1px solid $lightC;
-            border-right: 1px solid $lightC;
+
+    & table{
+        //width: 100%;
+        table-layout: fixed;
+    }
+    &-border{
+        th,td{
+            border-right: 1px solid $border-color-split;
         }
     }
-    .table-body {
-        &:last-child {
-            .table-main {
-                border-bottom-color: $lightC;
+    &-cell{
+        padding-left: 18px;
+        padding-right: 18px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: normal;
+        word-break: break-all;
+        box-sizing: border-box;
+
+        &-ellipsis {
+            word-break: keep-all;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        &-tooltip{
+            width: 100%;
+            display: flex;
+            align-items: center;
+            &-content{
+                display: block;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+        }
+
+        &-with-expand{
+            height: 47px;
+            line-height: 47px;
+            padding: 0;
+            text-align: center;
+        }
+
+        &-expand{
+            cursor: pointer;
+            transition: transform $animate-time-middle $ease-in-out;
+            i{
+                font-size: $font-size-base;
+            }
+            &-expanded{
+                transform: rotate(90deg);
+            }
+        }
+        &-sort{
+            cursor: pointer;
+            user-select: none;
+        }
+
+        // #3159
+        &-with-selection{
+            // .@{checkbox-prefix-cls}-wrapper{
+            //     margin-right: 0;
+            // }
+        }
+
+        &-tree{
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 1px solid $border-color-base;
+            border-radius: 2px;
+            background-color: #fff;
+            line-height: 12px;
+            cursor: pointer;
+            vertical-align: middle;
+            transition: color $animate-time-middle $ease-in-out, border-color $animate-time-middle $ease-in-out;
+
+            &-empty{
+                cursor: default;
+                color: transparent;
+                background-color: transparent;
+                border-color: transparent;
+            }
+
+            &:hover {
+                color: $primary;
+                border-color: $primary;
+            }
+            &-empty:hover{
+                color: transparent;
+                border-color: transparent;
+            }
+
+            &-loading{
+                cursor: default;
+                background-color: transparent;
+                border-color: transparent;
+                &:hover{
+                    border-color: transparent;
+                }
+            }
+
+            &-level{
+                display: inline-block;
+                height: 16px;
             }
         }
     }
-    &-footer {
-        display: flex;
-        flex-direction: row-reverse;
-        padding-top: 20px;
+    &-hidden{
+        visibility: hidden;
     }
-    
+    th &-cell{
+        display: inline-block;
+        //position: relative;
+        word-wrap: normal;
+        vertical-align: middle;
+    }
+
+    td.#{$table}-expanded-cell{
+        padding: 20px 50px;
+        background: $table-thead-bg;
+    }
+
+    &-stripe &-body,
+    &-stripe &-fixed-body
+    {
+        tr:nth-child(2n) {
+            td{
+                background-color: #f8f8f9;
+            }
+        }
+        // #1380
+        tr.#{$table}-row-hover{
+            td{
+                background-color: #ebf7ff;
+            }
+        }
+    }
+
+    tr.#{$table}-row-hover{
+        td{
+            background-color: #ebf7ff;
+        }
+    }
+
+    &-large {
+        font-size: $font-size-medium;
+        th{
+            height: 48px;
+        }
+        td{
+            height: 60px;
+        }
+        &-title, &-footer{
+            height: 60px;
+            line-height: 60px;
+        }
+        .#{$table}-cell-with-expand{
+            height: 59px;
+            line-height: 59px;
+            i{
+                font-size: $font-size-base+2;
+            }
+        }
+    }
+
+    &-small{
+        font-size: $font-size-small;
+        th{
+            height: 32px;
+        }
+        td{
+            height: 40px;
+        }
+        &-title, &-footer{
+            height: 40px;
+            line-height: 40px;
+        }
+        .#{$table}-cell-with-expand{
+            height: 39px;
+            line-height: 39px;
+        }
+    }
+
+    &-row-highlight,
+    tr.#{$table}-row-highlighttr.#{$table}-row-hover,
+    &-stripe &-body tr.#{$table}-row-highlight:nth-child(2n),
+    &-stripe &-fixed-body tr.#{$table}-row-highlight:nth-child(2n)
+    {
+        td{
+            background-color: #ebf7ff;
+        }
+    }
+
+
+
+    &-fixed, &-fixed-right{
+        position: absolute;
+        top: 0;
+        left: 0;
+        box-shadow: 2px 0 6px -2px rgba(0, 0, 0, 0.2);
+
+        &::before {
+            content: '';
+            width: 100%;
+            height: 1px;
+            background-color: $border-color-base;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            z-index: 4;
+        }
+    }
+    &-fixed-right{
+        top: 0;
+        left: auto;
+        right: 0;
+        box-shadow: -2px 0 6px -2px rgba(0, 0, 0, 0.2);
+    }
+    &-fixed-right-header{
+        position: absolute;
+        top: -1px;
+        right: 0;
+        background-color: $table-thead-bg;
+        border-top: 1px solid $border-color-base;
+        border-bottom: 1px solid $border-color-split;
+    }
+    &-fixed-header{
+        overflow: hidden;
+        // 在 #1387 里，添加了下面的代码，但是在 #5174 会出现新的问题。
+        // 但是，在新版本里，注释掉后，#1387 的问题并没有再复现，所以注释掉
+        //&-with-empty{
+        //    .#{$table}-hidden{
+        //        .#{$table}-sort{
+        //            display: none;
+        //        }
+        //        .#{$table}-cell span{
+        //            display: none;
+        //        }
+        //    }
+        //}
+        thead{
+            tr{
+                th{
+                    position: relative;
+                    height: 100%;
+                    padding: 8px 0;
+                }
+            }
+        }
+    }
+    &-fixed-body{
+        overflow: hidden;
+        position: relative;
+        z-index: 3;
+    }
+
+    &-fixed-shadow {
+        width: 1px;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        right: 0;
+        box-shadow: 1px 0 6px rgba(0, 0, 0, 0.2);
+        overflow: hidden;
+        z-index: 1;
+    }
+
+    &-sort{
+        // .sortable();
+    }
+    &-filter{
+        display: inline-block;
+        cursor: pointer;
+        position: relative;
+        //top: 1px;
+
+        i{
+            color: #c5c8ce;
+            transition: color $animate-time-middle $ease-in-out;
+            &:hover{
+                color: inherit;
+            }
+            &.on{
+                color: $primary;
+            }
+        }
+        &-list{
+            padding: 8px 0 0;
+            &-item{
+                padding: 0 12px 8px;
+
+                .ivu-checkbox-wrapper + .ivu-checkbox-wrapper{
+                    margin: 0;
+                }
+                label {
+                    display: block;
+
+                    & > span{
+                        margin-right: 4px;
+                    }
+                }
+            }
+            ul{
+                padding-bottom: 8px;
+            }
+            // .select-item(@table-prefix-cls, @table-select-item-prefix-cls);
+        }
+        &-footer{
+            padding: 4px;
+            border-top: 1px solid $border-color-split;
+            overflow: hidden;
+            button:first-child{
+                float: left;
+            }
+            button:last-child{
+                float: right;
+            }
+        }
+    }
+
+    &-tip {
+        table {
+            width: 100%;
+
+            td {
+              text-align: center;
+            }
+        }
+    }
+
+    &-expanded-hidden{
+        visibility: hidden;
+    }
+}
+.ivu-table-popper{
+    min-width: 0;
+    text-align: left;
+    .ivu-poptip-body{
+        padding: 0;
+    }
 }
