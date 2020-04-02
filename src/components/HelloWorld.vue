@@ -171,8 +171,6 @@
 
     <hr style="margin: 25px auto;" />
 
-    <button @click="closeBtn">测试关闭按钮</button>
- -->
     <!-- <Modal :title="'这是个标题啊哈啊这是个标题啊哈啊这是个标题啊哈啊这是个标题啊哈啊这是个标题啊哈啊'"
         :hasCancel="false"
         @on-cancel="cancelModal"
@@ -617,6 +615,62 @@
     <button @click="loadingStart">start</button>
     <button @click="loadingError">error</button>
     <button @click="loadingFinsh">finish</button>
+  ======================栅格布局============================
+    <Row>  
+      <Col :span="12" >
+        <div class="test-col">12</div>
+      </Col>
+      <Col :span="12" >
+        <div class="test-col">12</div>
+      </Col>
+    </Row>
+
+
+    <Row :gutter="20">  
+      <Col :span="6" >
+        <div class="test-col">6</div>
+      </Col>
+      <Col :span="6" >
+        <div class="test-col">6</div>
+      </Col>
+      <Col :span="6" >
+        <div class="test-col">6</div>
+      </Col>
+      <Col :span="6" >
+        <div class="test-col">6</div>
+      </Col>
+    </Row>
+
+    <Row>  
+      <Col :span="6" :xs="8" :sm="6" :md="4" :xl="1" >
+        <div class="test-col">6</div>
+      </Col>
+      <Col :span="4" :xs="6" :sm="8" :md="9" :xl="11" >
+        <div class="test-col">6</div>
+      </Col>
+      <Col :span="4" :xs="6" :sm="8" :md="9" :xl="11" >
+        <div class="test-col">6</div>
+      </Col>
+      <Col :span="8" :xs="6" :sm="4" :md="3" :xl="1"  >
+        <div class="test-col">6</div>
+      </Col>
+    </Row>
+  <hr style="margin: 50px auto;" />
+
+
+  <Table width="100%"    :columns="columns2" :data="data4"></Table>
+
+
+  <Table border :columns="columns12" :data="data6">
+        <template slot-scope="{ row }" slot="name">
+            <strong>{{ row.name }}</strong>
+        </template>
+        <template slot-scope="{ row, index }" slot="action">
+            <Button type="primary" size="small" style="margin-right: 5px" @click="show(index)">View</Button>
+            <Button type="error" size="small" @click="remove(index)">Delete</Button>
+        </template>
+    </Table>
+
 
 <!-- direction="vertical" -->
     <!-- <Carousel arrow="hover" loop height="150px" trigger="click" :indicatorPosition="'outside'" >
@@ -709,9 +763,15 @@ import Carousel from './carousel'
 
 import CarouselItem from './carousel-item'
 
+import Row from './row'
+
+import Col from './col'
+
 export default {
   name: "HelloWorld",
   components: {
+    Row,
+    Col,
     Carousel,
     CarouselItem,
     BackTop,
@@ -752,6 +812,171 @@ export default {
   },
   data() {
     return {
+
+      columns12: [
+                    {
+                        title: 'Name',
+                        slot: 'name'
+                    },
+                    {
+                        title: 'Age',
+                        key: 'age'
+                    },
+                    {
+                        title: 'Address',
+                        key: 'address'
+                    },
+                    {
+                        title: 'Action',
+                        slot: 'action',
+                        width: 150,
+                        align: 'center'
+                    }
+                ],
+                data6: [
+                    {
+                        name: 'John Brown',
+                        age: 18,
+                        address: 'New York No. 1 Lake Park'
+                    },
+                    {
+                        name: 'Jim Green',
+                        age: 24,
+                        address: 'London No. 1 Lake Park'
+                    },
+                    {
+                        name: 'Joe Black',
+                        age: 30,
+                        address: 'Sydney No. 1 Lake Park'
+                    },
+                    {
+                        name: 'Jon Snow',
+                        age: 26,
+                        address: 'Ottawa No. 2 Lake Park'
+                    }
+                ],
+      columns2:[
+                    {
+                        title: 'Name',
+                        key: 'name',
+                        width: 100,
+                        fixed: 'left'
+                    },
+                    {
+                        title: 'Age',
+                        key: 'age',
+                        width: 200
+                    },
+                    {
+                        title: 'Province',
+                        key: 'province',
+                        width: 200,
+                        fixed: 'left'
+                    },
+                    {
+                        title: 'City',
+                        key: 'city',
+                         width: 300,
+                    },
+                    {
+                        title: 'Address',
+                        key: 'address',
+                         width: 400,
+                    },
+                    {
+                        title: 'Postcode',
+                        key: 'zip',
+                         width: 300,
+                    },
+                    {
+                        title: 'Action',
+                        key: 'action',
+                        fixed: 'right',
+                        width: 320,
+                        render: (h, params) => {
+                            return h('div', [
+                                h(Button, {
+                                    props: {
+                                        type: 'primary',
+                                        size: 'small'
+                                    }
+                                }, 'View'),
+                                h('Button', {
+                                    props: {
+                                        type: 'text',
+                                        size: 'small'
+                                    }
+                                }, 'Edit')
+                            ]);
+                        }
+                    }
+                ],
+                data4: [
+                    {
+                        name: 'John Brown',
+                        age: 18,
+                        address: 'New York No. 1 Lake Park',
+                        province: 'America',
+                        city: 'New York',
+                        zip: 100000
+                    },
+                    {
+                        name: 'Jim Green',
+                        age: 24,
+                        address: 'Washington, D.C. No. 1 Lake Park',
+                        province: 'America',
+                        city: 'Washington, D.C.',
+                        zip: 100000
+                    },
+                    {
+                        name: 'Joe Black',
+                        age: 30,
+                        address: 'Sydney No. 1 Lake Park',
+                        province: 'Australian',
+                        city: 'Sydney',
+                        zip: 100000
+                    },
+                    {
+                        name: 'Jon Snow',
+                        age: 26,
+                        address: 'Ottawa No. 2 Lake Park',
+                        province: 'Canada',
+                        city: 'Ottawa',
+                        zip: 100000
+                    },
+                    {
+                        name: 'John Brown',
+                        age: 18,
+                        address: 'New York No. 1 Lake Park',
+                        province: 'America',
+                        city: 'New York',
+                        zip: 100000
+                    },
+                    {
+                        name: 'Jim Green',
+                        age: 24,
+                        address: 'Washington, D.C. No. 1 Lake Park',
+                        province: 'America',
+                        city: 'Washington, D.C.',
+                        zip: 100000
+                    },
+                    {
+                        name: 'Joe Black',
+                        age: 30,
+                        address: 'Sydney No. 1 Lake Park',
+                        province: 'Australian',
+                        city: 'Sydney',
+                        zip: 100000
+                    },
+                    {
+                        name: 'Jon Snow',
+                        age: 26,
+                        address: 'Ottawa No. 2 Lake Park',
+                        province: 'Canada',
+                        city: 'Ottawa',
+                        zip: 100000
+                    }
+                ],
       circleColor: ['red', 'green'],
       rateValue: 3.7,
       fileData: { a: 1 },
@@ -997,6 +1222,12 @@ export default {
     height: 5
   })},
   methods: {
+    show (index) {
+      console.log(index)
+    },
+    remove (index) {
+      console.log(index)
+    },
     loadingStart () {
       LoadingBar.start()
     },
@@ -1064,7 +1295,7 @@ export default {
     },
     closeBtn() {
       // Loading.hide();
-
+      
       this.$Message.warning({
         text: "看看这个会咋样23",
         onOk() {
