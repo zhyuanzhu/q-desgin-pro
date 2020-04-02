@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "deepmerge": "^4.2.2",
+    "element-resize-detector": "^1.2.1",
     "js-calendar": "^1.2.3",
     "popper.js": "^1.16.0",
     "throttle-debounce": "^2.1.0",
