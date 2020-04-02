@@ -69,6 +69,9 @@ import CarouselItem from './components/carousel-item'
 
 import Drawer from './components/drawer'
 
+import Row from './components/row'
+
+import Col from './components/col'
 
 const components = {
     Alert,
@@ -105,7 +108,9 @@ const components = {
     LoadingBar,
     Carousel,
     CarouselItem,
-    Drawer
+    Drawer,
+    Row,
+    Col
 };
 
 const install = function (Vue, options = {}) {
