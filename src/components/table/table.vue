@@ -1319,7 +1319,6 @@
             },
             // create a multiple table-head
             makeColumnRows (fixedType, cols) {
-                debugger
                 return convertToRows(cols, fixedType);
             },
             // exportCsv (params) {
