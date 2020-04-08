@@ -63,7 +63,6 @@ export default {
                     let showDefault = true;
                     this.childrens =  findComponentChildren(this, 'Option');
                     this.childrens && this.childrens.map(child => {
-                        console.log(this.value, child.value)
                         if (this.value == child.value) {
                             this.$parent.selectLabel = child.label;
                             showDefault = false;
