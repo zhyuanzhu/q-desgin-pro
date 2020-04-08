@@ -7,8 +7,8 @@
         <div class="qui-table-cell-tree-level" v-if="showLevel" :style="treeLevelStyle"></div>
         <div class="qui-table-cell-tree" :class="{ 'qui-table-cell-tree-loading': childrenLoading }" v-if="showChildren" @click.prevent.stop="handleToggleTree">
             <Icon type="ios-loading" v-if="childrenLoading" class="qui-load-loop" />
-            <Icon type="ios-add" v-else-if="!childrenExpand" />
-            <Icon type="ios-remove" v-else />
+            <Icon type="plus" v-else-if="!childrenExpand" />
+            <Icon type="close" v-else />
         </div>
         <div class="qui-table-cell-tree qui-table-cell-tree-empty" v-else-if="showTreeNode"></div>
         <template v-if="renderType === 'html'"><span v-html="row[column.key]"></span></template>
@@ -22,7 +22,7 @@
         </template>
         <template v-if="renderType === 'expand' && !row._disableExpand">
             <div :class="expandCls" @click="toggleExpand">
-                <Icon type="ios-arrow-forward"></Icon>
+                <Icon type="arrow-right"></Icon>
             </div>
         </template>
         <table-expand

@@ -1317,37 +1317,9 @@
                 });
                 return left.concat(center).concat(right);
             },
-            // create a multiple table-head
             makeColumnRows (fixedType, cols) {
                 return convertToRows(cols, fixedType);
             },
-            // exportCsv (params) {
-            //     if (params.filename) {
-            //         if (params.filename.indexOf('.csv') === -1) {
-            //             params.filename += '.csv';
-            //         }
-            //     } else {
-            //         params.filename = 'table.csv';
-            //     }
-
-            //     let columns = [];
-            //     let datas = [];
-            //     if (params.columns && params.data) {
-            //         columns = params.columns;
-            //         datas = params.data;
-            //     } else {
-            //         columns = this.allColumns;
-            //         if (!('original' in params)) params.original = true;
-            //         datas = params.original ? this.data : this.rebuildData;
-            //     }
-
-            //     let noHeader = false;
-            //     if ('noHeader' in params) noHeader = params.noHeader;
-
-            //     const data = Csv(columns, datas, params, noHeader);
-            //     if (params.callback) params.callback(data);
-            //     else ExportCsv.download(params.filename, data);
-            // },
             dragAndDrop(a,b) {
                 this.$emit('on-drag-drop', a,b);
             }
