@@ -2,17 +2,73 @@
 @import "../common/var";
 @import "../mixins/mixin";
 
-$loadingPrefix: "#{$prefixCls}loading";
+$loading: "#{$prefixCls}loading";
 
-.#{$loadingPrefix} {
-    height: 100%;
-    &-mask {
-        @include mask(rgba($black, 0));
+.#{$loading} {
+    color: $primary;
+    vertical-align: middle;
+    text-align: center;
+
+    &-main {
 
     }
-    &-img {
-        min-height: 50px;
-        height: 100%;
-        transform: rotate(180deg);
+
+    &.#{$loading}-fix {
+        position: absolute;
+        top: 0;
+        left: 0;
+        @include wh(100%);
+        z-index: 2899;
+        background-color: rgba(255, 255, 255, .9);
+    }
+
+
+    &-dot {
+        @include wh(38px);
+        position: relative;
+        transform: rotate(45deg);
+        animation: loadingRotate 1.2s infinite linear;
+        &-item {
+            @include wh(16px);
+            border-radius: 50%;
+            background-color: $primary;
+            transform: scale(.75);
+            position: absolute;
+            transform-origin: 50% 50%;
+            opacity: .3;
+            animation: loadingDotMove 1s infinite linear alternate;
+
+            &:nth-child(1) {
+                top: 0;
+                left: 0;
+            }
+            &:nth-child(2) {
+                top: 0;
+                right: 0;
+                animation-delay: .4s;
+            }
+            &:nth-child(3) {
+                bottom: 0;
+                right: 0;
+                animation-delay: .8s;
+            }
+            &:nth-child(4) {
+                bottom: 0;
+                left: 0;
+                animation-delay: 1.2s;
+            }
+        }
+    }
+}
+
+@keyframes loadingDotMove {
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes loadingRotate {
+    to {
+        transform: rotate(405deg);
     }
 }

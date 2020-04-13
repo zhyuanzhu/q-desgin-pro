@@ -124,15 +124,16 @@
             <div :class="[prefixCls + '-footer']" v-if="showSlotFooter" ref="footer"><slot name="footer"></slot></div>
         </div>
         <div class="qui-table-resize-line" v-show="showResizeLine" ref="resizeLine"></div>
-        <!-- <Spin fix size="large" v-if="loading">
+        <Loading fix v-if="loading">
             <slot name="loading"></slot>
-        </Spin> -->
+        </Loading>
     </div>
 </template>
 <script>
     import tableHead from './table-head.vue';
     import tableBody from './table-body.vue';
     import tableSummary from './summary.vue';
+    import Loading from '../loading/loading.vue';
     import { hasParam, getStyle, deepCopy, getScrollBarSize, on, off } from '../../utils/util';
     import Locale from '../../mixins/locale';
     import elementResizeDetectorMaker from 'element-resize-detector';
@@ -146,7 +147,7 @@
     export default {
         name: 'Table',
         mixins: [ Locale ],
-        components: { tableHead, tableBody, tableSummary },
+        components: { tableHead, tableBody, tableSummary, Loading },
         provide () {
             return {
                 tableRoot: this

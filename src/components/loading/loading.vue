@@ -1,33 +1,61 @@
 <template>
-    <div :class="prefixCls" v-show="show">
-        <div :class="`${prefixCls}-mask`"></div>
-        <div :class="`${prefixCls}-img`" :style="`background:url(${url}) no-repeat center;`"></div>
-    </div>
+    <transition name="loading-fade">
+        <div :class="classes" v-if="isFullscreen">
+            <div :class="`${prefixCls}-main`">
+                <div :class="`${prefixCls}-dot`">
+                    <span :class="`${prefixCls}-dot-item`"></span>
+                    <span :class="`${prefixCls}-dot-item`"></span>
+                    <span :class="`${prefixCls}-dot-item`"></span>
+                    <span :class="`${prefixCls}-dot-item`"></span>
+                </div>
+                <p :class="`${prefixCls}-text`"><slot></slot></p>
+            </div>
+        </div>
+    </transition>
 </template>
 <script>
 
 const prefixCls = 'qui-loading';
-const imgUrl = 'http://p0.qhimg.com/t0148208a3906a8623f.gif';
-
-//处理成可以主动调用，关闭
+// todo: fullscreen
 
 export default {
     name: 'Loading',
     props: {
-        url: {
-            type: String,
-            default: imgUrl
+        fix: {
+            type: Boolean,
+            default: false
         },
-        // show: {
+        // fullscreen: {
         //     type: Boolean,
-        //     default: true
+        //     default: false
         // }
     },
     data() {
         return {
             prefixCls,
-            show: false
+            show: false,
+            showText: false,
+            fullscreen: false
         }
+    },
+    computed: {
+        classes () {
+            const { prefixCls, fix, fullscreen, showText } = this;
+            return [prefixCls, {
+                [`${prefixCls}-fix`]: fix,
+                [`${prefixCls}-show-text`]: showText,
+                [`${prefixCls}-fullscreen`]: fullscreen
+            }]
+        },
+        isFullscreen () {
+            if (this.fullscreen) {
+                return this.show
+            }
+            return true
+        }
+    },
+    mounted() {
+        this.showText = this.$slots.default !== undefined
     },
     // watch: {
     //     show (v) {
