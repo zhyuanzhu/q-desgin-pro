@@ -43,7 +43,7 @@ $table-select-item-prefix-cls: "#{$table}-filter-select-item";
     }
 
     &-with-summary{
-        .ivu-table-tbody{
+        .qui-table-tbody{
             tr:last-child td{
                 border-bottom: none;
             }
@@ -401,18 +401,6 @@ $table-select-item-prefix-cls: "#{$table}-filter-select-item";
     }
     &-fixed-header{
         overflow: hidden;
-        // 在 #1387 里，添加了下面的代码，但是在 #5174 会出现新的问题。
-        // 但是，在新版本里，注释掉后，#1387 的问题并没有再复现，所以注释掉
-        //&-with-empty{
-        //    .#{$table}-hidden{
-        //        .#{$table}-sort{
-        //            display: none;
-        //        }
-        //        .#{$table}-cell span{
-        //            display: none;
-        //        }
-        //    }
-        //}
         thead{
             tr{
                 th{
@@ -461,7 +449,7 @@ $table-select-item-prefix-cls: "#{$table}-filter-select-item";
             &-item{
                 padding: 0 12px 8px;
 
-                .ivu-checkbox-wrapper + .ivu-checkbox-wrapper{
+                .qui-checkbox-wrapper + .qui-checkbox-wrapper{
                     margin: 0;
                 }
                 label {
@@ -503,11 +491,20 @@ $table-select-item-prefix-cls: "#{$table}-filter-select-item";
     &-expanded-hidden{
         visibility: hidden;
     }
+
+    &-loading {
+        position: relative;
+        .#{$prefixCls}loading {
+            &.#{$prefixCls}loading-fix {
+                top: 40%;
+            }
+        }
+    }
 }
-.ivu-table-popper{
+.qui-table-popper{
     min-width: 0;
     text-align: left;
-    .ivu-poptip-body{
+    .qui-poptip-body{
         padding: 0;
     }
 }

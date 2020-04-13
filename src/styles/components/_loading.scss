@@ -27,6 +27,8 @@ $loading: "#{$prefixCls}loading";
         @include wh(38px);
         position: relative;
         transform: rotate(45deg);
+        display: inline-block;
+        margin: 0 auto;
         animation: loadingRotate 1.2s infinite linear;
         &-item {
             @include wh(16px);

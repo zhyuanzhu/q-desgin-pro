@@ -36,7 +36,7 @@
             />
             <div
                 :class="[prefixCls + '-tip']" :style="bodyStyle" @scroll="handleBodyScroll"
-                v-show="((!!localeNoDataText && (!data || data.length === 0)) || (!!localeNoFilteredDataText && (!rebuildData || rebuildData.length === 0)))">
+                v-show="!loading && ((!!localeNoDataText && (!data || data.length === 0)) || (!!localeNoFilteredDataText && (!rebuildData || rebuildData.length === 0)))">
                 <table cellspacing="0" cellpadding="0" border="0">
                     <tbody>
                         <tr>
@@ -122,11 +122,14 @@
             </div>
             <div :class="[prefixCls + '-fixed-right-header']" :style="fixedRightHeaderStyle" v-if="isRightFixed"></div>
             <div :class="[prefixCls + '-footer']" v-if="showSlotFooter" ref="footer"><slot name="footer"></slot></div>
+            <div :class="`${prefixCls}-loading`" :style="loading && `height: 140px`">
+                <Loading fix v-if="loading">
+                    <slot name="loading"></slot>
+                </Loading>
+            </div>
         </div>
         <div class="qui-table-resize-line" v-show="showResizeLine" ref="resizeLine"></div>
-        <Loading fix v-if="loading">
-            <slot name="loading"></slot>
-        </Loading>
+        
     </div>
 </template>
 <script>
