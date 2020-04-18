@@ -1,7 +1,7 @@
 @charset "urf-8";
 @import "../common/var";
 @import "../mixins/mixin";
-@import "../animation/animation";
+// @import "../animation/animation";
 
 $select: "#{$prefixCls}select";
 
@@ -109,26 +109,16 @@ $select: "#{$prefixCls}select";
     }
 }
 
-@include slide(transition-drop, quiTransitionDrop);
 
-@keyframes quiTransitionDropIn {
-    0% {
-        opacity: 0;
-        transform: scaleY(0.8);
-    }
-    100% {
-        opacity: 1;
-        transform: scaleY(1);
-    }
+.select-slide-enter-active,
+.select-slide-leave-active {
+  opacity: 1;
+  transform: scaleY(1);
+  transition: transform 300ms cubic-bezier(0.23, 1, 0.32, 1), opacity 300ms cubic-bezier(0.23, 1, 0.32, 1);
+  transform-origin: center top;
 }
-
-@keyframes quiTransitionDropOut {
-    0% {
-        opacity: 1;
-        transform: scaleY(1);
-    }
-    100% {
-        opacity: 0;
-        transform: scaleY(0.8);
-    }
+.select-slide-enter,
+.select-slide-leave-active {
+  opacity: 0;
+  transform: scaleY(0);
 }

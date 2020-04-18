@@ -5,7 +5,7 @@
             <input :type="filter ?'text': 'hidden'" v-model="selectValue" :class="`${prefixCls}-input`" >
             <Icon :size="size == 'large' ? 14 : 12" :type="'arrow-down'" :class="[arrowDown ? `${prefixCls}-down` : `${prefixCls}-up`, `${prefixCls}-arrow`]" />
         </div>
-        <transition name="transition-drop">
+        <transition name="select-slide">
             <div :class="`${prefixCls}-dropdown`" v-scroll :style="boxStyle" v-show="!arrowDown">
                 <Dropdown :value="selectValue" :filter="filter"><slot></slot></Dropdown>
             </div>
