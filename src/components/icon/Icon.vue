@@ -1,5 +1,5 @@
 <template>
-    <i :class="classes" :style="styles" @click="handleClick"><slot></slot></i>
+    <i :class="[prefixCls, `${prefixCls}-${type}`]" :style="styles" @click="handleClick"></i>
 </template>
 <script>
 
@@ -14,29 +14,21 @@ export default {
         },
         size: {
             type: [Number, String],
-            default: 16
+            default: 14
         },
         color: String,
-        custom: {
-            type: String,
-            default: ''
+    },
+    data() {
+        return {
+            prefixCls
         }
     },
     computed: {
-        classes () {
-            return [
-                `${prefixCls}`,
-                {
-                    [`${prefixCls}-${this.type}`]: this.type !== '',
-                    [`${this.custom}`]: this.custom !== ''
-                }
-            ];
-        },
         styles () {
             let style = {};
 
             if (this.size) {
-                style['font-size'] = `${this.size}px`;
+                style['font-size'] = `${Number(this.size)}px`;
             }
 
             if (this.color) {
