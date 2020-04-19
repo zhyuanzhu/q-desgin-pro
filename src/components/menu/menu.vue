@@ -15,7 +15,8 @@
                         :class="[`${prefixCls}-arrow`, menu.active ? `${prefixCls}-arrow-up`: `${prefixCls}-arrow-down`]" />
                 </div>
                 <!-- <transition :name="setTransition(menu)"> -->
-                <transition name="transition-menu-drop">
+                <!-- <transition name="transition-menu-drop"> -->
+                <collapse-transition>
                     <div :class="[`${prefixCls}-item-children`, `${menu.id}-children`]" v-if="hasChild(menu)" v-show="menu.active">
                         <ul :class="`${menu.id}-list`">
                             <li v-for="(item, idx) in menu.children" :key="item.id || idx" 
@@ -26,7 +27,8 @@
                             </li>
                         </ul>
                     </div>
-                </transition>
+                </collapse-transition>
+                <!-- </transition> -->
             </li>
         </ul>
     </div>
@@ -36,11 +38,12 @@
 const [prefixCls, iconClass] = ['qui-menu', 'menu-icon'];
 import { hasParam } from '../../utils/util';
 import Icon from '../icon'
+import CollapseTransition from '../collapse-transition'
 
 
 export default {
     name: 'Menu',
-    components: { Icon },
+    components: { Icon, CollapseTransition },
     props: {
         theme: {
             type: String,
