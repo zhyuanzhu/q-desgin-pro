@@ -81,6 +81,12 @@ import ToolTip from './components/tooltip'
 
 import Tag from './components/tag'
 
+import CollapseTransition from './components/collapse-transition'
+
+import Collapse from './components/collapse'
+
+import CollapseItem from './components/collapse-item'
+
  
 const components = {
     Alert,
@@ -123,7 +129,10 @@ const components = {
     PopTip,
     Tree,
     ToolTip,
-    Tag
+    Tag,
+    CollapseTransition,
+    Collapse,
+    CollapseItem
 };
 
 const install = function (Vue, options = {}) {
