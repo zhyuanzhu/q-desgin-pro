@@ -87,6 +87,10 @@ import Collapse from './components/collapse'
 
 import CollapseItem from './components/collapse-item'
 
+import BreadCrumb from './components/breadcrumb'
+
+import BreadCrumbItem from './components/breadcrumb-item'
+
  
 const components = {
     Alert,
@@ -132,7 +136,9 @@ const components = {
     Tag,
     CollapseTransition,
     Collapse,
-    CollapseItem
+    CollapseItem,
+    BreadCrumb,
+    BreadCrumbItem
 };
 
 const install = function (Vue, options = {}) {
