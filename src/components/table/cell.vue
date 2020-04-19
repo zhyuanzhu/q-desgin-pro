@@ -13,12 +13,7 @@
         <div class="qui-table-cell-tree qui-table-cell-tree-empty" v-else-if="showTreeNode"></div>
         <template v-if="renderType === 'html'"><span v-html="row[column.key]"></span></template>
         <template v-if="renderType === 'normal'">
-            <template v-if="column.tooltip">
-                <Tooltip transfer :content="row[column.key]" :theme="tableRoot.tooltipTheme" :disabled="!showTooltip && !tooltipShow" :max-width="300" class="qui-table-cell-tooltip" @on-popper-show="handleTooltipShow" @on-popper-hide="handleTooltipHide">
-                    <span ref="content" @mouseenter="handleTooltipIn" @mouseleave="handleTooltipOut" class="qui-table-cell-tooltip-content">{{ row[column.key] }}</span>
-                </Tooltip>
-            </template>
-            <span v-else>{{row[column.key]}}</span>
+            <span>{{row[column.key]}}</span>
         </template>
         <template v-if="renderType === 'expand' && !row._disableExpand">
             <div :class="expandCls" @click="toggleExpand">
@@ -43,11 +38,10 @@
     import TableSlot from './slot';
     import Icon from '../icon/Icon.vue';
     import Checkbox from '../checkbox/checkbox.vue';
-    import Tooltip from '../tooltip/tooltip.vue';
 
     export default {
         name: 'TableCell',
-        components: { Icon, Checkbox, TableExpand, TableSlot, Tooltip },
+        components: { Icon, Checkbox, TableExpand, TableSlot },
         inject: ['tableRoot'],
         props: {
             prefixCls: String,

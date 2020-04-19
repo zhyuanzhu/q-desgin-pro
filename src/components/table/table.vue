@@ -25,15 +25,6 @@
                     :columns-width="columnsWidth"
                     :obj-data="objData"></table-body>
             </div>
-            <table-summary
-                v-if="showSummary && (data && data.length)"
-                ref="summary"
-                :prefix-cls="prefixCls"
-                :styleObject="tableStyle"
-                :columns="cloneColumns"
-                :data="summaryData"
-                :columns-width="columnsWidth"
-            />
             <div
                 :class="[prefixCls + '-tip']" :style="bodyStyle" @scroll="handleBodyScroll"
                 v-show="!loading && ((!!localeNoDataText && (!data || data.length === 0)) || (!!localeNoFilteredDataText && (!rebuildData || rebuildData.length === 0)))">
@@ -73,16 +64,6 @@
                         :columns-width="columnsWidth"
                         :obj-data="objData"></table-body>
                 </div>
-                <table-summary
-                    v-if="showSummary && (data && data.length)"
-                    fixed="left"
-                    :prefix-cls="prefixCls"
-                    :styleObject="fixedTableStyle"
-                    :columns="leftFixedColumns"
-                    :data="summaryData"
-                    :columns-width="columnsWidth"
-                    :style="{ 'margin-top': showHorizontalScrollBar ? scrollBarWidth + 'px' : 0 }"
-                />
             </div>
             <div :class="[prefixCls + '-fixed-right']" :style="fixedRightTableStyle" v-if="isRightFixed">
                 <div :class="fixedHeaderClasses" v-if="showHeader">
@@ -109,16 +90,6 @@
                         :columns-width="columnsWidth"
                         :obj-data="objData"></table-body>
                 </div>
-                <table-summary
-                    v-if="showSummary && (data && data.length)"
-                    fixed="right"
-                    :prefix-cls="prefixCls"
-                    :styleObject="fixedRightTableStyle"
-                    :columns="rightFixedColumns"
-                    :data="summaryData"
-                    :columns-width="columnsWidth"
-                    :style="{ 'margin-top': showHorizontalScrollBar ? scrollBarWidth + 'px' : 0 }"
-                />
             </div>
             <div :class="[prefixCls + '-fixed-right-header']" :style="fixedRightHeaderStyle" v-if="isRightFixed"></div>
             <div :class="[prefixCls + '-footer']" v-if="showSlotFooter" ref="footer"><slot name="footer"></slot></div>
@@ -135,7 +106,6 @@
 <script>
     import tableHead from './table-head.vue';
     import tableBody from './table-body.vue';
-    import tableSummary from './summary.vue';
     import Loading from '../loading/loading.vue';
     import { hasParam, getStyle, deepCopy, getScrollBarSize, on, off } from '../../utils/util';
     import Locale from '../../mixins/locale';
@@ -150,7 +120,7 @@
     export default {
         name: 'Table',
         mixins: [ Locale ],
-        components: { tableHead, tableBody, tableSummary, Loading },
+        components: { tableHead, tableBody, Loading },
         provide () {
             return {
                 tableRoot: this
@@ -229,34 +199,11 @@
                 type: Boolean,
                 default: false
             },
-            tooltipTheme: {
-                validator (value) {
-                    return hasParam(value, ['dark', 'light']);
-                },
-                default: 'dark'
-            },
             // #5380 开启后，:key 强制更新，否则使用 index
             // 4.1 开始支持 String，指定具体字段
             rowKey: {
                 type: [Boolean, String],
                 default: false
-            },
-            // 4.0.0
-            spanMethod: {
-                type: Function
-            },
-            // 4.0.0
-            showSummary: {
-                type: Boolean,
-                default: false
-            },
-            // 4.0.0
-            summaryMethod: {
-                type: Function
-            },
-            // 4.0.0
-            sumText: {
-                type: String
             },
             // 4.1.0
             indentSize: {
@@ -316,13 +263,6 @@
                     return this.noFilteredDataText;
                 }
             },
-            localeSumText () {
-                if (this.sumText === undefined) {
-                    return this.t('i.table.sumText');
-                } else {
-                    return this.sumText;
-                }
-            },
             wrapClasses () {
                 const { prefixCls } = this
                 return [
@@ -331,7 +271,6 @@
                         [`${prefixCls}-hide`]: !this.ready,
                         [`${prefixCls}-with-header`]: this.showSlotHeader,
                         [`${prefixCls}-with-footer`]: this.showSlotFooter,
-                        [`${prefixCls}-with-summary`]: this.showSummary,
                         [`${prefixCls}-wrapper-with-border`]: this.border
                     }
                 ];
@@ -359,18 +298,13 @@
             },
             styles () {
                 let style = {};
-                let summaryHeight = 0;
-                if (this.showSummary) {
-                    if (this.size === 'small') summaryHeight = 40;
-                    else if (this.size === 'large') summaryHeight = 60;
-                    else summaryHeight = 48;
-                }
+
                 if (this.height) {
-                    let height = parseInt(this.height) + summaryHeight;
+                    let height = parseInt(this.height);
                     style.height = `${height}px`;
                 }
                 if (this.maxHeight) {
-                    const maxHeight = parseInt(this.maxHeight) + summaryHeight;
+                    const maxHeight = parseInt(this.maxHeight);
                     style.maxHeight = `${maxHeight}px`;
                 }
                 if (this.width) style.width = `${this.width}px`;
@@ -461,59 +395,6 @@
             },
             isRightFixed () {
                 return this.columns.some(col => col.fixed && col.fixed === 'right');
-            },
-            // for summary data
-            summaryData () {
-                if (!this.showSummary) return {};
-
-                let sums = {};
-                if (this.summaryMethod) {
-                    sums = this.summaryMethod({ columns: this.cloneColumns, data: this.rebuildData });
-                } else {
-                    
-                    this.cloneColumns.forEach((column, index) => {
-                        const key = column.key;
-                        if (index === 0) {
-                            sums[key] = {
-                                key: column.key,
-                                value: this.localeSumText
-                            };
-                            return;
-                        }
-                        const values = this.rebuildData.map(item => Number(item[column.key]));
-                        const precisions = [];
-                        let notNumber = true;
-                        values.forEach(value => {
-                            if (!isNaN(value)) {
-                                notNumber = false;
-                                let decimal = ('' + value).split('.')[1];
-                                precisions.push(decimal ? decimal.length : 0);
-                            }
-                        });
-                        const precision = Math.max.apply(null, precisions);
-                        if (!notNumber) {
-                            const currentValue = values.reduce((prev, curr) => {
-                                const value = Number(curr);
-                                if (!isNaN(value)) {
-                                    return parseFloat((prev + curr).toFixed(Math.min(precision, 20)));
-                                } else {
-                                    return prev;
-                                }
-                            }, 0);
-                            sums[key] = {
-                                key: column.key,
-                                value: currentValue
-                            };
-                        } else {
-                            sums[key] = {
-                                key: column.key,
-                                value: ''
-                            };
-                        }
-                    });
-                }
-
-                return sums;
             }
         },
         methods: {
